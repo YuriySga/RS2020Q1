@@ -184,12 +184,16 @@ const config = {
     stats: 'errors-only',
     clientLogLevel: 'none'
   }
-}
+};
 
 if (isProd) {
   config.plugins.push(
-    new UglifyJSPlugin(),
+    new UglifyJSPlugin()
   );
-};
+}
 
 module.exports = config;
+
+//npm run clear
+//npm run build
+//npm run dev

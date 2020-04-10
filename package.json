@@ -7,10 +7,10 @@
     "> 0.25%, not dead"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --history-api-fallback --inline --open",
-    "build": "npm run clear -s && webpack --progress",
-    "lint": "eslint ./**/*.js",
-    "clear": "del-cli dist"
+    "dev": "webpack-dev-server --mode development --history-api-fallback --inline --open --watch",
+    "build": "npm run clear -s && webpack --mode production",
+    "lint": "eslint src/",
+    "clear": "del-cli dist"    
   },
   "author": "Netizen",
   "license": "ISC",
