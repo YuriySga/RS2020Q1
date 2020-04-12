@@ -167,7 +167,27 @@ header {
 }
 
 
+.nav-panel { 
+  display: block;
+  left: -350px;
+  top: 0;
+  /* left: 0px; */
+  position: absolute;
+  font-size: 2.2rem;
+  background: linear-gradient(40deg,#ffd86f,#fc6262);
+  padding-top: 80px;
+  width: 350px;
+  height: 100%;
+  min-height: 500px;
+  z-index: 1;
 
+    .nav-link {
+      padding: 14px 0;   
 
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+}
 
 
