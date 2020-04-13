@@ -137,6 +137,7 @@ header {
   position: relative;
   height: 22px;
   width: fit-content;
+  z-index: 1;
 
   input {
     position: absolute;
@@ -180,6 +181,7 @@ header {
   height: 100%;
   min-height: 500px;
   z-index: 1;
+  transition: left 0.5s ease-out;
 
     .nav-link {
       padding: 14px 0;   
@@ -188,6 +190,16 @@ header {
         text-decoration: underline;
       }
     }
+}
+
+.burger_right {
+  transform: rotate(90deg);
+  transition: 0.5s;
+}
+
+.burger_left {
+  transform: rotate(0deg);
+  transition: 0.5s;
 }
 
 

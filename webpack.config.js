@@ -158,6 +158,16 @@ const config = {
             outputPath: 'fonts'
           }
         }]
+      },
+      {
+        test: /.(mp3)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            outputPath: 'audio',
+            name: '[name].[ext]'
+          }
+        }]
       }
     ]
   },
@@ -170,6 +180,10 @@ const config = {
       template: './src/index.html',
       filename: './index.html'
     }),
+    new HtmlWebPackPlugin({
+      template: './src/index2.html',
+      filename: './index2.html'
+    }),  
     new CopyWebpackPlugin([
       // {from: './src/static', to: './'},
       // {from: './src/img', to: './img/'},

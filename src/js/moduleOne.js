@@ -1,10 +1,5 @@
 const helloArr = ['Hello World!'];
 
-module.exports = helloArr;
-module.exports = {
-  moduleOne
-};
-
 function moduleOne(x, y) {
   const lo = 17;
   const test = `test in ${lo}`;
@@ -12,3 +7,8 @@ function moduleOne(x, y) {
 
   return x * y;
 }
+
+module.exports = helloArr;
+module.exports = {
+  moduleOne
+};
