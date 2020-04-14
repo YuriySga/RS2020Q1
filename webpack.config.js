@@ -23,14 +23,21 @@ function setDMode() {
     return 'development';
   }
 }
+
 const config = {
   target: "web",
   //entry: {index: './src/js/index.js'},
   entry: ['./src/js/index.js', './src/css/style.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    /* publicPath: './../src/' */
   },
+/*   resolve: {
+    alias: {
+      images: path.resolve(__dirname, 'src/img/'),
+    },
+  }, */
   mode: setDMode(),
   devtool: setDevTool(),
   module: {
@@ -118,11 +125,14 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: {
+            options: {name: 'img/[name].[ext]'}  
+            
+            /* options: {
               outputPath: 'img',
               name: '[name].[ext]'
-            }},
-          {
+            } */
+          },
+          /* {
             loader: 'image-webpack-loader',
             options: {
               bypassOnDebug : true,
@@ -147,7 +157,7 @@ const config = {
                 quality: 75
               }
             }
-          }
+          } */
         ]
       },
       {

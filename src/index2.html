@@ -21,19 +21,19 @@
          
         <div class="container nav-container"> 
           <nav class="nav-panel">
-            <a class="nav-link active" href="index.html">Main Page</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 1">Action (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 2">Action (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 3">Adjective</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 4">Animal (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 5">Animal (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageName = 6">Clothes</a>
-            <a class="nav-link disabled" href="index2.html" onclick="localStorage.pageName = 7">Emotions</a>
+            <a class="nav-link" href="index.html">Main Page</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 1">Action (set A)</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 2">Action (set B)</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 3">Adjective</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 4">Animal (set A)</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 5">Animal (set B)</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 6">Clothes</a>
+            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 7">Emotions</a>
           </nav>  
           <div class="row justify-content-between">
             <div class="col-auto p-0 align-self-center">        
               <div class="menuToggle">
-                <input type="checkbox">
+                <input type="checkbox" id="burger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -43,7 +43,7 @@
             <div class="col-auto p-0 align-self-center"> 
               <div class="button-cover">
                 <div class="button b2" id="button-10">
-                  <input type="checkbox" class="checkbox">
+                  <input type="checkbox" class="checkbox" id="swich" checked>
                   <div class="knobs">
                     <span>TRAIN</span>
                   </div>
@@ -55,151 +55,31 @@
         </div>
   </header>
   <div class="main">
-    <div class="container">
+    <div class="container card-container">
       <div class="row justify-content-between"> 
         <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/dance.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (set A)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/dance.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (555 A)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>         
         </div>
         <div class="col-lg-auto col-md-auto my-5 p-0">  
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/swim.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (set B)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/swim.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (444 B)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>
         </div>
         <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/dogEndKids.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (set C)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/dogEndKids.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Action (333 C)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>
         </div>        
         <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/action.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Adjective</p>
-                <div class="rotate"></div>
-              </div>
-            </div> 
-            <div class="back">
-              <img src="../src/img/action.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Adjec666</p>
-                <div class="rotate"></div>
-              </div>
-            </div> 
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>
         </div>      
         <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/cat.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Animal (set A)</p>
-                <div class="rotate"></div>
-              </div>
-            </div> 
-            <div class="back">
-              <img src="../src/img/cat.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Animal (788 A)</p>
-                <div class="rotate"></div>
-              </div>
-            </div> 
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>
         </div>
         <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/bird.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Animal (set B)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/bird.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Animal (999 B)</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div>
+          <div class="card card_set mx-md-auto border-0" href="#"></div>
         </div>
         <div class="col-lg col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto mx-lg-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/blouse.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Clothes</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/blouse.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Clo000</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div>
+          <div class="card card_set mx-md-auto mx-lg-auto border-0" href="#"></div>
         </div>
         <div class="col-lg col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto mx-lg-auto border-0" href="#">
-            <div class="front">
-              <img src="../src/img/smile.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Emotion</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-            <div class="back">
-              <img src="../src/img/smile.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                <p class="card-text h1">Emot111</p>
-                <div class="rotate"></div>
-              </div>
-            </div>
-          </div> 
+          <div class="card card_set mx-md-auto mx-lg-auto border-0" href="#"></div> 
         </div>
       </div>
     </div> 
@@ -209,5 +89,4 @@
     </div>  
   </div>  
 </body>
-
 </html>

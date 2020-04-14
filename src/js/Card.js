@@ -8,11 +8,10 @@ export class Card {
     this.Rest = Rest;
   }
 
-  /* Button generator */
   generateCart() {
     let template = `
     <div class="front">
-      <img src=${this.image} class="card-img-top" alt=""> 
+      <img src=${this.image} class="card-img-top" alt="${this.word}"> 
       <div class="card-body">
         <p class="card-text h1">${this.word}</p>
         <div class="rotate"></div>

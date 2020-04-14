@@ -45,7 +45,7 @@ header {
     }
     
     &:hover {
-      /* box-shadow: 0px 10px 17px 0px rgba(50, 50, 50, 0.5); */
+      box-shadow: 0px 10px 17px 0px rgba(50, 50, 50, 0.5);
       text-decoration: none;
       color: #000000;
     }
@@ -71,9 +71,7 @@ header {
       width: 45px;
       position: absolute;
       left: 255px;
-    }
-
-    
+    }  
     
 }
 
@@ -106,7 +104,6 @@ header {
       backface-visibility: hidden;
       transition: 0.5s;
       display: block;
-      /* transform: rotateY(180deg); */
     }
 
     .back {
@@ -120,7 +117,7 @@ header {
       display: block;
     }
 
-    &:hover .front {
+/*     &:hover .front {
       transform: rotateY(180deg);
       box-shadow: 0px 10px 17px 0px rgba(50, 50, 50, 0.5);
     }
@@ -128,8 +125,12 @@ header {
     &:hover .back  {
       transform: rotateY(360deg);
       box-shadow: 0px 10px 17px 0px rgba(50, 50, 50, 0.5);
-    }
+    } */
 
+}
+
+.play {
+  background: linear-gradient(180deg,#fd6a63,#feb46b 40%,#fff 0,#fff);
 }
 
 .menuToggle {
@@ -172,7 +173,6 @@ header {
   display: block;
   left: -350px;
   top: 0;
-  /* left: 0px; */
   position: absolute;
   font-size: 2.2rem;
   background: linear-gradient(40deg,#ffd86f,#fc6262);
