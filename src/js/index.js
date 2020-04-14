@@ -14,6 +14,7 @@ const nav = document.querySelector(".nav-container");
 const navPanel = document.querySelector(".nav-panel");
 const menuToggle = document.querySelector(".menuToggle");
 const trainPlaySwicher = document.getElementById("swich");
+const startButton = document.getElementById("start-button");
 
 let navPanelFlag = false;
 /* const audioElement = new Audio('../audio/bird.mp3'); */
@@ -44,45 +45,25 @@ console.log(mod);
 
  */
 loadSecondPageTrainPlaySwicher ();
-
-function loadSecondPageTrainPlaySwicher () {
-  if (localStorage.trainPlayFlagChecked === "true") {
-    trainPlaySwicher.checked = true;
-  } else {
-    trainPlaySwicher.checked = false;
-  }
-}
-
-
+loadstartBtnEnDis();
 loadSecondPageCard();
 
-function loadSecondPageCard () {
-  if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}  
-  cardArr.forEach(function(item, index) { 
-    let c = (new Card (cards[localStorage.pageIndex][index]));
-    item.innerHTML = '';
-    item.innerHTML = c.generateCart();
-  }); 
-}    
+ 
 
 
 
 
 cardContainer.addEventListener('click', (event) => {
-  if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){  return;}
+  console.log(event);
+  if (localStorage.audioIsOn === "false" || localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}
   if (event.target.tagName === "IMG") {
-    const foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
-    playAudio(foundObject.audioSrc);
-    
+      const foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
+      playAudio(foundObject.audioSrc);    
   }
-
 });
 
 
-function playAudio (path) {  
-  const audioElement = new Audio(path);
-  audioElement.play(); 
-}
+
 
 
 /* createSecondPageCards(secondPageCardsName);
@@ -96,22 +77,26 @@ function createSecondPageCards (str) {
   
 } */
 
+
+
+
 document.addEventListener('click',  (event) => {
   /* train/play swicher first page */
   if (event.target.id === "swich") {    
     if (localStorage.pageIndex === "0") {
       if (event.target.checked === true) {
-        localStorage.trainPlayFlagChecked = true;
-        cardArr.forEach(element => {
-          element.classList.add("play");
-        });
+        firstPageSetColorCards(true);        
       } else {
-        cardArr.forEach(element => {
-          element.classList.remove("play");
-          localStorage.trainPlayFlagChecked = false;
-        });
+        firstPageSetColorCards(false);        
       }
-    }
+    } else if (localStorage.pageIndex !== "0") { 
+      /* train/play swicher second page */   
+      if (event.target.checked === true) {
+        startBtnEnDis(true);
+      } else {
+        startBtnEnDis(false);
+      }     
+    }    
   }
   /* berger swicher */
   if (event.target.id === "burger") {   
@@ -133,6 +118,59 @@ document.addEventListener('click',  (event) => {
       navPanelFlag = false;
     }                             
   });
-
   
+  function startBtnEnDis (bool) {
+    if (bool === true) {
+      startButton.classList.remove("disabled");
+      localStorage.trainPlayFlagChecked = true;
+    } else if (bool === false) {
+      startButton.classList.add("disabled");
+      localStorage.trainPlayFlagChecked = false;
+    }
+  }
+
+  function loadstartBtnEnDis () {
+    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){  return;}
+    if (localStorage.trainPlayFlagChecked === "true") {
+      startBtnEnDis(true);
+    } else {
+      startBtnEnDis(false);
+    }
+  }
+
+  function loadSecondPageTrainPlaySwicher () {
+    if (localStorage.trainPlayFlagChecked === "true") {
+      trainPlaySwicher.checked = true;
+    } else {
+      trainPlaySwicher.checked = false;
+    }
+  }
+
+  function playAudio (path) {  
+    const audioElement = new Audio(path);
+    audioElement.play(); 
+  }
+
+  function firstPageSetColorCards(bool) {
+    if (bool === true) {
+      localStorage.trainPlayFlagChecked = true;
+      cardArr.forEach(element => {
+        element.classList.add("play");
+      });
+    } else if (bool === false) {
+      cardArr.forEach(element => {
+        element.classList.remove("play");
+        localStorage.trainPlayFlagChecked = false;
+      });
+    }
+  }
+
+  function loadSecondPageCard () {
+    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}  
+    cardArr.forEach(function(item, index) { 
+      let c = (new Card (cards[localStorage.pageIndex][index]));
+      item.innerHTML = '';
+      item.innerHTML = c.generateCart();
+    }); 
+  }   
   
