@@ -15,6 +15,7 @@ const navPanel = document.querySelector(".nav-panel");
 const menuToggle = document.querySelector(".menuToggle");
 const trainPlaySwicher = document.getElementById("swich");
 const startButton = document.getElementById("start-button");
+/* const images = document.querySelectorAll(".card-images"); */
 
 let navPanelFlag = false;
 /* const audioElement = new Audio('../audio/bird.mp3'); */
@@ -47,20 +48,28 @@ console.log(mod);
 loadSecondPageTrainPlaySwicher ();
 loadstartBtnEnDis();
 loadSecondPageCard();
-
- 
+if (localStorage.trainPlayFlagChecked === "true") {setCardsOnPlayMode(true);}
+else {setCardsOnPlayMode(false);} 
 
 
 
 
 cardContainer.addEventListener('click', (event) => {
-  console.log(event);
   if (localStorage.audioIsOn === "false" || localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}
-  if (event.target.tagName === "IMG") {
+  if (event.target.alt !== "" && event.target.tagName === "IMG" && localStorage.trainPlayFlagChecked === "false") {
       const foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
-      playAudio(foundObject.audioSrc);    
+      playAudio(foundObject.audioSrc);  
+  }
+  if (event.target.classList.contains("rotate")) {
+    rotateCardTrue(event.target.id);
+    rotateCardCloseEListener(event.target.id);   
   }
 });
+
+
+
+
+
 
 
 
@@ -76,6 +85,29 @@ function createSecondPageCards (str) {
   
   
 } */
+function setCardsOnPlayMode (bool) {
+  const images = document.querySelectorAll(".card-images");
+  const myCardsBody = document.querySelectorAll(".my-card-body");
+  if (bool) {
+    localStorage.trainPlayFlagChecked = true;   
+    images.forEach(element => {
+      element.style.height = "100%";
+    });
+
+    myCardsBody.forEach(element => {
+      element.style.display = "none";
+    });
+  } else {
+    localStorage.trainPlayFlagChecked = false; 
+    images.forEach(element => {
+      element.style.height = "";
+    });
+  
+    myCardsBody.forEach(element => {
+      element.style.display = "";
+    });
+  }
+}
 
 
 
@@ -93,8 +125,10 @@ document.addEventListener('click',  (event) => {
       /* train/play swicher second page */   
       if (event.target.checked === true) {
         startBtnEnDis(true);
+        setCardsOnPlayMode(true);
       } else {
         startBtnEnDis(false);
+        setCardsOnPlayMode(false);
       }     
     }    
   }
@@ -117,7 +151,7 @@ document.addEventListener('click',  (event) => {
       navPanel.style.left = "-350px";
       navPanelFlag = false;
     }                             
-  });
+});
   
   function startBtnEnDis (bool) {
     if (bool === true) {
@@ -141,8 +175,10 @@ document.addEventListener('click',  (event) => {
   function loadSecondPageTrainPlaySwicher () {
     if (localStorage.trainPlayFlagChecked === "true") {
       trainPlaySwicher.checked = true;
+      /* setCardsOnPlayMode(true); */
     } else {
       trainPlaySwicher.checked = false;
+      /* setCardsOnPlayMode(false); */
     }
   }
 
@@ -168,9 +204,25 @@ document.addEventListener('click',  (event) => {
   function loadSecondPageCard () {
     if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}  
     cardArr.forEach(function(item, index) { 
-      let c = (new Card (cards[localStorage.pageIndex][index]));
+      const c = (new Card (cards[localStorage.pageIndex][index]));
       item.innerHTML = '';
-      item.innerHTML = c.generateCart();
+      item.innerHTML = c.generateCart(index);  
     }); 
   }   
   
+  function rotateCardTrue (id) {
+    cardArr[id].childNodes[1].style.transform = "rotateY(180deg)";
+    cardArr[id].childNodes[3].style.transform = "rotateY(360deg)"; 
+  }
+  
+  function rotateCardFalse (id) {
+    cardArr[id].childNodes[1].style.transform = "";
+    cardArr[id].childNodes[3].style.transform = "";  
+  }
+  
+  function rotateCardCloseEListener (id) {
+    cardArr[id].onmouseleave  = () => {
+      rotateCardFalse(id);
+      cardArr[id].onmouseleave = null;
+    };
+  } 

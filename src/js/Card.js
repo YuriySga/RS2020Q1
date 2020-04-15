@@ -8,20 +8,19 @@ export class Card {
     this.Rest = Rest;
   }
 
-  generateCart() {
+  generateCart(id) {
     let template = `
     <div class="front">
-      <img src=${this.image} class="card-img-top" alt="${this.word}"> 
-      <div class="card-body">
+      <img src=${this.image} class="card-img-top card-images" alt="${this.word}"> 
+      <div class="card-body my-card-body">
         <p class="card-text h1">${this.word}</p>
-        <div class="rotate"></div>
+        <div class="rotate" id="${id}"></div>
       </div>
     </div>
     <div class="back">
-      <img src=${this.image} class="card-img-top" alt="">
-      <div class="card-body">
+      <img src=${this.image} class="card-img-top card-images" alt="">
+      <div class="card-body my-card-body">
         <p class="card-text h1">${this.translation}</p>
-        <div class="rotate"></div>
       </div>
     </div>`;
 
