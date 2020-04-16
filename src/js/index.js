@@ -9,6 +9,7 @@ require.context("../audio/", true, /\.(mp3)$/);
 const cards = require('./cards.js');
 
 const cardArr = document.querySelectorAll(".card");
+const pop_up = document.querySelector(".pop_up");
 const cardContainer = document.querySelector(".card-container");
 const nav = document.querySelector(".nav-container");
 const navPanel = document.querySelector(".nav-panel");
@@ -18,6 +19,10 @@ const startButton = document.getElementById("start-button");
 /* const images = document.querySelectorAll(".card-images"); */
 
 let navPanelFlag = false;
+let lastClickCardImageAlt = "";  /* variable for contained answer; */
+let refreshButtonIsPress = false;
+let gameIsStart= false;
+let lastAudioSrc;
 /* const audioElement = new Audio('../audio/bird.mp3'); */
 
 /* import {
@@ -54,12 +59,110 @@ else {setCardsOnPlayMode(false);}
 
 
 
+
+/* push button start, then play audio random */
+function startQuestions () {  
+  if (gameIsStart === false) return;
+  let found = cards[localStorage.pageIndex];
+  shuffle(found);
+  lastAudioSrc = found[0].audioSrc;
+  askQuestions(lastAudioSrc);
+  check();
+  
+
+
+  function check () {
+    if (gameIsStart === false) return;
+    if (checkAnswerQuestions() === true) {
+      found.shift(); 
+      if (found.length !== 0){ 
+        lastAudioSrc = found[0].audioSrc;
+        setTimeout(()=>{playAudio(lastAudioSrc);}, 700);
+        setTimeout(check, 1000);
+      } else {
+        /* YOU WIN */
+        console.log('you win');
+        playAudio('audio/success.mp3');
+        popupMsg();
+        return;
+       }
+    } else {
+      setTimeout(check, 500);
+    }
+  }
+
+  function checkAnswerQuestions () {       
+    /* if (lastClickCardImageAlt === "") {}  */ 
+    /* if refresh button is press, need again play audio */
+    /* if (refreshButtonIsPress === true) {
+      askQuestions ();
+    } */
+    if (lastClickCardImageAlt === found[0].word) {
+      lastClickCardImageAlt = "";
+      /* addGoldStar();*/
+      playAudio('audio/correct.mp3');
+      return true;
+    }
+    if (lastClickCardImageAlt !== "" && lastClickCardImageAlt !== found[0].word) {
+      lastClickCardImageAlt = "";
+      /* addWhiteStar();*/        
+      playAudio('audio/error.mp3');
+    }
+  console.log('end check'); 
+  }
+}
+
+function askQuestions (audioSrc) {  
+  if (gameIsStart === false) return;
+  playAudio(audioSrc);   /* play first melody in arr */  
+  lastClickCardImageAlt = "";   /* clear variable for contained answer; */
+  /* refreshButtonIsPress = false;  */ /* clear variable; */
+}
+
+
+
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));    
+    [array[i], array[j]] = [array[j], array[i]];    
+  }
+  return array;
+}
+
+/* function random() {
+  let slidesPortfolio = document.querySelectorAll('.picture');
+  slidesPortfolio.forEach((item, index) => {
+    if (Math.random() > 0.5) { 
+      image_art.append(slidesPortfolio[index]);
+    }
+  });
+}
+ */
+
+
+
+
+
+
+
+
+
 cardContainer.addEventListener('click', (event) => {
+ /*  if user is located of first page */
   if (localStorage.audioIsOn === "false" || localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}
+ 
+  /* play audio in train mode */
   if (event.target.alt !== "" && event.target.tagName === "IMG" && localStorage.trainPlayFlagChecked === "false") {
       const foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
       playAudio(foundObject.audioSrc);  
   }
+  /* Check answer the questions */
+  if (event.target.alt !== "" && event.target.tagName === "IMG" && gameIsStart === true) {
+    lastClickCardImageAlt = event.target.alt;
+  }
+    /* cllick of rotate icon to rotate card */
   if (event.target.classList.contains("rotate")) {
     rotateCardTrue(event.target.id);
     rotateCardCloseEListener(event.target.id);   
@@ -113,8 +216,9 @@ function setCardsOnPlayMode (bool) {
 
 
 document.addEventListener('click',  (event) => {
+  console.log(event.target.id);
   /* train/play swicher first page */
-  if (event.target.id === "swich") {    
+  if (event.target.id === "swich") {   
     if (localStorage.pageIndex === "0") {
       if (event.target.checked === true) {
         firstPageSetColorCards(true);        
@@ -129,12 +233,14 @@ document.addEventListener('click',  (event) => {
       } else {
         startBtnEnDis(false);
         setCardsOnPlayMode(false);
+        gameIsStart = false;
       }     
     }    
   }
-  /* berger swicher */
-  if (event.target.id === "burger") {   
+  /* burger swicher */
+  else if (event.target.id === "burger") {
     if (navPanelFlag === false) {
+    console.log(navPanel.style.left); 
     navPanel.style.left = "0";
     navPanelFlag = true;
     menuToggle.classList.remove("burger_left");
@@ -145,12 +251,24 @@ document.addEventListener('click',  (event) => {
     navPanel.style.left = "-350px";
     navPanelFlag = false;
     }
-    } else {
-      menuToggle.classList.remove("burger_right");
-      menuToggle.classList.add("burger_left");
-      navPanel.style.left = "-350px";
-      navPanelFlag = false;
-    }                             
+  } 
+  /* start button press */
+  else if (event.target.id === "start-button") { 
+    if (localStorage.trainPlayFlagChecked === "true" && gameIsStart === false) {
+      gameIsStart = true; 
+      /* refreshButtonIsPress = false; */
+      startQuestions();      
+    } else if (localStorage.trainPlayFlagChecked === "true" && gameIsStart === true) {
+      /* refreshButtonIsPress = true; */
+      askQuestions(lastAudioSrc);
+    }
+  }  
+  else {
+    menuToggle.classList.remove("burger_right");
+    menuToggle.classList.add("burger_left");
+    navPanel.style.left = "-350px";
+    navPanelFlag = false; 
+  }                           
 });
   
   function startBtnEnDis (bool) {
@@ -226,3 +344,8 @@ document.addEventListener('click',  (event) => {
       cardArr[id].onmouseleave = null;
     };
   } 
+  
+  function popupMsg(str ="block") {    
+    pop_up.style.display = str;
+    setTimeout(()=>{popupMsg("none");}, 3000);
+  }

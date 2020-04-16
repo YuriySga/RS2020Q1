@@ -375,5 +375,5 @@ const cards = [
   ]
 ];
 
-/* export default cards; */
+/* export cards; */
 module.exports = cards;

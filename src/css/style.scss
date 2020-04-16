@@ -213,4 +213,17 @@ header {
   transition: 0.5s;
 }
 
+.pop_up {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF;  
+  z-index: 3;  
+  background-image: url("/img/success.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
