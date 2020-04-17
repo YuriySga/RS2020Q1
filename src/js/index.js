@@ -16,60 +16,31 @@ const navPanel = document.querySelector(".nav-panel");
 const menuToggle = document.querySelector(".menuToggle");
 const trainPlaySwicher = document.getElementById("swich");
 const startButton = document.getElementById("start-button");
+const starContainer = document.querySelector(".star-container");
 /* const images = document.querySelectorAll(".card-images"); */
 
 let navPanelFlag = false;
 let lastClickCardImageAlt = "";  /* variable for contained answer; */
-let refreshButtonIsPress = false;
-let gameIsStart= false;
+let gameIsStart = false;
+let gameIsTrain;
 let lastAudioSrc;
-/* const audioElement = new Audio('../audio/bird.mp3'); */
 
-/* import {
-  moduleOne
-} from './moduleOne';
-/*
 
-const helloArr = require('./moduleOne.js');
-
-class TestClass {
-  constructor() {
-    const msg = "Using ES2015+ syntax";
-    console.log(msg);
-  }
-}
-
-const test = new TestClass();
-
-// Пример массива
-console.log(helloArr);
-
-/* пример подключения модуля
-let mod = moduleOne(2, 3);
-
-console.log(mod);
-
- */
 loadSecondPageTrainPlaySwicher ();
 loadstartBtnEnDis();
 loadSecondPageCard();
-if (localStorage.trainPlayFlagChecked === "true") {setCardsOnPlayMode(true);}
-else {setCardsOnPlayMode(false);} 
-
-
-
-
+if (gameIsTrain === false) {setCardsOnPlayMode(true);}
+else {setCardsOnPlayMode(false);}
 
 /* push button start, then play audio random */
 function startQuestions () {  
   if (gameIsStart === false) return;
-  let found = cards[localStorage.pageIndex];
+  startBtnToRefresh(true);
+  const found = cards[localStorage.pageIndex].slice();
   shuffle(found);
   lastAudioSrc = found[0].audioSrc;
   askQuestions(lastAudioSrc);
   check();
-  
-
 
   function check () {
     if (gameIsStart === false) return;
@@ -81,47 +52,56 @@ function startQuestions () {
         setTimeout(check, 1000);
       } else {
         /* YOU WIN */
-        console.log('you win');
         playAudio('audio/success.mp3');
         popupMsg();
+        swichSwicher("forceOff");
+        lastAudioSrc = "";
+        lastClickCardImageAlt = "";
+        removeStars();
+        startBtnToRefresh(false);
         return;
-       }
+        }
     } else {
       setTimeout(check, 500);
     }
   }
 
-  function checkAnswerQuestions () {       
-    /* if (lastClickCardImageAlt === "") {}  */ 
-    /* if refresh button is press, need again play audio */
-    /* if (refreshButtonIsPress === true) {
-      askQuestions ();
-    } */
+  function checkAnswerQuestions () {
     if (lastClickCardImageAlt === found[0].word) {
       lastClickCardImageAlt = "";
-      /* addGoldStar();*/
+      addGoldStar();
       playAudio('audio/correct.mp3');
       return true;
     }
     if (lastClickCardImageAlt !== "" && lastClickCardImageAlt !== found[0].word) {
       lastClickCardImageAlt = "";
-      /* addWhiteStar();*/        
+      addWhiteStar();       
       playAudio('audio/error.mp3');
     }
-  console.log('end check'); 
   }
 }
 
 function askQuestions (audioSrc) {  
   if (gameIsStart === false) return;
-  playAudio(audioSrc);   /* play first melody in arr */  
+  playAudio(audioSrc);           /* play first melody in arr */  
   lastClickCardImageAlt = "";   /* clear variable for contained answer; */
-  /* refreshButtonIsPress = false;  */ /* clear variable; */
 }
 
+function removeStars () {
+  starContainer.innerHTML = "";
+}
 
+function addGoldStar() {
+  const span = document.createElement("span");
+  span.classList.add("goldStar");
+  starContainer.append(span);
+}
 
-
+function addWhiteStar() {
+  const span = document.createElement("span");
+  span.classList.add("whiteStar");
+  starContainer.append(span);
+}
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -131,31 +111,13 @@ function shuffle(array) {
   return array;
 }
 
-/* function random() {
-  let slidesPortfolio = document.querySelectorAll('.picture');
-  slidesPortfolio.forEach((item, index) => {
-    if (Math.random() > 0.5) { 
-      image_art.append(slidesPortfolio[index]);
-    }
-  });
-}
- */
-
-
-
-
-
-
-
-
-
 cardContainer.addEventListener('click', (event) => {
  /*  if user is located of first page */
   if (localStorage.audioIsOn === "false" || localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}
  
   /* play audio in train mode */
-  if (event.target.alt !== "" && event.target.tagName === "IMG" && localStorage.trainPlayFlagChecked === "false") {
-      const foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
+  if (event.target.alt !== "" && event.target.tagName === "IMG" && gameIsTrain === true && gameIsStart === false) {
+      let foundObject = cards[localStorage.pageIndex].find(item => item.word === event.target.alt);
       playAudio(foundObject.audioSrc);  
   }
   /* Check answer the questions */
@@ -169,30 +131,11 @@ cardContainer.addEventListener('click', (event) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-/* createSecondPageCards(secondPageCardsName);
-function createSecondPageCards (str) {
-  let ind = cards[0].indexOf(str);
-  /* console.log(ind); */
-
-  
-  /* console.log( new Card(cards[ind+1][0]));
-  
-  
-} */
 function setCardsOnPlayMode (bool) {
   const images = document.querySelectorAll(".card-images");
   const myCardsBody = document.querySelectorAll(".my-card-body");
   if (bool) {
-    localStorage.trainPlayFlagChecked = true;   
+    gameIsTrain = false;   
     images.forEach(element => {
       element.style.height = "100%";
     });
@@ -201,7 +144,7 @@ function setCardsOnPlayMode (bool) {
       element.style.display = "none";
     });
   } else {
-    localStorage.trainPlayFlagChecked = false; 
+    gameIsTrain = true;
     images.forEach(element => {
       element.style.height = "";
     });
@@ -212,35 +155,43 @@ function setCardsOnPlayMode (bool) {
   }
 }
 
-
-
-
-document.addEventListener('click',  (event) => {
-  console.log(event.target.id);
-  /* train/play swicher first page */
-  if (event.target.id === "swich") {   
-    if (localStorage.pageIndex === "0") {
-      if (event.target.checked === true) {
-        firstPageSetColorCards(true);        
-      } else {
-        firstPageSetColorCards(false);        
-      }
-    } else if (localStorage.pageIndex !== "0") { 
-      /* train/play swicher second page */   
-      if (event.target.checked === true) {
-        startBtnEnDis(true);
-        setCardsOnPlayMode(true);
-      } else {
-        startBtnEnDis(false);
-        setCardsOnPlayMode(false);
-        gameIsStart = false;
-      }     
-    }    
+function swichSwicher(str) {
+  if (str === "forceOff") {   
+      trainPlaySwicher.checked = false;
+      swichSwicher();
   }
-  /* burger swicher */
-  else if (event.target.id === "burger") {
-    if (navPanelFlag === false) {
-    console.log(navPanel.style.left); 
+  if (str === "forceOn") {
+      trainPlaySwicher.checked = true;
+      swichSwicher();
+  }  
+  if (localStorage.pageIndex === "0") {
+    /* train/play swicher firsst page */
+    if (trainPlaySwicher.checked === true) {
+      localStorage.trainPlayFlagChecked = true;
+      firstPageSetColorCards(true);        
+    } else {
+      localStorage.trainPlayFlagChecked = false;
+      firstPageSetColorCards(false);        
+    }
+  } else if (localStorage.pageIndex !== "0") { 
+    /* train/play swicher second page */   
+    if (trainPlaySwicher.checked === true) {
+      startBtnEnDis(true);
+      setCardsOnPlayMode(true);
+      gameIsTrain = false;
+    } else {
+      startBtnEnDis(false);
+      setCardsOnPlayMode(false);
+      gameIsStart = false;
+      gameIsTrain = true;
+      startBtnToRefresh(false);
+      removeStars();
+    }     
+  }
+}
+
+function swichBurger() {
+  if (navPanelFlag === false) {
     navPanel.style.left = "0";
     navPanelFlag = true;
     menuToggle.classList.remove("burger_left");
@@ -251,15 +202,25 @@ document.addEventListener('click',  (event) => {
     navPanel.style.left = "-350px";
     navPanelFlag = false;
     }
+}
+
+document.addEventListener('click',  (event) => {
+  /* train/play swicher first page */
+  if (event.target.id === "swich") {   
+    swichSwicher();
+  }
+  /* burger swicher */
+  else if (event.target.id === "burger") {
+    gameIsStart = false;
+    swichBurger();
+    swichSwicher("forceOff");
   } 
   /* start button press */
   else if (event.target.id === "start-button") { 
-    if (localStorage.trainPlayFlagChecked === "true" && gameIsStart === false) {
-      gameIsStart = true; 
-      /* refreshButtonIsPress = false; */
+    if (gameIsTrain === false && gameIsStart === false) {
+      gameIsStart = true;
       startQuestions();      
-    } else if (localStorage.trainPlayFlagChecked === "true" && gameIsStart === true) {
-      /* refreshButtonIsPress = true; */
+    } else if (gameIsTrain === false && gameIsStart === true) {
       askQuestions(lastAudioSrc);
     }
   }  
@@ -270,20 +231,30 @@ document.addEventListener('click',  (event) => {
     navPanelFlag = false; 
   }                           
 });
-  
+
+function startBtnToRefresh (bool) {
+  if (bool === true) {
+    startButton.innerHTML = "";
+    startButton.classList.add("btn-repeat");
+  } else if (bool === false) {
+    startButton.innerHTML = "Start game";
+    startButton.classList.remove("btn-repeat");
+  }
+}
+
   function startBtnEnDis (bool) {
     if (bool === true) {
       startButton.classList.remove("disabled");
-      localStorage.trainPlayFlagChecked = true;
+      gameIsTrain = false;
     } else if (bool === false) {
       startButton.classList.add("disabled");
-      localStorage.trainPlayFlagChecked = false;
+      gameIsTrain = true;
     }
   }
 
   function loadstartBtnEnDis () {
     if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){  return;}
-    if (localStorage.trainPlayFlagChecked === "true") {
+    if (gameIsTrain === false) {
       startBtnEnDis(true);
     } else {
       startBtnEnDis(false);
@@ -293,10 +264,11 @@ document.addEventListener('click',  (event) => {
   function loadSecondPageTrainPlaySwicher () {
     if (localStorage.trainPlayFlagChecked === "true") {
       trainPlaySwicher.checked = true;
-      /* setCardsOnPlayMode(true); */
+      localStorage.trainPlayFlagChecked = false;   /* for if page is refresh swich on of train mode */
+      gameIsTrain = false;
     } else {
       trainPlaySwicher.checked = false;
-      /* setCardsOnPlayMode(false); */
+      gameIsTrain = true; 
     }
   }
 
@@ -307,14 +279,14 @@ document.addEventListener('click',  (event) => {
 
   function firstPageSetColorCards(bool) {
     if (bool === true) {
-      localStorage.trainPlayFlagChecked = true;
+      gameIsTrain = false;
       cardArr.forEach(element => {
         element.classList.add("play");
       });
     } else if (bool === false) {
       cardArr.forEach(element => {
         element.classList.remove("play");
-        localStorage.trainPlayFlagChecked = false;
+        gameIsTrain = true;
       });
     }
   }
@@ -349,3 +321,10 @@ document.addEventListener('click',  (event) => {
     pop_up.style.display = str;
     setTimeout(()=>{popupMsg("none");}, 3000);
   }
+
+  /* window.addEventListener("unload", function() {
+    if (localStorage.pageIndex !== 0) {
+      console.log(777);
+      localStorage.trainPlayFlagChecked = false; 
+    }
+  }); */
