@@ -23,6 +23,14 @@ header {
   padding-top: 30px;
 }
 
+.my-card {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+
+  &:hover {
+    box-shadow: 0px 10px 17px 0px rgba(50, 50, 50, 0.5);
+  }
+}
+
 .card {  
   width: 300px;
   height: 280px;
@@ -210,6 +218,10 @@ header {
         text-decoration: underline;
       }
     }
+
+    .active-link {
+      text-decoration: underline;
+    }
 }
 
 .burger_right {
@@ -231,9 +243,22 @@ header {
   height: 100vh;
   background-color: #FFFFFF;  
   z-index: 3;  
-  background-image: url("/img/success.jpg");
   background-repeat: no-repeat;
   background-position: center;
+
+  .pop_up_score{
+    display: block; 
+    font-weight: bold;
+    font-size: 45px;
+  }
+}
+
+.pop_up_success {
+  background-image: url("/img/success.jpg");
+}
+
+.pop_up_failure {
+  background-image: url("/img/failure.jpg");
 }
 
 .star-container {
@@ -266,3 +291,14 @@ header {
 
 }
 
+.card-list {
+  height: 200px;
+  font-size: 1.6rem;
+  border-bottom: solid 1px rgb(78, 78, 78);
+  background: none;
+  text-align: left;
+}
+
+.my-statics-card {
+  background: linear-gradient(40deg, #ffd86f, #fc6262);
+}

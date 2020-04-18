@@ -194,6 +194,10 @@ const config = {
       template: './src/index2.html',
       filename: './index2.html'
     }),  
+    new HtmlWebPackPlugin({
+      template: './src/index3.html',
+      filename: './index3.html'
+    }),  
     new CopyWebpackPlugin([
       // {from: './src/static', to: './'},
       // {from: './src/img', to: './img/'},
@@ -217,7 +221,3 @@ if (isProd) {
 }
 
 module.exports = config;
-
-//npm run clear
-//npm run build
-//npm run dev

@@ -3,6 +3,7 @@ import '../css/style.css';
 import '../css/style.scss';
 import { Card } from './Card';
 
+
 require.context("../img/", true, /\.(png|svg|jpg|gif)$/);
 require.context("../audio/", true, /\.(mp3)$/);
 
@@ -10,8 +11,8 @@ const cards = require('./cards.js');
 
 const cardArr = document.querySelectorAll(".card");
 const pop_up = document.querySelector(".pop_up");
+const pop_up_score = document.querySelector(".pop_up_score");
 const cardContainer = document.querySelector(".card-container");
-const nav = document.querySelector(".nav-container");
 const navPanel = document.querySelector(".nav-panel");
 const menuToggle = document.querySelector(".menuToggle");
 const trainPlaySwicher = document.getElementById("swich");
@@ -20,22 +21,28 @@ const starContainer = document.querySelector(".star-container");
 /* const images = document.querySelectorAll(".card-images"); */
 
 let navPanelFlag = false;
-let lastClickCardImageAlt = "";  /* variable for contained answer; */
+let lastClickCardImage = "";  /* variable for contained answer; */
 let gameIsStart = false;
 let gameIsTrain;
 let lastAudioSrc;
+let roundScorePlus = 0;
+let roundScoreMinus= 0;
+let lastClickedCardAltArr = [];
 
 
 loadSecondPageTrainPlaySwicher ();
-loadstartBtnEnDis();
-loadSecondPageCard();
+loadstartBtnEnDis ();
+loadSecondPageCard ();
+loadStatisticsPageCard ();
 if (gameIsTrain === false) {setCardsOnPlayMode(true);}
 else {setCardsOnPlayMode(false);}
 
-/* push button start, then play audio random */
 function startQuestions () {  
   if (gameIsStart === false) return;
   startBtnToRefresh(true);
+  roundScorePlus = 0;
+  roundScoreMinus = 0;
+  lastClickedCardAltArr.length = 0;
   const found = cards[localStorage.pageIndex].slice();
   shuffle(found);
   lastAudioSrc = found[0].audioSrc;
@@ -46,45 +53,61 @@ function startQuestions () {
     if (gameIsStart === false) return;
     if (checkAnswerQuestions() === true) {
       found.shift(); 
-      if (found.length !== 0){ 
+      if (found.length !== 0){         
         lastAudioSrc = found[0].audioSrc;
         setTimeout(()=>{playAudio(lastAudioSrc);}, 700);
         setTimeout(check, 1000);
       } else {
-        /* YOU WIN */
-        playAudio('audio/success.mp3');
-        popupMsg();
+        /* Game over */
+        const roundRes = roundScorePlus - roundScoreMinus;
+        if (roundRes === 8) {
+          /* WIN */
+          playAudio('audio/success.mp3');        
+          popupMsg("success");          
+        } else {
+           /* DEFEAT */
+          playAudio('audio/failure.mp3');
+          popupMsg("failure");
+        }
         swichSwicher("forceOff");
         lastAudioSrc = "";
-        lastClickCardImageAlt = "";
+        lastClickCardImage = "";
         removeStars();
-        startBtnToRefresh(false);
+        startBtnToRefresh(false);        
         return;
-        }
+      }
     } else {
       setTimeout(check, 500);
     }
   }
-
   function checkAnswerQuestions () {
-    if (lastClickCardImageAlt === found[0].word) {
-      lastClickCardImageAlt = "";
+    if (lastClickCardImage.alt === found[0].word) {
+      lastClickCardImage.style.opacity = "0.4";
+      lastClickedCardAltArr.push(lastClickCardImage.alt);
+      lastClickCardImage = "";
+      roundScorePlus +=1;
       addGoldStar();
       playAudio('audio/correct.mp3');
       return true;
     }
-    if (lastClickCardImageAlt !== "" && lastClickCardImageAlt !== found[0].word) {
-      lastClickCardImageAlt = "";
+    if (lastClickCardImage !== "" && lastClickCardImage.alt !== found[0].word) {
+      lastClickCardImage = "";
+      roundScoreMinus +=1;
       addWhiteStar();       
       playAudio('audio/error.mp3');
+      return false;
     }
   }
 }
 
+/* function checkingPreviouslyClickedCards(cardAlt) {
+  lastClickedCardAltArr.includes(cardAlt);
+} */
+
 function askQuestions (audioSrc) {  
   if (gameIsStart === false) return;
   playAudio(audioSrc);           /* play first melody in arr */  
-  lastClickCardImageAlt = "";   /* clear variable for contained answer; */
+  lastClickCardImage = "";   /* clear variable for contained answer; */
 }
 
 function removeStars () {
@@ -122,7 +145,9 @@ cardContainer.addEventListener('click', (event) => {
   }
   /* Check answer the questions */
   if (event.target.alt !== "" && event.target.tagName === "IMG" && gameIsStart === true) {
-    lastClickCardImageAlt = event.target.alt;
+    if (lastClickedCardAltArr.includes(event.target.alt) !== true) {
+      lastClickCardImage = event.target;
+    } else { return; }
   }
     /* cllick of rotate icon to rotate card */
   if (event.target.classList.contains("rotate")) {
@@ -173,7 +198,7 @@ function swichSwicher(str) {
       localStorage.trainPlayFlagChecked = false;
       firstPageSetColorCards(false);        
     }
-  } else if (localStorage.pageIndex !== "0") { 
+  } else if (localStorage.pageIndex !== "0" && localStorage.pageIndex !== "9") { 
     /* train/play swicher second page */   
     if (trainPlaySwicher.checked === true) {
       startBtnEnDis(true);
@@ -190,24 +215,31 @@ function swichSwicher(str) {
   }
 }
 
-function swichBurger() {
+function swichBurger(str) {
+  if (str === "forceOff") {
+    navPanelFlag = false;
+    swichBurger();
+  }
   if (navPanelFlag === false) {
     navPanel.style.left = "0";
     navPanelFlag = true;
     menuToggle.classList.remove("burger_left");
     menuToggle.classList.add("burger_right");
-    } else {
+    navPanel.children[localStorage.pageIndex].classList.add("active-link");
+  } else {
     menuToggle.classList.remove("burger_right");
     menuToggle.classList.add("burger_left");
     navPanel.style.left = "-350px";
     navPanelFlag = false;
-    }
+  }
 }
 
 document.addEventListener('click',  (event) => {
-  /* train/play swicher first page */
+  /* train/play swicher */
+  console.log(event.target);
   if (event.target.id === "swich") {   
     swichSwicher();
+    swichBurger("forceOff");
   }
   /* burger swicher */
   else if (event.target.id === "burger") {
@@ -232,6 +264,7 @@ document.addEventListener('click',  (event) => {
   }                           
 });
 
+
 function startBtnToRefresh (bool) {
   if (bool === true) {
     startButton.innerHTML = "";
@@ -253,7 +286,7 @@ function startBtnToRefresh (bool) {
   }
 
   function loadstartBtnEnDis () {
-    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){  return;}
+    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0" || localStorage.pageIndex === "9"){  return;}
     if (gameIsTrain === false) {
       startBtnEnDis(true);
     } else {
@@ -292,14 +325,25 @@ function startBtnToRefresh (bool) {
   }
 
   function loadSecondPageCard () {
-    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"){return;}  
+    if (localStorage.pageIndex === undefined || localStorage.pageIndex === "0"|| localStorage.pageIndex === "9"){return;}  
     cardArr.forEach(function(item, index) { 
       const c = (new Card (cards[localStorage.pageIndex][index]));
       item.innerHTML = '';
       item.innerHTML = c.generateCart(index);  
     }); 
   }   
-  
+ 
+  function loadStatisticsPageCard () {
+    if (localStorage.pageIndex !== "9"){return;}  
+    cardArr.forEach((item, index) => { 
+      item.children[0].children[0].innerHTML = '';
+      for (let i = 0; i < 8; i++) { 
+        const c = (new Card (cards[index+1][i]));
+        item.children[0].children[0].innerHTML += c.generateStatisticsWords();                
+      }    
+    });  
+  }  
+
   function rotateCardTrue (id) {
     cardArr[id].childNodes[1].style.transform = "rotateY(180deg)";
     cardArr[id].childNodes[3].style.transform = "rotateY(360deg)"; 
@@ -317,14 +361,25 @@ function startBtnToRefresh (bool) {
     };
   } 
   
-  function popupMsg(str ="block") {    
-    pop_up.style.display = str;
-    setTimeout(()=>{popupMsg("none");}, 3000);
+  function popupMsg(str1, str2 ="block") { 
+    pop_up_score.innerHTML = `Score: ${roundScorePlus - roundScoreMinus}, Errors: ${roundScoreMinus}`;
+    if (str1 === "success") {
+      pop_up.classList.add("pop_up_success");
+      pop_up.style.display = str2;    
+    } else if (str1 === "failure") {
+      pop_up.classList.add("pop_up_failure");
+      pop_up.style.display = str2;    
+    } else {
+      pop_up.classList.remove("pop_up_success");
+      pop_up.classList.remove("pop_up_failure");
+      pop_up.style.display = str2;
+      document.location.href = "index.html";
+      return false;      
+    }
+    setTimeout(()=>{popupMsg("clear", "none");}, 3000);    
   }
 
-  /* window.addEventListener("unload", function() {
-    if (localStorage.pageIndex !== 0) {
-      console.log(777);
-      localStorage.trainPlayFlagChecked = false; 
-    }
-  }); */
+
+  
+
+

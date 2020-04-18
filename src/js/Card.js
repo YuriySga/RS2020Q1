@@ -23,11 +23,14 @@ export class Card {
         <p class="card-text h1">${this.translation}</p>
       </div>
     </div>`;
+    return template;
+  }
 
+  generateStatisticsWords() {
+    let template = `<li>${this.word} - ${this.translation}</li>`;
     return template;
   }
 }
-
 
 /* module.exports = {
   Card

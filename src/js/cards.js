@@ -100,79 +100,106 @@ const cards = [
       audioSrc: 'audio/swim.mp3'
     }
   ],
-
-
-
-
-///////////////////////////////////////////
-
-
-
-
   [
     {
-      word: 'open',
-      translation: 'открывать',
-      image: 'img/open.jpg',
-      audioSrc: 'audio/open.mp3'
+      word: 'surf',
+      translation: 'серфинг',
+      image: 'img/surf.jpg',
+      audioSrc: 'audio/surf.mp3'
     },
     {
-      word: 'play',
-      translation: 'играть',
-      image: 'img/play.jpg',
-      audioSrc: 'audio/play.mp3'
+      word: 'watch',
+      translation: 'смотреть',
+      image: 'img/watch.jpg',
+      audioSrc: 'audio/watch.mp3'
     },
     {
-      word: 'point',
-      translation: 'указывать',
-      image: 'img/point.jpg',
-      audioSrc: 'audio/point.mp3'
+      word: 'build',
+      translation: 'строить',
+      image: 'img/build.jpg',
+      audioSrc: 'audio/build.mp3'
     },
     {
-      word: 'ride',
-      translation: 'ездить',
-      image: 'img/ride.jpg',
-      audioSrc: 'audio/ride.mp3'
+      word: 'wash',
+      translation: 'мыть',
+      image: 'img/wash.jpg',
+      audioSrc: 'audio/wash.mp3'
     },
     {
-      word: 'run',
-      translation: 'бегать',
-      image: 'img/run.jpg',
-      audioSrc: 'audio/run.mp3'
+      word: 'write',
+      translation: 'писать',
+      image: 'img/write.jpg',
+      audioSrc: 'audio/write.mp3'
     },
     {
-      word: 'sing',
-      translation: 'петь',
-      image: 'img/sing.jpg',
-      audioSrc: 'audio/sing.mp3'
+      word: 'dig',
+      translation: 'копать',
+      image: 'img/dig.jpg',
+      audioSrc: 'audio/dig.mp3'
     },
     {
-      word: 'skip',
-      translation: 'пропускать, прыгать',
-      image: 'img/skip.jpg',
-      audioSrc: 'audio/skip.mp3'
+      word: 'call',
+      translation: 'звонить',
+      image: 'img/call.jpg',
+      audioSrc: 'audio/call.mp3'
     },
     {
-      word: 'swim',
-      translation: 'плавать',
-      image: 'img/swim.jpg',
-      audioSrc: 'audio/swim.mp3'
+      word: 'feed',
+      translation: 'кормить',
+      image: 'img/feed.jpg',
+      audioSrc: 'audio/feed.mp3'
     }
   ],
-
-
-
-
-///////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
+  [
+    {
+      word: 'beautiful',
+      translation: 'красивый',
+      image: 'img/beautiful.jpg',
+      audioSrc: 'audio/beautiful.mp3'
+    },
+    {
+      word: 'terrible',
+      translation: 'ужасный',
+      image: 'img/terrible.jpg',
+      audioSrc: 'audio/terrible.mp3'
+    },
+    {
+      word: 'fluffy',
+      translation: 'пушистый',
+      image: 'img/fluffy.jpg',
+      audioSrc: 'audio/fluffy.mp3'
+    },
+    {
+      word: 'dirty',
+      translation: 'грязный',
+      image: 'img/dirty.jpg',
+      audioSrc: 'audio/dirty.mp3'
+    },
+    {
+      word: 'old',
+      translation: 'старый',
+      image: 'img/old.jpg',
+      audioSrc: 'audio/old.mp3'
+    },
+    {
+      word: 'big',
+      translation: 'большой',
+      image: 'img/big.jpg',
+      audioSrc: 'audio/big.mp3'
+    },
+    {
+      word: 'cold',
+      translation: 'холодный',
+      image: 'img/cold.jpg',
+      audioSrc: 'audio/cold.mp3'
+    },
+    {
+      word: 'hot',
+      translation: 'горячий',
+      image: 'img/hot.jpg',
+      audioSrc: 'audio/hot.mp3'
+    }
+  ],
   [
     {
       word: 'cat',
@@ -377,3 +404,28 @@ const cards = [
 
 /* export cards; */
 module.exports = cards;
+
+
+
+
+/* word: 'surf', серфинг
+word: 'watch',   смотреть
+word: 'build',   строить
+word: 'wash',  мыть
+word: 'write',  писать
+word: 'dig',    копать
+word: 'call',   звонить
+word: 'feed',    кормить
+
+
+
+адджектив
+beautiful    красивый
+terrible      ужасный монстр
+fluffy      пушистый
+dirty   грязный
+old    старый
+big    большой экскаватор
+cold    холодный
+hot  горячий */
+
