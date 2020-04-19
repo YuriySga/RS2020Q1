@@ -404,28 +404,3 @@ const cards = [
 
 /* export cards; */
 module.exports = cards;
-
-
-
-
-/* word: 'surf', серфинг
-word: 'watch',   смотреть
-word: 'build',   строить
-word: 'wash',  мыть
-word: 'write',  писать
-word: 'dig',    копать
-word: 'call',   звонить
-word: 'feed',    кормить
-
-
-
-адджектив
-beautiful    красивый
-terrible      ужасный монстр
-fluffy      пушистый
-dirty   грязный
-old    старый
-big    большой экскаватор
-cold    холодный
-hot  горячий */
-

@@ -26,18 +26,11 @@ function setDMode() {
 
 const config = {
   target: "web",
-  //entry: {index: './src/js/index.js'},
   entry: ['./src/js/index.js', './src/css/style.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    /* publicPath: './../src/' */
   },
-/*   resolve: {
-    alias: {
-      images: path.resolve(__dirname, 'src/img/'),
-    },
-  }, */
   mode: setDMode(),
   devtool: setDevTool(),
   module: {
@@ -57,107 +50,19 @@ const config = {
           /node_modules/
         ]
       },
-      /* {
-        test: /\.(scss)$/,
-        use: [{
-          loader: 'style-loader', // inject CSS to page
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        }, {
-          loader: 'postcss-loader', // Run post css actions
-          options: {
-            plugins: function () { // post css plugins, can be exported to postcss.config.js
-              return [
-                require('precss'),
-                require('autoprefixer')
-              ];
-            }
-          }
-        }, {
-          loader: 'sass-loader' // compiles SASS to CSS
-        }]
-      }, */
        {
         test: /\.scss$/,
         use: [
             MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' 
         ]
     }, 
-     /*  {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          }
-        ]
-      }, */
-      /* {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },  {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          },   {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          } 
-        ]
-      }, */
       {
         test: /\.(jpe?g|png|svg|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options: {name: 'img/[name].[ext]'}  
-            
-            /* options: {
-              outputPath: 'img',
-              name: '[name].[ext]'
-            } */
           },
-          /* {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug : true,
-              mozjpeg: {
-                progressive: true,
-                quality: 75
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.90],
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false,
-                optimizationLevel: 1
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75
-              }
-            }
-          } */
         ]
       },
       {

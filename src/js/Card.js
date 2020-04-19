@@ -1,4 +1,3 @@
-/* export default class Card { */
 export class Card {
   constructor ({word, translation, image, audioSrc, ...Rest}) {
     this.word = word; 
@@ -32,9 +31,7 @@ export class Card {
   }
 }
 
-/* module.exports = {
-  Card
-}; */
+
 
 
 
