@@ -174,7 +174,7 @@ header {
 
 .btn-repeat {
   width: 100px;  
-  background-image: url("/img/repeat.svg");
+  background-image: url("../img/repeat.svg");
   background-repeat: no-repeat;
   background-position: center; 
 }
@@ -236,11 +236,11 @@ header {
 }
 
 .pop_up_success {
-  background-image: url("/img/success.jpg");
+  background-image: url("../img/success.jpg");
 }
 
 .pop_up_failure {
-  background-image: url("/img/failure.jpg");
+  background-image: url("../img/failure.jpg");
 }
 
 .star-container {
@@ -260,13 +260,13 @@ header {
   }
 
   .goldStar {
-    background-image: url("/img/star-win.svg");
+    background-image: url("../img/star-win.svg");
     background-repeat: no-repeat;
     background-position: center;
   }
 
   .whiteStar {
-    background-image: url("/img/star.svg");
+    background-image: url("../img/star.svg");
     background-repeat: no-repeat;
     background-position: center;
   }
