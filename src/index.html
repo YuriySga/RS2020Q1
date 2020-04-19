@@ -1,130 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Hello !</title>
+    <title>English for kids</title>
     <script>
       localStorage.pageIndex = 0;
       localStorage.trainPlayFlagChecked = false;  
       localStorage.audioIsOn = false;
     </script>
-    <link rel="stylesheet" href="style.css"/>
-</head>
-
-<body> 
-
-  <header class="header">
-    <!-- <div class="container">  -->
-      <!-- <div class="navbar p-0 mx-auto"> -->
-        <div class="container nav-container">
-          <nav class="nav-panel">
-            <a class="nav-link active-link" href="index.html" onclick="localStorage.pageIndex = 0">Main Page</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 1">Action (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 2">Action (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 3">Action (set C)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 4">Adjective</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 5">Animal (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 6">Animal (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 7">Clothes</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 8">Emotions</a>
-            <a class="nav-link" href="index3.html" onclick="localStorage.pageIndex = 9">Statistics</a>
-          </nav>  
-          <div class="row justify-content-between">
-            <div class="col-auto p-0 align-self-center">        
-              <div class="menuToggle">
-                <input type="checkbox" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav-container">
+        <nav class="nav-panel">
+          <a class="nav-link active-link" href="index.html" onclick="localStorage.pageIndex = 0">Main Page</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 1">Action (set A)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 2">Action (set B)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 3">Action (set C)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 4">Adjective</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 5">Animal (set A)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 6">Animal (set B)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 7">Clothes</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 8">Emotions</a>
+          <a class="nav-link" href="index3.html" onclick="localStorage.pageIndex = 9">Statistics</a>
+        </nav>  
+        <div class="row justify-content-between">
+          <div class="col-auto p-0 align-self-center">        
+            <div class="menuToggle">
+              <input type="checkbox" id="burger">
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-            <!-- <div class="toggle-button-cover"> -->
-            <div class="col-auto p-0 align-self-center"> 
-              <div class="button-cover">
-                <div class="button b2" id="button-10">
-                  <input type="checkbox" class="checkbox" id="swich">
-                  <div class="knobs">
-                    <span>TRAIN</span>
-                  </div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div> 
           </div>
-        </div>
-  </header>
-  <div class="main">
-    <div class="container card-container">
-      <div class="row justify-content-between"> 
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 1">
-            <img src="../src/img/dance.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Action (set A)</p>
+          <div class="col-auto p-0 align-self-center"> 
+            <div class="button-cover">
+              <div class="button b2" id="button-10">
+                <input type="checkbox" class="checkbox" id="swich">
+                <div class="knobs">
+                  <span>TRAIN</span>
+                </div>
+                <div class="layer"></div>
+              </div>
             </div>
-          </a>
-        </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0">  
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 2">
-            <img src="../src/img/swim.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Action (set B)</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 3">
-            <img src="../src/img/dogEndKids.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Action (set C)</p>
-            </div>
-          </a>
-        </div>        
-        <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 4">
-            <img src="../src/img/action.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Adjective</p>
-            </div>
-          </a>
-        </div>      
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 5">
-            <img src="../src/img/cat.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Animal (set A)</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 6">
-            <img src="../src/img/bird.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Animal (set B)</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg col-md-auto my-5 p-0">
-          <a class="card my-card mx-md-auto mx-lg-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 7">
-            <img src="../src/img/blouse.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Clothes</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg col-md-auto my-5 p-0">
-          <a class="card my-card mx-md-auto mx-lg-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 8">
-            <img src="../src/img/smile.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-              <p class="card-text h1">Emotion</p>
-            </div>
-          </a> 
+          </div> 
         </div>
       </div>
-    </div>   
-  </div>  
-</body>
-
+    </header>
+    <div class="main">
+      <div class="container card-container">
+        <div class="row justify-content-between"> 
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 1">
+              <img src="../src/img/dance.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Action (set A)</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0">  
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 2">
+              <img src="../src/img/swim.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Action (set B)</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0"> 
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 3">
+              <img src="../src/img/dogEndKids.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Action (set C)</p>
+              </div>
+            </a>
+          </div>        
+          <div class="col-lg-auto col-md-auto my-5 p-0"> 
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 4">
+              <img src="../src/img/action.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Adjective</p>
+              </div>
+            </a>
+          </div>      
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 5">
+              <img src="../src/img/cat.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Animal (set A)</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <a class="card my-card mx-md-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 6">
+              <img src="../src/img/bird.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Animal (set B)</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg col-md-auto my-5 p-0">
+            <a class="card my-card mx-md-auto mx-lg-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 7">
+              <img src="../src/img/blouse.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Clothes</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg col-md-auto my-5 p-0">
+            <a class="card my-card mx-md-auto mx-lg-auto border-0" href="index2.html" onclick="localStorage.pageIndex = 8">
+              <img src="../src/img/smile.jpg" class="card-img-top" alt="">
+              <div class="card-body">
+                <p class="card-text h1">Emotion</p>
+              </div>
+            </a> 
+          </div>
+        </div>
+      </div>   
+    </div>  
+  </body>
 </html>

@@ -1,103 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello !</title>
+    <title>English for kids</title>
     <script>
       localStorage.audioIsOn = true;
     </script>
-    <link rel="stylesheet" href="style.css" />   
-</head>
-
-<body> 
-
- 
-<!-- <div class="container"> -->
-  
-<!-- </div> -->
-
-  <header class="header">
-    <!-- <div class="container">  -->
-      <!-- <div class="navbar p-0 mx-auto"> -->
-         
-        <div class="container nav-container"> 
-          <nav class="nav-panel">
-            <a class="nav-link" href="index.html" onclick="localStorage.pageIndex = 0">Main Page</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 1">Action (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 2">Action (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 3">Action (set C)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 4">Adjective</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 5">Animal (set A)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 6">Animal (set B)</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 7">Clothes</a>
-            <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 8">Emotions</a>
-            <a class="nav-link" href="index3.html" onclick="localStorage.pageIndex = 9">Statistics</a>
-          </nav>  
-          <div class="row justify-content-between">
-            <div class="col-auto p-0 align-self-center">        
-              <div class="menuToggle">
-                <input type="checkbox" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <link rel="stylesheet" href="style.css">   
+  </head>
+  <body> 
+    <header class="header">
+      <div class="container nav-container"> 
+        <nav class="nav-panel">
+          <a class="nav-link" href="index.html" onclick="localStorage.pageIndex = 0">Main Page</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 1">Action (set A)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 2">Action (set B)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 3">Action (set C)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 4">Adjective</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 5">Animal (set A)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 6">Animal (set B)</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 7">Clothes</a>
+          <a class="nav-link" href="index2.html" onclick="localStorage.pageIndex = 8">Emotions</a>
+          <a class="nav-link" href="index3.html" onclick="localStorage.pageIndex = 9">Statistics</a>
+        </nav>  
+        <div class="row justify-content-between">
+          <div class="col-auto p-0 align-self-center">        
+            <div class="menuToggle">
+              <input type="checkbox" id="burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="col-auto p-0 align-self-center"> 
+            <div class="button-cover">
+              <div class="button b2" id="button-10">
+                <input type="checkbox" class="checkbox" id="swich">
+                <div class="knobs">
+                  <span>TRAIN</span>
+                </div>
+                <div class="layer"></div>
               </div>
             </div>
-            <!-- <div class="toggle-button-cover"> -->
-            <div class="col-auto p-0 align-self-center"> 
-              <div class="button-cover">
-                <div class="button b2" id="button-10">
-                  <input type="checkbox" class="checkbox" id="swich">
-                  <div class="knobs">
-                    <span>TRAIN</span>
-                  </div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div> 
+          </div> 
+        </div>
+      </div>
+    </header>
+    <div class="main">
+      <div class="container">
+        <div class="star-container"></div>
+        <div class="pop_up">
+          <div class="pop_up_score"></div>
+        </div>
+      </div>
+      <div class="container card-container">
+        <div class="row justify-content-between"> 
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <div class="card card_set mx-md-auto border-0"></div>         
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0">  
+            <div class="card card_set mx-md-auto border-0"></div>
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0"> 
+            <div class="card card_set mx-md-auto border-0"></div>
+          </div>        
+          <div class="col-lg-auto col-md-auto my-5 p-0"> 
+            <div class="card card_set mx-md-auto border-0"></div>
+          </div>      
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <div class="card card_set mx-md-auto border-0"></div>
+          </div>
+          <div class="col-lg-auto col-md-auto my-5 p-0">
+            <div class="card card_set mx-md-auto border-0"></div>
+          </div>
+          <div class="col-lg col-md-auto my-5 p-0">
+            <div class="card card_set mx-md-auto mx-lg-auto border-0"></div>
+          </div>
+          <div class="col-lg col-md-auto my-5 p-0">
+            <div class="card card_set mx-md-auto mx-lg-auto border-0"></div> 
           </div>
         </div>
-  </header>
-  <div class="main">
-    <div class="container">
-      <div class="star-container"></div>
-      <div class="pop_up">
-        <div class="pop_up_score"></div>
-      </div>
-    </div>
-    <div class="container card-container">
-      <div class="row justify-content-between"> 
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0"></div>         
+      </div> 
+      <div class="container">      
+        <button type="button" class="btn btn-warning btn-lg btn-block" id="start-button">Start game</button>
         </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0">  
-          <div class="card card_set mx-md-auto border-0"></div>
-        </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <div class="card card_set mx-md-auto border-0"></div>
-        </div>        
-        <div class="col-lg-auto col-md-auto my-5 p-0"> 
-          <div class="card card_set mx-md-auto border-0"></div>
-        </div>      
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0"></div>
-        </div>
-        <div class="col-lg-auto col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto border-0"></div>
-        </div>
-        <div class="col-lg col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto mx-lg-auto border-0"></div>
-        </div>
-        <div class="col-lg col-md-auto my-5 p-0">
-          <div class="card card_set mx-md-auto mx-lg-auto border-0"></div> 
-        </div>
-      </div>
-    </div> 
-    <div class="container">      
-      <button type="button" class="btn btn-warning btn-lg btn-block" id="start-button">Start game</button>
-      </div>
+      </div>  
     </div>  
-  </div>  
-</body>
+  </body>
 </html>
