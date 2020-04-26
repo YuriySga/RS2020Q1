@@ -3,8 +3,8 @@ import '../css/style.css';
 import '../css/style.scss';
 import { Card } from './Card';
 
-require.context("../img/", true, /\.(png|svg|jpg|gif)$/);
-require.context("../audio/", true, /\.(mp3)$/);
+//require.context("../img/", true, /\.(png|svg|jpg|gif)$/);
+//require.context("../audio/", true, /\.(mp3)$/);
 
 const cards = require('./cards.js');
 
@@ -303,14 +303,14 @@ function startQuestions () {
       lastClickCardImage = "";
       roundScorePlus +=1;
       addGoldStar();
-      playAudio('audio/correct.mp3');
+      playAudio('https://drive.google.com/uc?export=view&id=1DZELwouH5KJ2o2syzXRy_aHVSe72aFgy');
       return true;
     } 
     if (lastClickCardImage !== "" && lastClickCardImage.alt !== found[0].word) {
       lastClickCardImage = "";
       roundScoreMinus +=1;
       addWhiteStar();       
-      playAudio('audio/error.mp3');
+      playAudio('https://drive.google.com/uc?export=view&id=1Dpxz9szZAdlTish_ALDbWKPIZ_HibAXH');
       return false;
     } 
   }
@@ -328,11 +328,11 @@ function startQuestions () {
         const roundRes = roundScorePlus - roundScoreMinus;
         if (roundRes === 8) {
           /* WIN */
-          playAudio('audio/success.mp3');        
+          playAudio('https://drive.google.com/uc?export=view&id=1GSzt_itE77Ltm4JNeZhREzzQeteN7qwv');        
           popupMsg("success");          
         } else {
            /* DEFEAT */
-          playAudio('audio/failure.mp3');
+          playAudio('https://drive.google.com/uc?export=view&id=1KJjnv8Ekmuh-eTaqXo0JcepSd7DiHX-v');
           popupMsg("failure");
         }
         swichSwicher("forceOff");
