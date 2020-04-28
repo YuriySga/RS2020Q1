@@ -1,0 +1,21 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+html {
+  font-size: 10px;  
+  background-color: #ffffff;
+}
+
+body {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  background-color:  #ffffff;
+  overflow-x: hidden;
+}
+
+header {
+  height: 100px;
+  padding-top: 30px;
+}
