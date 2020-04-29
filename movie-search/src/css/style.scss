@@ -1,6 +1,7 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/swiper/css/swiper.min.css"; 
 
 html {
   font-size: 10px;  
@@ -11,11 +12,12 @@ body {
   max-width: 1000px;
   margin: auto;
   text-align: center;
-  background-color:  #ffffff;
+  background-color:  #c7c7c7;
   overflow-x: hidden;
 }
 
-header {
-  height: 100px;
-  padding-top: 30px;
+
+.swiper-container {
+  width: 600px;
+  height: 300px;
 }

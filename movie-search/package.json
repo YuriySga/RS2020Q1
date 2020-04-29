@@ -54,6 +54,7 @@
     "popper.js": "^1.16.1",
     "precss": "^4.0.0",
     "regenerator-runtime": "^0.13.3",
-    "sass": "^1.26.3"
+    "sass": "^1.26.3",
+    "swiper": "^5.3.8"
   }
 }

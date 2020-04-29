@@ -1,4 +1,5 @@
 const path = require('path');
+const Swiper = require('swiper');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
