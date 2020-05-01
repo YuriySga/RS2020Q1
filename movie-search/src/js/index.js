@@ -36,6 +36,18 @@ const mySwiper = new Swiper ('.swiper-container', {
 console.log("Hello world");
 //create(el, classNames, child, parent, ...dataAttr)
 
+function getMovieTitle(page) {
+ const url = `https://www.omdbapi.com/?s=dream&page=${page}&apikey=5d6802cf`;
+
+ return fetch(url)
+   .then(res => res.json())
+   .then(data => {
+     console.log(data.Search[0].Title);
+     console.log(data);
+   });
+}
+
+/* getMovieTitle(1); */
 
 
 
