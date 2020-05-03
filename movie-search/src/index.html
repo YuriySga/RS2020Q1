@@ -12,50 +12,32 @@
     </header>
     <main class="container main">
       <form action="" class="container search-form search-form_medium">
-        <input type="text" class="search-form__input search-form__input_medium">
-        <button type="button" class="search-form__button btn btn-info">Search</button>
-      </form>
-      <!-- <div class="container swiper-container"> -->
-        <!-- Slider main container -->
-        <div class="swiper-container">
-          <!-- Additional required wrapper -->
-          <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">
-              <span class="swiper-slide__title">Requiem For A Dream</span>
-              <img class="swiper-slide__img" src="req.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img class="swiper-slide__img" src="req.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img class="swiper-slide__img" src="req.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img class="swiper-slide__img" src="req.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img class="swiper-slide__img" src="req.jpg" alt="">
-            </div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>      
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">
+              <img src="https://drive.google.com/uc?export=view&id=18IsetLvbenupL2uO3dGgK1x5dtI1YFHD" alt="" class="search-form__icon-search">
+            </span>
           </div>
-          <!-- If we need pagination -->
-          <div class="swiper-pagination"></div>
-
-          <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <input type="text" class="form-control search-form__input search-form__input_medium" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+          <div class="input-group-append">
+            <img src="https://drive.google.com/uc?export=view&id=1_eLN9iJY3T5Re3UwlwPKoRkol62d2AfU" alt="" class="search-form__load-indicator">
+            <button class="btn btn-outline-secondary search-form__button btn-info" type="submit">Search</button>
+          </div>
         </div>
-
-<!--       </div>
- -->
+      </form> 
+      <div class="container swiper">    
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div> 
     </main>
-    <footer class="container footer-container">
-      <a class="footer-container__link">RS School 2020q1</a>
-      <a class="footer-container__link">Github</a>
+    <footer class="container footer footer_medium">
+      <a class="footer__link">RS School 2020q1</a>
+      <a class="footer__link">Github</a>
     </footer>       
   </body>
 </html>
