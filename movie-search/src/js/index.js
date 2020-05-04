@@ -15,16 +15,19 @@ const mySwiper = new Swiper ('.swiper-container', swiper_settings);
 
 const searchForm = document.querySelector(".search-form");
 const searchForm__input = document.querySelector(".search-form__input");
+const searchForm__loadIndicator = document.querySelector(".search-form__load-indicator");
 
 
 mySwiper.on('reachEnd', function () {
   if (mySwiper.slides.length === 0) {
     return;
   } else {  
-    //loadIndicatorOn();
+    loadIndicatorOn(true);
     loadablePage +=1;
     getMovie(searchFilm, loadablePage)
-      .then(data => addSlides(data));
+      .then(data => addIdInSlides(data))
+      .then(data => addSlides(data))
+      .then(() => loadIndicatorOn(false));
   }
 });
 
@@ -37,7 +40,8 @@ searchForm.addEventListener('submit', (event) => {
   } else {
     searchFilm = searchForm__input.value;
     getMovie(searchFilm, loadablePage)
-      .then(data => createSlides(data));
+      .then(data => addIdInSlides(data))
+      .then(arr => createSlides(arr));
   }
 }); 
 
@@ -60,72 +64,81 @@ function removeWhitespaces(value) {
   return str;
 }
 
-function getMovieTitle(title, page) {
-  let clearTitle = removeWhitespaces(title);
-
-  
- const url = `https://www.omdbapi.com/?s=${clearTitle}&page=${page}&apikey=${apikeyOmdb}`;
-
- return fetch(url)
-   .then(res => res.json())
-   .then(data => {
-     console.log([data.Search]);
-     console.log(data);
-   });
-}
-
-/* getMovieTitle(1); */
-
-
 function getMovie(title, page) {
   let clearTitle = removeWhitespaces(title);  
   const url = `https://www.omdbapi.com/?s=${clearTitle}&page=${page}&apikey=${apikeyOmdb}`;
-  console.log(url);
-
+  
   return fetch(url)
     .then(response => response.json());
 }
 
-/* function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/${name}`)
-    .then(response => response.json());
-} */
+function getMovieReiting(filmId) {  
+  const url = `https://www.omdbapi.com/?i=${filmId}&apikey=${apikeyOmdb}`;
+  
+  return fetch(url)
+    .then(response => response.json())
+    .then((data) => data.imdbRating);
+}
 
-function createSlides(data) {
-  console.log(data);
+function createSlides(arr) {  
+    const arrMovies = arr;
+    mySwiper.removeAllSlides();    
+    arrMovies.forEach((film) => {       
+      const slide = (new Slide (film));      
+      mySwiper.appendSlide(slide.generateSlide());
+    });     
+}
+
+function addSlides(arr) {
   return new Promise(function(resolve, reject) {
-    const arrMovies = data.Search;
-    mySwiper.removeAllSlides();
+    const arrMovies = arr;
     arrMovies.forEach((film) => {       
       const slide = (new Slide (film));
-      //const swiper_wrapper = document.querySelector(".swiper-wrapper");
       mySwiper.appendSlide(slide.generateSlide());
     });
-    resolve(data);
+    resolve(arrMovies);    
   });
 }
 
-function addSlides(data) {
-  return new Promise(function(resolve, reject) {
-    const arrMovies = data.Search;
-    arrMovies.forEach((film) => {       
-      const slide = (new Slide (film));
-      //const swiper_wrapper = document.querySelector(".swiper-wrapper");
-      mySwiper.appendSlide(slide.generateSlide());
+
+function addIdInSlides(data) {
+    return new Promise(function(resolve, reject) { 
+      let arrMovies = data.Search;
+      arrMovies.forEach((film) => {
+        getMovieReiting(film.imdbID)
+          .then(id => film.Rating = id);
+      }); 
+      setTimeout(() => {        
+        resolve(arrMovies);
+      }, 1000);
+      //resolve(arrMovies);
     });
-    resolve(data);
-  });
+  }
+
+function loadIndicatorOn(indicatorTurnOn) {
+  if (indicatorTurnOn) {
+    searchForm__loadIndicator.classList.add('search-form__load-indicator_active');
+  } else {
+    searchForm__loadIndicator.classList.remove('search-form__load-indicator_active');
+  }
 }
 
-/* mySwiper.prependSlide('<div class="swiper-slide">Slide 0"</div>')
-mySwiper.prependSlide([
-   '<div class="swiper-slide">Slide 1"</div>',
-   '<div class="swiper-slide">Slide 2"</div>'
-]); */
 
+getMovie(searchFilm, loadablePage)
+  .then(data => addIdInSlides(data))
+  .then(arr => createSlides(arr));
+ 
 
-/* function showAvatar(githubUser) {
-  return new Promise(function(resolve, reject) {
+  
+
+  //.then(showAvatar)
+  //.then(githubUser => alert(`Показ аватара ${githubUser.name} завершён`));
+  
+ /*  fetch('/article/promise-chaining/user.json')
+  .then(response => response.json())
+  .then(user => fetch(`https://api.github.com/users/${user.name}`))
+  .then(response => response.json())
+  .then(githubUser => new Promise(function(resolve, reject) { // (*)
     let img = document.createElement('img');
     img.src = githubUser.avatar_url;
     img.className = "promise-avatar-example";
@@ -133,27 +146,13 @@ mySwiper.prependSlide([
 
     setTimeout(() => {
       img.remove();
-      resolve(githubUser);
+      resolve(githubUser); // (**)
     }, 3000);
-  });
-} */
-
-// Используем их:
-
-getMovie(searchFilm, loadablePage)
-  //.then(data => createSlides(data))
-  .then(data => createSlides(data));
-
+  }))
+  // срабатывает через 3 секунды
+  .then(githubUser => alert(`Закончили показ ${githubUser.name}`));
   
-
-  //.then(showAvatar)
-  //.then(githubUser => alert(`Показ аватара ${githubUser.name} завершён`));
-  
-
-
-
-  
-
+ */
 
 
 

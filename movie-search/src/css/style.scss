@@ -73,7 +73,21 @@ body {
   width: 26px;
   height: 26px;
   z-index: 5;
-  opacity: 0;
+}
+
+.search-form__load-indicator_active {
+  display: block;
+    
+    animation-name: rotation;
+    animation-duration: 0.8s; 
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    
+}
+
+@keyframes rotation { 
+  0% {transform:rotate(0deg);} 
+  100% {transform:rotate(-360deg);}
 }
 
 .main {
@@ -101,11 +115,12 @@ body {
   //height: 360px;
   width: 192px;
   height: 288px;
+  user-select: none;
 }
 
 .swiper-slide__title_medium {
   text-decoration: underline;
-  height: 50px;   
+  height: 45px;   
 }
 
 .swiper-slide__year_medium {
