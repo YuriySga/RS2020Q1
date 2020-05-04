@@ -16,6 +16,7 @@ const mySwiper = new Swiper ('.swiper-container', swiper_settings);
 const searchForm = document.querySelector(".search-form");
 const searchForm__input = document.querySelector(".search-form__input");
 const searchForm__loadIndicator = document.querySelector(".search-form__load-indicator");
+const notice = document.querySelector(".notice-container_text");
 
 
 mySwiper.on('reachEnd', function () {
@@ -25,7 +26,7 @@ mySwiper.on('reachEnd', function () {
     loadIndicatorOn(true);
     loadablePage +=1;
     getMovie(searchFilm, loadablePage)
-      .then(data => addIdInSlides(data))
+      .then(data => addRatingInSlides(data))
       .then(data => addSlides(data))
       .then(() => loadIndicatorOn(false));
   }
@@ -40,22 +41,12 @@ searchForm.addEventListener('submit', (event) => {
   } else {
     searchFilm = searchForm__input.value;
     getMovie(searchFilm, loadablePage)
-      .then(data => addIdInSlides(data))
+      .then(data => addRatingInSlides(data))
       .then(arr => createSlides(arr));
   }
 }); 
 
-
-
-//const cards = require('./cards.js');
-
-//const cardArr = document.querySelectorAll(".card");
-
-//let navPanelFlag = false;
 console.log("Hello world");
-//create(el, classNames, child, parent, ...dataAttr)
-
-//getMovieTitle("Terminator", "1");
 
 function removeWhitespaces(value) {
   let str = value;
@@ -69,15 +60,41 @@ function getMovie(title, page) {
   const url = `https://www.omdbapi.com/?s=${clearTitle}&page=${page}&apikey=${apikeyOmdb}`;
   
   return fetch(url)
-    .then(response => response.json());
+    .then(response => {
+      //console.log(response);
+      if (response.ok === true) {
+        notice.innerHTML = `Showing results for "${title}"`;
+        return response;
+      } else {    
+        notice.innerHTML = `Ошибка HTTP: ${response.status}`;        
+      }
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      console.log(responseJson.Response);
+      if (responseJson.Response === "True") {
+        return responseJson;
+      } else {
+        notice.innerHTML = `No results for "${title}"`;
+      }
+    });
 }
 
 function getMovieReiting(filmId) {  
   const url = `https://www.omdbapi.com/?i=${filmId}&apikey=${apikeyOmdb}`;
   
   return fetch(url)
+    .then(response => {
+      if (response.ok === true) {
+        return response;
+      } else {
+        notice.innerHTML = `Ошибка HTTP: ${response.status}`;  
+      }
+    })
     .then(response => response.json())
-    .then((data) => data.imdbRating);
+    .then(responseJson => {
+      if (responseJson.Response === "True") return responseJson.imdbRating;      
+    });
 }
 
 function createSlides(arr) {  
@@ -101,7 +118,8 @@ function addSlides(arr) {
 }
 
 
-function addIdInSlides(data) {
+function addRatingInSlides(data) {
+    console.log(data);
     return new Promise(function(resolve, reject) { 
       let arrMovies = data.Search;
       arrMovies.forEach((film) => {
@@ -110,8 +128,7 @@ function addIdInSlides(data) {
       }); 
       setTimeout(() => {        
         resolve(arrMovies);
-      }, 1000);
-      //resolve(arrMovies);
+      }, 1000);      
     });
   }
 
@@ -125,8 +142,9 @@ function loadIndicatorOn(indicatorTurnOn) {
 
 
 getMovie(searchFilm, loadablePage)
-  .then(data => addIdInSlides(data))
+  .then(data => addRatingInSlides(data))
   .then(arr => createSlides(arr));
+//notice.innerHTML = `Showing results`;
  
 
   

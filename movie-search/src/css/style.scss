@@ -52,12 +52,13 @@ body {
 .search-form_medium {
   display: flex;
   justify-content: center;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 5px 0;
 }
 
 .search-form__input_medium {
   width: 80%;
   height: 26px;
+  font-size: 1.4rem;
 }
 
 .search-form__icon-search {
@@ -93,6 +94,11 @@ body {
 .main {
   position: relative;
 }
+
+.notice-container__medium {
+  font-size: 1.4rem;
+}
+
 
 .swiper-slide-container {
   flex-wrap: nowrap;
