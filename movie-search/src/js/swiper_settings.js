@@ -17,6 +17,9 @@ const swiper_settings = {
   grabCursor: true,
   //centeredSlides: true,  
   watchOverflow: true, 
+  preloadImages: true,
+  updateOnImagesReady: true,
+  //preventInteractionOnTransition: true,
   breakpoints: {
     // when window width is >= 320px
     320: {

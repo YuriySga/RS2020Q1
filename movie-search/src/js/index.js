@@ -17,6 +17,7 @@ const searchForm = document.querySelector(".search-form");
 const searchForm__input = document.querySelector(".search-form__input");
 const searchForm__loadIndicator = document.querySelector(".search-form__load-indicator");
 const notice = document.querySelector(".notice-container_text");
+const searchForm__imgButtonClear = document.querySelector(".search-form__img-button-clear");
 
 
 mySwiper.on('reachEnd', function () {
@@ -28,7 +29,11 @@ mySwiper.on('reachEnd', function () {
     getMovie(searchFilm, loadablePage)
       .then(data => addRatingInSlides(data))
       .then(data => addSlides(data))
-      .then(() => loadIndicatorOn(false));
+      .then(() => loadIndicatorOn(false))
+      .catch(() => {
+        loadIndicatorOn(false);
+        notice.innerHTML = `No more results for "${searchFilm}"`;        
+      });
   }
 });
 
@@ -39,12 +44,24 @@ searchForm.addEventListener('submit', (event) => {
   if (searchForm__input.value === "") {
    return;
   } else {
+    loadablePage = 1;
     searchFilm = searchForm__input.value;
+    loadIndicatorOn(true);
     getMovie(searchFilm, loadablePage)
       .then(data => addRatingInSlides(data))
-      .then(arr => createSlides(arr));
+      .then(arr => createSlides(arr))
+      .then(() => loadIndicatorOn(false))
+      .catch(() => {
+        loadIndicatorOn(false);
+        notice.innerHTML = `No results for "${searchFilm}"`;        
+      });      
   }
 }); 
+
+searchForm__imgButtonClear.addEventListener('click', (event) => {
+  searchForm__input.value = "";
+  searchFilm = "Terminator";
+});
 
 console.log("Hello world");
 
@@ -56,7 +73,8 @@ function removeWhitespaces(value) {
 }
 
 function getMovie(title, page) {
-  let clearTitle = removeWhitespaces(title);  
+  let clearTitle = removeWhitespaces(title); 
+  console.log(clearTitle); 
   const url = `https://www.omdbapi.com/?s=${clearTitle}&page=${page}&apikey=${apikeyOmdb}`;
   
   return fetch(url)
@@ -66,16 +84,18 @@ function getMovie(title, page) {
         notice.innerHTML = `Showing results for "${title}"`;
         return response;
       } else {    
-        notice.innerHTML = `Ошибка HTTP: ${response.status}`;        
+        notice.innerHTML = `Ошибка HTTP: ${response.status}`;  
+        throw new Error("Ошибка!");      
       }
     })
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson.Response);
+      console.log(responseJson);
       if (responseJson.Response === "True") {
         return responseJson;
       } else {
-        notice.innerHTML = `No results for "${title}"`;
+        //notice.innerHTML = `No results for "${title}"`;
+        throw new Error(`No results for "${title}"`);
       }
     });
 }
@@ -85,15 +105,22 @@ function getMovieReiting(filmId) {
   
   return fetch(url)
     .then(response => {
+      //console.log(response);
       if (response.ok === true) {
         return response;
       } else {
-        notice.innerHTML = `Ошибка HTTP: ${response.status}`;  
+        notice.innerHTML = `Ошибка HTTP: ${response.status}`;
+        throw new Error("Ошибка!");  
       }
     })
     .then(response => response.json())
     .then(responseJson => {
-      if (responseJson.Response === "True") return responseJson.imdbRating;      
+      console.log(responseJson);
+      if (responseJson.Response === "True") {
+        return responseJson.imdbRating;
+      } else {
+        throw new Error("Ошибка imdbRating!");
+      }   
     });
 }
 
@@ -143,7 +170,11 @@ function loadIndicatorOn(indicatorTurnOn) {
 
 getMovie(searchFilm, loadablePage)
   .then(data => addRatingInSlides(data))
-  .then(arr => createSlides(arr));
+  .then(arr => createSlides(arr))
+  .catch(() => {
+    loadIndicatorOn(false);
+    notice.innerHTML = `No results for "${searchFilm}"`;        
+  });
 //notice.innerHTML = `Showing results`;
  
 
