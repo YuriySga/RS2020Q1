@@ -148,12 +148,21 @@ body {
   height: 45px;   
 }
 
+
+.rating-container {
+  display: flex;
+}
+
 .swiper-slide__year_medium {
   margin-top: 10px;
 }
 
 .swiper-slide__stars_medium {
-  margin: 10px 0 60px 0;
+  line-height: 32px;
+}
+
+.swiper-slide__img-star {
+  transform: scale(0.8);
 }
 
 .footer_medium {
