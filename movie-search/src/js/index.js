@@ -18,6 +18,7 @@ const searchForm__input = document.querySelector(".search-form__input");
 const searchForm__loadIndicator = document.querySelector(".search-form__load-indicator");
 const notice = document.querySelector(".notice-container_text");
 const searchForm__imgButtonClear = document.querySelector(".search-form__img-button-clear");
+const githubBlock = document.querySelector(".github_block");
 
 
 mySwiper.on('reachEnd', function () {
@@ -37,12 +38,13 @@ mySwiper.on('reachEnd', function () {
   }
 });
 
-
-
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
   if (searchForm__input.value === "") {
    return;
+  } else if (/^[А-яёЁ]*$/.test(searchForm__input.value)) {
+    notice.innerHTML = `Error: do not use the Cyrillic`;
+    return;    
   } else {
     loadablePage = 1;
     searchFilm = searchForm__input.value;
@@ -75,7 +77,7 @@ function removeWhitespaces(value) {
 function getMovie(title, page) {
   let clearTitle = removeWhitespaces(title); 
   console.log(clearTitle); 
-  const url = `https://www.omdbapi.com/?s=${clearTitle}&page=${page}&apikey=${apikeyOmdb}`;
+  const url = `https://www.omdbapi.com/?s=${clearTitle}&type=movie&page=${page}&apikey=${apikeyOmdb}`;
   
   return fetch(url)
     .then(response => {
@@ -126,20 +128,25 @@ function getMovieReiting(filmId) {
 
 function createSlides(arr) {  
     const arrMovies = arr;
+    let arrSlides = [];
     mySwiper.removeAllSlides();    
     arrMovies.forEach((film) => {       
-      const slide = (new Slide (film));      
-      mySwiper.appendSlide(slide.generateSlide());
-    });     
+      const slide = (new Slide (film));            
+      arrSlides.push(slide.generateSlide());
+    }); 
+    mySwiper.appendSlide(arrSlides);  
 }
 
 function addSlides(arr) {
   return new Promise(function(resolve, reject) {
     const arrMovies = arr;
+    let arrSlides = [];
     arrMovies.forEach((film) => {       
       const slide = (new Slide (film));
-      mySwiper.appendSlide(slide.generateSlide());
+      arrSlides.push(slide.generateSlide());
+      //mySwiper.appendSlide(slide.generateSlide());
     });
+    mySwiper.appendSlide(arrSlides);
     resolve(arrMovies);    
   });
 }
@@ -175,6 +182,16 @@ getMovie(searchFilm, loadablePage)
     loadIndicatorOn(false);
     notice.innerHTML = `No results for "${searchFilm}"`;        
   });
+
+
+githubBlock.addEventListener('click', (event) => {
+
+
+});
+
+
+
+
 //notice.innerHTML = `Showing results`;
  
 

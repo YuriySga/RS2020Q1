@@ -22,7 +22,8 @@ body {
 .swiper-container {
   //padding-left: 30px;
   //padding-right: 30px;
-  width: 90%
+  width: 90%;
+  height: 440px;
   /* width: 600px;
   height: 300px; */
 }
@@ -67,6 +68,8 @@ body {
   display: flex;
   justify-content: center;
   margin: 20px 0 5px 0;
+  padding-left: 7%;
+  padding-right: 7%;
 }
 
 .search-form__input_medium {
@@ -168,6 +171,8 @@ body {
 .footer_medium {
   height: 50px;
   font-size: 1.4rem;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 
 .footer {
@@ -179,5 +184,16 @@ body {
   margin-top: 50px;
 }
 
-.footer__icon-github {
+.github-link {
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none; 
+
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
   }
+}
+
+.github-block__logo {
+}

@@ -8,7 +8,7 @@ export class Slide {
     this.title = Title; 
     this.imgSrc = (Poster === "N/A") ? img_not_found : Poster ;
     this.year = Year; 
-    this.stars = (Rating === "N/A") ? "" : Rating;
+    this.stars = (Rating === "N/A" || Rating === "undefined") ? "-" : Rating;
     this.Rest = Rest;
     this.imdbID = imdbID;
   }
