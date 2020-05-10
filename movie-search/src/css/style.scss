@@ -1,4 +1,5 @@
 @import "custom";
+@import "keyboard";
 @import "~bootstrap/scss/bootstrap";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/swiper/css/swiper.min.css"; 
@@ -54,6 +55,18 @@ body {
 
 .search-form__img-button-clear {
   position: absolute;
+  right: 90px;
+  z-index: 6;
+  cursor: pointer;
+  opacity: 0.5;
+
+  &:hover{
+    opacity: 1;
+  }
+}
+
+.search-form__img-button-keyboard {
+  position: absolute;
   right: 60px;
   z-index: 6;
   cursor: pointer;
@@ -86,7 +99,7 @@ body {
 .search-form__load-indicator {
   display: none;
   position: absolute;
-  right: 90px;
+  right: 120px;
   top: 2px;
   width: 26px;
   height: 26px;
@@ -195,5 +208,13 @@ body {
   }
 }
 
-.github-block__logo {
+
+
+img {
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+img[data-src] {
+	opacity: 0;
 }

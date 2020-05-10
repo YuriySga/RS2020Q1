@@ -1,0 +1,375 @@
+/* * {
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+/* html {
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1020px;
+} */
+
+/* .textin {
+  resize:none;
+  width: 840px;
+  height: 150px;
+} */
+.keyboard-container {
+  display: none;
+  position: fixed;
+  top: 185px; 
+  z-index: 11;
+
+}
+
+.keyboard {
+  height: 31vw;
+  margin: auto;
+  //top: 185px;
+  //left: 0px;
+  position: relative;
+}
+
+.keyboard-button {   
+  user-select: none;
+  background-color: rgb(148, 148, 148);
+  border: 1px solid rgb(253, 255, 248);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: ease border-radius 0.3s;
+}
+
+.keyboard-button:hover {
+  cursor: pointer;
+  background-color: rgba(129, 96, 69, 0.452);
+}
+
+.keyboard .active {
+  background-color: rgb(255, 115, 0);
+  border-radius: 25px;
+  transition: ease background-color 0.1s;
+}
+
+.keyboard {
+  
+  background-color: cornsilk;
+  border: 2px solid #948080;
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-areas:
+    "tilde one    two three four five six    seven   eight   nine zero     minus         equal         backspace    backspace  backspace"
+    "tab    q      w    e    r     t    y     u        i      o     p       ha          strongSign      slash          del      del"
+    "caps  caps    a    s    d     f    g     h       j       k     l     colon       quotationMarks    enter       enter       enter"
+    "shift  shift shift  z   x    c     v     b        n        m  comma  point         questionMark  arrowUp       rShift    rShift"
+    "ctrl  win    alt  space space space space space space   space  rAlt rCtrl    rCtrl  arrowLeft    arrowDown     arrowRight";
+  //width: 840px;
+  //width: 80%;
+  //height: 281px;
+}
+
+.one {
+  grid-area: one;
+  display: block;
+}
+.two {
+  grid-area: two;
+  display: block;
+}
+.three {
+  grid-area: three;
+  display: block;
+}
+
+.four {
+  grid-area: four;
+  display: block;
+}
+.five {
+  grid-area: five;
+  display: block;
+}
+.six {
+  grid-area: six;
+  display: block;
+}
+.seven {
+  grid-area: seven;
+  display: block;
+}
+.eight {
+  grid-area: eight;
+  display: block;
+}
+.nine {
+  grid-area: nine;
+  display: block;
+}
+.zero {
+  grid-area: zero;
+  display: block;
+}
+.tilda {
+  grid-area: tilda;
+  display: block;
+}
+
+.minus {
+  grid-area: minus;
+  display: block;
+}
+
+.equal {
+  grid-area: equal;
+  display: block;
+}
+
+.backspace {
+  grid-area: backspace;
+  display: block;
+}
+
+.tab {
+  grid-area: tab;
+  display: block;
+}
+
+.q {
+  grid-area: q;
+  display: block;
+}
+
+.w {
+  grid-area: w;
+  display: block;
+}
+
+.e {
+  grid-area: e;
+  display: block;
+}
+
+.r {
+  grid-area: r;
+  display: block;
+}
+
+.t {
+  grid-area: t;
+  display: block;
+}
+
+.y {
+  grid-area: y;
+  display: block;
+}
+
+.u {
+  grid-area: u;
+  display: block;
+}
+
+.i {
+  grid-area: i;
+  display: block;
+}
+
+.o {
+  grid-area: o;
+  display: block;
+}
+
+.p {
+  grid-area: p;
+  display: block;
+}
+
+.ha {
+  grid-area: ha;
+  display: block;
+}
+
+.strongSign {
+  grid-area: strongSign;
+  display: block;
+}
+
+.slash {
+  grid-area: slash;
+  display: block;
+}
+
+.del {
+  grid-area: del;
+  display: block;
+}
+
+.caps {
+  grid-area: caps;
+  display: block;
+}
+
+.a {
+  grid-area: a;
+  display: block;
+}
+
+.s {
+  grid-area: s;
+  display: block;
+}
+.d {
+  grid-area: d;
+  display: block;
+}
+.f {
+  grid-area: f;
+  display: block;
+}
+.g {
+  grid-area: g;
+  display: block;
+}
+
+.h {
+  grid-area: h;
+  display: block;
+}
+.j {
+  grid-area: j;
+  display: block;
+}
+.k {
+  grid-area: k;
+  display: block;
+}
+.l {
+  grid-area: l;
+  display: block;
+}
+
+.colon {
+  grid-area: colon;
+  display: block;
+}
+
+.quotationMarks {
+  grid-area: quotationMarks;
+  display: block;
+}
+
+.enter {
+  grid-area: enter;
+  display: block;
+}
+
+.shift {
+  grid-area: shift;
+  display: block;
+}
+
+.z {
+  grid-area: z;
+  display: block;
+}
+.x {
+  grid-area: x;
+  display: block;
+}
+.c {
+  grid-area: c;
+  display: block;
+}
+.v {
+  grid-area: v;
+  display: block;
+}
+.b {
+  grid-area: b;
+  display: block;
+}
+.n {
+  grid-area: n;
+  display: block;
+}
+
+.m {
+  grid-area: m;
+  display: block;
+}
+
+.comma {
+  grid-area: comma;
+  display: block;
+}
+.point {
+  grid-area: point;
+  display: block;
+}
+.questionMark {
+  grid-area: questionMark;
+  display: block;
+}
+
+.arrowUp {
+  grid-area: arrowUp;
+  display: block;
+}
+
+.rShift {
+  grid-area: rShift;
+  display: block;
+}
+
+.ctrl {
+  grid-area: ctrl;
+  display: block;
+}
+
+.win {
+  grid-area: win;
+  display: block;
+}
+
+.alt {
+  grid-area: alt;
+  display: block;
+}
+
+.space {
+  grid-area: space;
+  display: block;
+}
+
+.rAlt {
+  grid-area: rAlt;
+  display: block;
+}
+
+.rCtrl {
+  grid-area: rCtrl;
+  display: block;
+}
+
+.arrowLeft {
+  grid-area: arrowLeft;
+  display: block;
+}
+
+.arrowDown {
+  grid-area: arrowDown;
+  display: block;
+}
+
+.arrowRight {
+  grid-area: arrowRight;
+  display: block;
+}

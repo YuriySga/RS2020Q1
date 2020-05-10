@@ -10,6 +10,7 @@ const swiper_settings = require('./swiper_settings.js');
 const apikeyOmdb = "5d6802cf";
 let loadablePage = 1;
 let searchFilm = "Terminator";
+let keyboardContainerIsOn = false;
 
 const mySwiper = new Swiper ('.swiper-container', swiper_settings);
 
@@ -18,8 +19,7 @@ const searchForm__input = document.querySelector(".search-form__input");
 const searchForm__loadIndicator = document.querySelector(".search-form__load-indicator");
 const notice = document.querySelector(".notice-container_text");
 const searchForm__imgButtonClear = document.querySelector(".search-form__img-button-clear");
-const githubBlock = document.querySelector(".github_block");
-
+const searchForm__imgButtonKeyboard = document.querySelector(".search-form__img-button-keyboard");
 
 mySwiper.on('reachEnd', function () {
   if (mySwiper.slides.length === 0) {
@@ -28,8 +28,9 @@ mySwiper.on('reachEnd', function () {
     loadIndicatorOn(true);
     loadablePage +=1;
     getMovie(searchFilm, loadablePage)
-      .then(data => addRatingInSlides(data))
+      .then(() => getMovie(searchFilm, loadablePage))
       .then(data => addSlides(data))
+      .then(() => imgOnload()) 
       .then(() => loadIndicatorOn(false))
       .catch(() => {
         loadIndicatorOn(false);
@@ -50,8 +51,9 @@ searchForm.addEventListener('submit', (event) => {
     searchFilm = searchForm__input.value;
     loadIndicatorOn(true);
     getMovie(searchFilm, loadablePage)
-      .then(data => addRatingInSlides(data))
+      .then(() => getMovie(searchFilm, loadablePage)) 
       .then(arr => createSlides(arr))
+      .then(() => imgOnload()) 
       .then(() => loadIndicatorOn(false))
       .catch(() => {
         loadIndicatorOn(false);
@@ -65,13 +67,28 @@ searchForm__imgButtonClear.addEventListener('click', (event) => {
   searchFilm = "Terminator";
 });
 
-console.log("Hello world");
+searchForm__imgButtonKeyboard.addEventListener('click', (event) => {
+  const keyboardContainer = document.querySelector(".keyboard-container");
+  if (keyboardContainerIsOn) {
+    keyboardContainer.style.display = "none";
+    keyboardContainerIsOn = false;
+  } else {
+    keyboardContainer.style.display = "block";
+    keyboardContainerIsOn = true;    
+  }  
+});
 
 function removeWhitespaces(value) {
-  let str = value;
-  str = str.trim();
-  str = str.replace(/ /g, '%20');
-  return str;
+  let notCorrectedTitle = value;
+  //notCorrectedTitle = notCorrectedTitle.trim();
+  //let strArr = str.split(" ");
+  let correctedTitleArr = [];
+  notCorrectedTitle.split(" ").forEach((word) => {    
+    if (word !== "") correctedTitleArr.push(word);
+  });
+  //console.log(arr);
+  //str = str.replace(/ /g, '%20');
+  return correctedTitleArr.join('%20');
 }
 
 function getMovie(title, page) {
@@ -81,6 +98,7 @@ function getMovie(title, page) {
   
   return fetch(url)
     .then(response => {
+      //console.log(response);
       //console.log(response);
       if (response.ok === true) {
         notice.innerHTML = `Showing results for "${title}"`;
@@ -92,14 +110,20 @@ function getMovie(title, page) {
     })
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson);
+      //console.log(responseJson);
       if (responseJson.Response === "True") {
         return responseJson;
       } else {
         //notice.innerHTML = `No results for "${title}"`;
         throw new Error(`No results for "${title}"`);
       }
-    });
+    })    
+    //.then(() => imgOnload()) 
+    .then(data => addRatingInSlides(data))
+    /* .catch(() => {
+      loadIndicatorOn(false);
+      notice.innerHTML = `No results for "${searchFilm}"`;        
+    }); */
 }
 
 function getMovieReiting(filmId) {  
@@ -116,8 +140,7 @@ function getMovieReiting(filmId) {
       }
     })
     .then(response => response.json())
-    .then(responseJson => {
-      console.log(responseJson);
+    .then(responseJson => {      
       if (responseJson.Response === "True") {
         return responseJson.imdbRating;
       } else {
@@ -127,14 +150,19 @@ function getMovieReiting(filmId) {
 }
 
 function createSlides(arr) {  
+  return new Promise(function(resolve, reject) {  
     const arrMovies = arr;
     let arrSlides = [];
     mySwiper.removeAllSlides();    
-    arrMovies.forEach((film) => {       
-      const slide = (new Slide (film));            
+    arrMovies.forEach((film) => { 
+      //console.log(55555);
+      //console.log(film.Poster);     
+      const slide = (new Slide (film));
       arrSlides.push(slide.generateSlide());
-    }); 
-    mySwiper.appendSlide(arrSlides);  
+    });
+      mySwiper.appendSlide(arrSlides);       
+      resolve();
+  }); 
 }
 
 function addSlides(arr) {
@@ -144,8 +172,7 @@ function addSlides(arr) {
     arrMovies.forEach((film) => {       
       const slide = (new Slide (film));
       arrSlides.push(slide.generateSlide());
-      //mySwiper.appendSlide(slide.generateSlide());
-    });
+    });    
     mySwiper.appendSlide(arrSlides);
     resolve(arrMovies);    
   });
@@ -153,7 +180,7 @@ function addSlides(arr) {
 
 
 function addRatingInSlides(data) {
-    console.log(data);
+    //console.log(data);
     return new Promise(function(resolve, reject) { 
       let arrMovies = data.Search;
       arrMovies.forEach((film) => {
@@ -175,53 +202,32 @@ function loadIndicatorOn(indicatorTurnOn) {
 }
 
 
-getMovie(searchFilm, loadablePage)
-  .then(data => addRatingInSlides(data))
+
+
+getMovie(searchFilm, loadablePage) 
+  .then(() => getMovie(searchFilm, loadablePage))
+  //.then(data => addRatingInSlides(data))
   .then(arr => createSlides(arr))
+  .then(() => imgOnload()) 
   .catch(() => {
     loadIndicatorOn(false);
     notice.innerHTML = `No results for "${searchFilm}"`;        
   });
 
 
-githubBlock.addEventListener('click', (event) => {
-
-
-});
-
-
-
-
-//notice.innerHTML = `Showing results`;
  
 
-  
 
-  //.then(showAvatar)
-  //.then(githubUser => alert(`Показ аватара ${githubUser.name} завершён`));
-  
- /*  fetch('/article/promise-chaining/user.json')
-  .then(response => response.json())
-  .then(user => fetch(`https://api.github.com/users/${user.name}`))
-  .then(response => response.json())
-  .then(githubUser => new Promise(function(resolve, reject) { // (*)
-    let img = document.createElement('img');
-    img.src = githubUser.avatar_url;
-    img.className = "promise-avatar-example";
-    document.body.append(img);
-
-    setTimeout(() => {
-      img.remove();
-      resolve(githubUser); // (**)
-    }, 3000);
-  }))
-  // срабатывает через 3 секунды
-  .then(githubUser => alert(`Закончили показ ${githubUser.name}`));
-  
- */
-
-
-
-  
+function imgOnload () {
+  return new Promise(function(resolve, reject) {
+    [].forEach.call(document.querySelectorAll('img[data-src].swiper-slide__img'), function(img) {
+      img.setAttribute('src', img.getAttribute('data-src'));
+      img.onload = function() {
+        img.removeAttribute('data-src');
+      };
+    });
+    resolve();
+  });
+}
 
 
