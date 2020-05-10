@@ -4,121 +4,112 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/swiper/css/swiper.min.css"; 
 
-html {
+@keyframes rotation { 
+  0% {transform:rotate(0deg);} 
+  100% {transform:rotate(-360deg);}
+}
+
+.html {
   font-size: 10px;  
   background-color: #ffffff;
 }
 
-body {
-  //max-width: 1200px;
+.body {
   margin: auto;
   text-align: center;
   background-color:  #ffffff;
   overflow-x: hidden;
 }
 
-/* .swiper {
-  height: 440px;
-} */
 .swiper-container {
-  //padding-left: 30px;
-  //padding-right: 30px;
   width: 90%;
   height: 440px;
-  /* width: 600px;
-  height: 300px; */
 }
 
 .swiper-pagination {
-  /* display: flex;
-  justify-content: center;*/
   overflow-x: hidden; 
 }
 
 .header {
   display: flex;
   color: #ffffff;
-  background-color: #262a35;  
-}
+  background-color: #262a35;
 
-.header_medium {  
-  height: 80px;
-}
-
-.header__logo {
-  font-size: 2.5rem;
-}
-
-.header__logo_center {
-  margin: auto;
-}
-
-.search-form__img-button-clear {
-  position: absolute;
-  right: 90px;
-  z-index: 6;
-  cursor: pointer;
-  opacity: 0.5;
-
-  &:hover{
-    opacity: 1;
+  &_medium {  
+    height: 80px;
+  }
+  
+  &__logo {
+    font-size: 2.5rem;
+  }
+  
+  &__logo_center {
+    margin: auto;
   }
 }
 
-.search-form__img-button-keyboard {
-  position: absolute;
-  right: 60px;
-  z-index: 6;
-  cursor: pointer;
-  opacity: 0.5;
+.search-form {
 
-  &:hover{
-    opacity: 1;
+  &__img-button-clear {
+    position: absolute;
+    right: 90px;
+    z-index: 6;
+    cursor: pointer;
+    opacity: 0.5;
+  
+    &:hover{
+      opacity: 1;
+    }
   }
-}
 
-.search-form_medium {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0 5px 0;
-  padding-left: 7%;
-  padding-right: 7%;
-}
+  &__img-button-keyboard {
+    position: absolute;
+    right: 60px;
+    z-index: 6;
+    cursor: pointer;
+    opacity: 0.5;
+  
+    &:hover{
+      opacity: 1;
+    }
+  }
 
-.search-form__input_medium {
-  width: 80%;
-  height: 26px;
-  font-size: 1.4rem;
-}
+  &_medium {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 5px 0;
+    padding-left: 7%;
+    padding-right: 7%;
+  }
 
-.search-form__icon-search {
-  width: 19px;
-  height: 19px;     
-}
-
-.search-form__load-indicator {
-  display: none;
-  position: absolute;
-  right: 120px;
-  top: 2px;
-  width: 26px;
-  height: 26px;
-  z-index: 5;
-}
-
-.search-form__load-indicator_active {
-  display: block;
-    
+  &__input_medium {
+    width: 80%;
+    height: 26px;
+    font-size: 1.4rem;
+  }
+  
+  &__icon-search {
+    width: 19px;
+    height: 19px;     
+  }
+  
+  &__load-indicator {
+    display: none;
+    position: absolute;
+    right: 120px;
+    top: 2px;
+    width: 26px;
+    height: 26px;
+    z-index: 5;
+  }
+  
+  &__load-indicator_active {
+    display: block;    
     animation-name: rotation;
     animation-duration: 0.8s; 
     animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    
-}
-
-@keyframes rotation { 
-  0% {transform:rotate(0deg);} 
-  100% {transform:rotate(-360deg);}
+    animation-timing-function: linear;    
+  }
 }
 
 .main {
@@ -126,34 +117,31 @@ body {
   height: 524px;
 }
 
-.notice-container__medium {
-  font-size: 1.4rem;
+.notice {
+  &__medium {
+    font-size: 1.4rem;
+  }
+  
+  &_text {
+    color: red;
+  }
 }
-
-.notice-container_text {
-  color: red;
-}
-
 
 .swiper-slide-container {
   flex-wrap: nowrap;
   flex-direction: column;
   display: flex;
   align-items: center;
-  //width: 192px;
-}
 
-.swiper-slide-container_medium {
-  font-size: 1.4rem;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis; 
+  &_medium {
+    font-size: 1.4rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
 }
 
 .swiper-slide__img {
-  /* transform: scale(0.8); */
-  //width: 240px;
-  //height: 360px;
   width: 192px;
   height: 288px;
   user-select: none;
@@ -163,7 +151,6 @@ body {
   text-decoration: underline;
   height: 45px;   
 }
-
 
 .rating-container {
   display: flex;
@@ -181,13 +168,6 @@ body {
   transform: scale(0.8);
 }
 
-.footer_medium {
-  height: 50px;
-  font-size: 1.4rem;
-  padding-left: 8%;
-  padding-right: 8%;
-}
-
 .footer {
   display: flex;
   justify-content: space-between;
@@ -195,6 +175,13 @@ body {
   color: #ffffff;
   background-color: #262a35; 
   margin-top: 50px;
+
+  &_medium {
+    height: 50px;
+    font-size: 1.4rem;
+    padding-left: 8%;
+    padding-right: 8%;
+  }
 }
 
 .github-link {
@@ -210,11 +197,11 @@ body {
 
 
 
-img {
+.swiper-slide__img {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
 
-img[data-src] {
+.swiper-slide__img[data-src] {
 	opacity: 0;
 }

@@ -189,8 +189,8 @@ function printKeyCode(key) {
   textin.selectionStart = textin.selectionEnd = pos + 1;
 }
 
-
 function identifyKey(event, updown) {
+  textin.focus(); 
   if (event.code === "ShiftLeft") {
     if (shiftCaseLeft) shiftCaseLeft = false;
     else shiftCaseLeft = true;
@@ -214,6 +214,24 @@ function identifyKey(event, updown) {
   } 
 
   if (updown === "down"){
+    if (event.code === "ArrowRight") {
+      arrowRightButtonIsPress();
+      return;
+    }
+
+    if (event.code === "ArrowLeft") {
+      arrowLeftButtonIsPress();
+      return;
+    }
+
+    if (event.code === "ArrowUp") {
+      return;
+    }
+
+    if (event.code === "ArrowDown") {
+      return;
+    }
+
     if (event.code === "Tab") {
       tabCase();
     } 
@@ -252,8 +270,24 @@ function identifyKey(event, updown) {
 
     if (event.code === "Enter") {
       enterButtonIsPress();
-    } 
+    }   
   }  
+}
+
+function arrowLeftButtonIsPress() {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  arr.splice(pos, 0, "");
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos - 1;
+}
+
+function arrowRightButtonIsPress() {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  arr.splice(pos, 0, "");
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos + 1;
 }
 
 function enterButtonIsPress() {

@@ -112,10 +112,10 @@ const config = {
   }
 };
 
-if (isProd) {
+/* if (isProd) {
   config.plugins.push(
     new UglifyJSPlugin()
   );
-}
+} */
 
 module.exports = config;

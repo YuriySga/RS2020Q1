@@ -1,38 +1,8 @@
-/* * {
-  margin: 0;
-  box-sizing: border-box;
-} */
-
-/* html {
-  font-size: 18px;
-  font-family: 'Lato', sans-serif;
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0 auto;
-  max-width: 1020px;
-} */
-
-/* .textin {
-  resize:none;
-  width: 840px;
-  height: 150px;
-} */
 .keyboard-container {
   display: none;
   position: fixed;
   top: 185px; 
   z-index: 11;
-
-}
-
-.keyboard {
-  height: 31vw;
-  margin: auto;
-  //top: 185px;
-  //left: 0px;
-  position: relative;
 }
 
 .keyboard-button {   
@@ -56,7 +26,9 @@ body {
 }
 
 .keyboard {
-  
+  height: 31vw;
+  margin: auto;
+  position: relative;
   background-color: cornsilk;
   border: 2px solid #948080;
   padding: 5px;
@@ -71,9 +43,6 @@ body {
     "caps  caps    a    s    d     f    g     h       j       k     l     colon       quotationMarks    enter       enter       enter"
     "shift  shift shift  z   x    c     v     b        n        m  comma  point         questionMark  arrowUp       rShift    rShift"
     "ctrl  win    alt  space space space space space space   space  rAlt rCtrl    rCtrl  arrowLeft    arrowDown     arrowRight";
-  //width: 840px;
-  //width: 80%;
-  //height: 281px;
 }
 
 .one {
