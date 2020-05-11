@@ -11,9 +11,9 @@ const mySwiper = new Swiper('.swiper-container', swiper_settings);
 const searchForm = document.querySelector('.search-form');
 const searchForm__input = document.querySelector('.search-form__input');
 const searchForm__loadIndicator = document.querySelector('.search-form__load-indicator');
-const notice = document.querySelector('.notice_text');
-const searchForm__imgButtonClear = document.querySelector('.search-form__img-button-clear');
-const searchForm__imgButtonKeyboard = document.querySelector('.search-form__img-button-keyboard');
+const notice = document.querySelector('.notice__text');
+const searchForm__buttonClear = document.querySelector('.search-form__button-clear');
+const searchForm__buttonKeyboard = document.querySelector('.search-form__button-keyboard');
 
 let loadablePage = 1;
 let searchFilm = 'Terminator';
@@ -188,11 +188,11 @@ searchForm.addEventListener('submit', (event) => {
   }
 });
 
-searchForm__imgButtonClear.addEventListener('click', (event) => {
+searchForm__buttonClear.addEventListener('click', (event) => {
   searchForm__input.value = '';
 });
 
-searchForm__imgButtonKeyboard.addEventListener('click', (event) => {
+searchForm__buttonKeyboard.addEventListener('click', (event) => {
   const keyboardContainer = document.querySelector('.keyboard-container');
   if (keyboardContainerIsOn) {
     keyboardContainer.style.display = 'none';

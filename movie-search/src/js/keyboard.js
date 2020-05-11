@@ -69,7 +69,7 @@ const obj = {
   ShiftRight: ['rShift'],
   ControlRight: ['rCtrl'],
   ControlLeft: ['ctrl'],
-  MetaLeft: ['win'],
+  MetaLeft: ['lang', 'en', 'ru','ru'],
   AltLeft: ['alt'],
   AltRight: ['rAlt'],   
 };
@@ -214,6 +214,11 @@ function identifyKey(event, updown) {
   } 
 
   if (updown === "down"){
+    if (event.code === "MetaLeft") {
+      langButtonButtonIsPress();
+      return;
+    }
+    
     if (event.code === "ArrowRight") {
       arrowRightButtonIsPress();
       return;
@@ -272,6 +277,10 @@ function identifyKey(event, updown) {
       enterButtonIsPress();
     }   
   }  
+}
+
+function langButtonButtonIsPress() {
+  changeLang();
 }
 
 function arrowLeftButtonIsPress() {

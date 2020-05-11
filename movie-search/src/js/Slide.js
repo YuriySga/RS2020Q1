@@ -14,13 +14,13 @@ export class Slide {
   generateSlide() {
     let template = `
       <div class="swiper-slide">
-        <div class="container swiper-slide-container swiper-slide-container_medium" >
-          <a class="swiper-slide__title swiper-slide__title_medium" href="https://www.imdb.com/title/${this.imdbID}/videogallery/">${this.title}</a>
+        <div class="container swiper-slide-container swiper-slide-container--medium" >
+          <a class="swiper-slide__title swiper-slide__title--medium" href="https://www.imdb.com/title/${this.imdbID}/videogallery/">${this.title}</a>
           <img class="swiper-slide__img" data-src="${this.imgSrc}" alt="">               
-          <span class="swiper-slide__year swiper-slide__year_medium">${this.year}</span>
-          <div class="rating-container">
-            <img class="swiper-slide__img-star" src="${imgStar}" alt=""> 
-            <span class="swiper-slide__stars swiper-slide__stars_medium">${this.stars}</span>
+          <span class="swiper-slide__year swiper-slide__year--medium">${this.year}</span>
+          <div class="swiper-slide__rating rating">
+            <img class="rating__img-star" src="${imgStar}" alt=""> 
+            <span class="rating__stars rating__stars--medium">${this.stars}</span>
           </div>
         </div>
       </div>`;
