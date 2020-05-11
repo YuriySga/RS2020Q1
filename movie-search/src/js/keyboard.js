@@ -123,7 +123,7 @@ keyboard.addEventListener('mouseup', function(event) {
   drawKey();
 });
 
-document.addEventListener('keydown', function(event) {
+/* document.addEventListener('keydown', function(event) {
   if (event.repeat) return;
   event.preventDefault(); 
   setStyle (document.querySelector(`.${obj[event.code][0]}`), true);  
@@ -139,7 +139,7 @@ document.addEventListener('keyup', function(event) {
   identifyKey(event, 'up');
   checkLang();
   drawKey();
- });
+ }); */
 
 function setStyle (code, bool) {
   if (bool) code.classList.add("active");

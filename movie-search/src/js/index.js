@@ -6,6 +6,7 @@ import Swiper from 'swiper';
 import { Slide } from './Slide';
 
 const swiper_settings = require('./swiper_settings.js');
+
 const apikeyOmdb = '5d6802cf';
 const mySwiper = new Swiper('.swiper-container', swiper_settings);
 const searchForm = document.querySelector('.search-form');
@@ -28,7 +29,7 @@ function startSearchMovie () {
       .then((arr) => createSlides(arr))
       .then(() => imgOnload())
       .then(() => loadIndicatorOn(false))
-      .then(() => foundFilm = searchFilm)
+      .then(() => saveFoundFilm())
       .catch(() => {
         loadIndicatorOn(false);
         notice.innerHTML = `No results were found for "${searchFilm}"`;
@@ -44,25 +45,25 @@ function loadIndicatorOn(indicatorTurnOn) {
 }
 
 function getMovie(title, page) {
-  let clearTitle = removeWhitespaces(title);
+  const clearTitle = removeWhitespaces(title);
   const url = `https://www.omdbapi.com/?s=${clearTitle}&type=movie&page=${page}&apikey=${apikeyOmdb}`;
 
   return fetch(url)
     .then((response) => {
-      if (response.ok === true) {
+      if (response.ok !== true) {
+        notice.innerHTML = `Ошибка HTTP: ${response.status}`;
+        throw new Error('Ошибка!');        
+      } else {
         notice.innerHTML = `Showing results for "${title}"`;
         return response;
-      } else {
-        notice.innerHTML = `Ошибка HTTP: ${response.status}`;
-        throw new Error('Ошибка!');
       }
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      if (responseJson.Response === 'True') {
-        return responseJson;
+      if (responseJson.Response !== 'True') {
+        throw new Error(`No results were found for "${title}"`);        
       } else {
-        throw new Error(`No results were found for "${title}"`);
+        return responseJson;
       }
     })
     .then((data) => addRatingInSlides(data));
@@ -71,7 +72,7 @@ function getMovie(title, page) {
 function createSlides(arr) {
   return new Promise(function (resolve) {
     const arrMovies = arr;
-    let arrSlides = [];
+    const arrSlides = [];
     mySwiper.removeAllSlides();
     arrMovies.forEach((film) => {
       const slide = new Slide(film);
@@ -83,7 +84,7 @@ function createSlides(arr) {
 }
 
 function imgOnload() {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     [].forEach.call(
       document.querySelectorAll('img[data-src].swiper-slide__img'),
       function (img) {
@@ -97,9 +98,13 @@ function imgOnload() {
   });
 }
 
+function saveFoundFilm() {
+  foundFilm = searchFilm;
+}
+
 function removeWhitespaces(value) {
-  let notCorrectedTitle = value;
-  let correctedTitleArr = [];
+  const notCorrectedTitle = value;
+  const correctedTitleArr = [];
   notCorrectedTitle.split(' ').forEach((word) => {
     if (word !== '') correctedTitleArr.push(word);
   });
@@ -108,9 +113,12 @@ function removeWhitespaces(value) {
 
 function addRatingInSlides(data) {
   return new Promise(function (resolve) {
-    let arrMovies = data.Search;
+    const arrMovies = data.Search;
     arrMovies.forEach((film) => {
-      getMovieReiting(film.imdbID).then((id) => (film.Rating = id));
+      getMovieReiting(film.imdbID)
+        .then((rating) => {
+          film.Rating = rating;
+        });
     });
     setTimeout(() => {
       resolve(arrMovies);
@@ -123,29 +131,25 @@ function getMovieReiting(filmId) {
 
   return fetch(url)
     .then((response) => {
-      if (response.ok === true) {
-        return response;
-      } else {
+      if (response.ok !== true) {
         notice.innerHTML = `Ошибка HTTP: ${response.status}`;
-        throw new Error('Ошибка!');
+        throw new Error('Ошибка!');        
+      } else {
+        return response;
       }
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      if (responseJson.Response === 'True') {
-        return responseJson.imdbRating;
+      if (responseJson.Response !== 'True') {
+        throw new Error('Ошибка imdbRating!');       
       } else {
-        throw new Error('Ошибка imdbRating!');
+        return responseJson.imdbRating;
       }
     });
 }
 
 mySwiper.on('reachEnd', function () {
-  if (mySwiper.slides.length === 0) {
-    return;
-  } else {
-    addMoreMovieInSlider();    
-  }
+  if (mySwiper.slides.length !== 0) addMoreMovieInSlider(); 
 });
 
 function addMoreMovieInSlider() {
@@ -164,7 +168,7 @@ function addMoreMovieInSlider() {
 function addSlides(arr) {
   return new Promise(function (resolve) {
     const arrMovies = arr;
-    let arrSlides = [];
+    const arrSlides = [];
     arrMovies.forEach((film) => {
       const slide = new Slide(film);
       arrSlides.push(slide.generateSlide());
@@ -176,23 +180,20 @@ function addSlides(arr) {
 
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  if (searchForm__input.value === '') {
-    return;
-  } else if (/^[А-яёЁ]*$/.test(searchForm__input.value)) {
+  if (/^[А-яёЁ]*$/.test(searchForm__input.value)) {
     notice.innerHTML = `Error: do not use the Cyrillic`;
-    return;
-  } else {
+  } else if (searchForm__input.value !== '') {
     loadablePage = 1;
     searchFilm = searchForm__input.value;
     startSearchMovie();   
-  }
+  }   
 });
 
-searchForm__buttonClear.addEventListener('click', (event) => {
+searchForm__buttonClear.addEventListener('click', () => {
   searchForm__input.value = '';
 });
 
-searchForm__buttonKeyboard.addEventListener('click', (event) => {
+searchForm__buttonKeyboard.addEventListener('click', () => {
   const keyboardContainer = document.querySelector('.keyboard-container');
   if (keyboardContainerIsOn) {
     keyboardContainer.style.display = 'none';

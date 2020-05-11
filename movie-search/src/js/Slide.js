@@ -12,7 +12,7 @@ export class Slide {
   }
 
   generateSlide() {
-    let template = `
+    const template = `
       <div class="swiper-slide">
         <div class="container swiper-slide-container swiper-slide-container--medium" >
           <a class="swiper-slide__title swiper-slide__title--medium" href="https://www.imdb.com/title/${this.imdbID}/videogallery/">${this.title}</a>
