@@ -1,4 +1,3 @@
-import 'bootstrap';
 import '../css/style.css';
 import '../css/style.scss';
 
@@ -74,6 +73,7 @@ function createSlides(arr) {
     const arrMovies = arr;
     const arrSlides = [];
     mySwiper.removeAllSlides();
+    mySwiper.slideTo(0);
     arrMovies.forEach((film) => {
       const slide = new Slide(film);
       arrSlides.push(slide.generateSlide());

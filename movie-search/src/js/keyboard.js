@@ -8,70 +8,70 @@ createKeyboard();
 const keyboard = document.querySelector('.keyboard');
 
 const obj = {
-  Backquote: ["tilde", "~", "`", "ё", "Ё" ],  
-  Digit1: ["one", '1', '!', "1", "!" ],
-  Digit2: ["two",'2','@', "2", "\""],
-  Digit3: ["three",'3','#', "3", "№"],
-  Digit4: ["four",'4',"$", "4", ";"],
-  Digit5: ["five",'5','%', "5", "%"],
-  Digit6: ["six",'6','^', "6", ":"],
-  Digit7: ['seven','7','&', "7", "?"],
-  Digit8: ['eight','8','*', "8", "*"],
-  Digit9: ['nine','9','(', "9", "("],
-  Digit0: ['zero','0',')', "0", ")"],
-  Minus: ['minus','-','_', "-", "_"],
-  Equal: ['equal','=','+', "=", "+"],  
-  KeyQ: ['q','q','Q', "й", "Й"],
-  KeyW: ['w','w','W', "ц", "Ц"],
-  KeyE: ['e','e','E', "у", "У"],
-  KeyR: ['r','r','R', "к", "К"],
-  KeyT: ['t','t','T', "е", "Е"],
-  KeyY: ['y','y','Y', "н", "Н"],
-  KeyU: ['u','u','U', "г", "Г"],
-  KeyI: ['i','i','I', "ш", "Ш"],
-  KeyO: ['o','o','O', "щ", "Щ"],
-  KeyP: ['p','p','P', "з", "З"],
-  BracketLeft:['ha','[','{', "х", "Х"],
-  BracketRight: ['strongSign',']','}', "ъ", "Ъ"],
-  Backslash: ['slash','\\','|', "\\", "/"],  
-  KeyA: ['a','a','A', "ф", "Ф"],
-  KeyS: ['s','s','S', "ы", "Ы"],
-  KeyD: ['d','d','D', "в", "В"],
-  KeyF: ['f','f','F', "а", "А"],
-  KeyG: ['g','g','G', "п", "П"],
-  KeyH: ['h','h','H', "р", "Р"],
-  KeyJ: ['j','j','J', "о", "О"],
-  KeyK: ['k','k','K', "л", "Л"],
-  KeyL: ['l','l','L', "д", "Д"],
-  Semicolon: ['colon',';',':', "ж", "Ж"],
-  Quote: ['quotationMarks',"'",'"', "э", "Э"], 
-  KeyZ: ['z','z','Z', "я", "Я"],
-  KeyX: ['x','x','X', "ч", "Ч"],
-  KeyC: ['c','c','C', "с", "С"],
-  KeyV: ['v','v','V', "м", "М"],
-  KeyB: ['b','b','B', "и", "И"],
-  KeyN: ['n','n','N', "т", "Т"],
-  KeyM: ['m','m','M', "ь", "Ь"],
-  Comma: ['comma',',','<', "б", "Б"],
-  Period: ['point','.','>', "ю", "Ю"],
-  Slash: ['questionMark','/','?', ".", ","],
-  Space: ['space',' ',' ',' ',' '],
-  Enter: ['enter','\n','\n','\n','\n'],
-  ArrowLeft: ['arrowLeft','◄','◄', "◄", "◄"],
-  ArrowRight: ['arrowRight','►','►', "►", "►"],
-  ArrowDown: ['arrowDown','▼','▼', "▼", "▼"],
-  ArrowUp: ['arrowUp','▲','▲', "▲", "▲"],
-  Backspace: ['backspace'],
-  Tab: ['tab'],
-  Delete: ['del'],
-  CapsLock: ['caps'],
-  ShiftLeft: ['shift'],  
-  ShiftRight: ['rShift'],
-  ControlRight: ['rCtrl'],
-  ControlLeft: ['ctrl'],
-  MetaLeft: ['lang', 'en', 'ru','ru'],
-  AltLeft: ['alt'],
-  AltRight: ['rAlt'],   
+  Backquote: ["key-tilde", "~", "`", "ё", "Ё" ],  
+  Digit1: ["key-one", '1', '!', "1", "!" ],
+  Digit2: ["key-two",'2','@', "2", "\""],
+  Digit3: ["key-three",'3','#', "3", "№"],
+  Digit4: ["key-four",'4',"$", "4", ";"],
+  Digit5: ["key-five",'5','%', "5", "%"],
+  Digit6: ["key-six",'6','^', "6", ":"],
+  Digit7: ['key-seven','7','&', "7", "?"],
+  Digit8: ['key-eight','8','*', "8", "*"],
+  Digit9: ['key-nine','9','(', "9", "("],
+  Digit0: ['key-zero','0',')', "0", ")"],
+  Minus: ['key-minus','-','_', "-", "_"],
+  Equal: ['key-equal','=','+', "=", "+"],  
+  KeyQ: ['key-q','q','Q', "й", "Й"],
+  KeyW: ['key-w','w','W', "ц", "Ц"],
+  KeyE: ['key-e','e','E', "у", "У"],
+  KeyR: ['key-r','r','R', "к", "К"],
+  KeyT: ['key-t','t','T', "е", "Е"],
+  KeyY: ['key-y','y','Y', "н", "Н"],
+  KeyU: ['key-u','u','U', "г", "Г"],
+  KeyI: ['key-i','i','I', "ш", "Ш"],
+  KeyO: ['key-o','o','O', "щ", "Щ"],
+  KeyP: ['key-p','p','P', "з", "З"],
+  BracketLeft:['key-ha','[','{', "х", "Х"],
+  BracketRight: ['key-strongSign',']','}', "ъ", "Ъ"],
+  Backslash: ['key-slash','\\','|', "\\", "/"],  
+  KeyA: ['key-a','a','A', "ф", "Ф"],
+  KeyS: ['key-s','s','S', "ы", "Ы"],
+  KeyD: ['key-d','d','D', "в", "В"],
+  KeyF: ['key-f','f','F', "а", "А"],
+  KeyG: ['key-g','g','G', "п", "П"],
+  KeyH: ['key-h','h','H', "р", "Р"],
+  KeyJ: ['key-j','j','J', "о", "О"],
+  KeyK: ['key-k','k','K', "л", "Л"],
+  KeyL: ['key-l','l','L', "д", "Д"],
+  Semicolon: ['key-colon',';',':', "ж", "Ж"],
+  Quote: ['key-quotationMarks',"'",'"', "э", "Э"], 
+  KeyZ: ['key-z','z','Z', "я", "Я"],
+  KeyX: ['key-x','x','X', "ч", "Ч"],
+  KeyC: ['key-c','c','C', "с", "С"],
+  KeyV: ['key-v','v','V', "м", "М"],
+  KeyB: ['key-b','b','B', "и", "И"],
+  KeyN: ['key-n','n','N', "т", "Т"],
+  KeyM: ['key-m','m','M', "ь", "Ь"],
+  Comma: ['key-comma',',','<', "б", "Б"],
+  Period: ['key-point','.','>', "ю", "Ю"],
+  Slash: ['key-questionMark','/','?', ".", ","],
+  Space: ['key-space',' ',' ',' ',' '],
+  Enter: ['key-enter','\n','\n','\n','\n'],
+  ArrowLeft: ['key-arrowLeft','◄','◄', "◄", "◄"],
+  ArrowRight: ['key-arrowRight','►','►', "►", "►"],
+  ArrowDown: ['key-arrowDown','▼','▼', "▼", "▼"],
+  ArrowUp: ['key-arrowUp','▲','▲', "▲", "▲"],
+  Backspace: ['key-backspace'],
+  Tab: ['key-tab'],
+  Delete: ['key-del'],
+  CapsLock: ['key-caps'],
+  ShiftLeft: ['key-shift'],  
+  ShiftRight: ['key-rShift'],
+  ControlRight: ['key-rCtrl'],
+  ControlLeft: ['key-ctrl'],
+  MetaLeft: ['key-lang', 'en', 'ru','ru'],
+  AltLeft: ['key-alt'],
+  AltRight: ['key-rAlt'],   
 };
 
 let MousLastPressButton = '';
@@ -91,7 +91,6 @@ class Button {
 
   //Button generator
   generateButton() {
-    let template = '';
     let div = document.createElement('div');
     div.className = this.className; 
     div.dataset.key = this.key;
@@ -334,66 +333,28 @@ function changeLang () {
 
 function drawKey() {
   let arrVals = Object.values(obj);
-
-  if (shiftCase === false && localStorage.lang === 'ENG') {
-    arrVals.forEach(el => {
-      let x = document.querySelector(`.${el[0]}`);
-      if (el.length < 2) {
-        x.innerText = el[0];
-      } else if (el[0] === 'enter') {
-        //nop
-      } else if (el[1] !== undefined) { 
-        x.innerText = el[1];
-      }      
-    });
-  }
-
-  if (shiftCase === true && localStorage.lang === 'ENG') {
-    arrVals.forEach(el => {
-      let x = document.querySelector(`.${el[0]}`);
-      if (el.length < 2) {
-        x.innerText = el[0];
-      } else if (el[0] === 'enter') {
-        //nop
-      } else if (el[2] !== undefined) {
-        x.innerText = el[2];
-      }      
-    });
-  }
-
-  if (shiftCase === false && localStorage.lang === 'RUS') {
-    arrVals.forEach(el => {
-      let x = document.querySelector(`.${el[0]}`);
-      if (el.length < 2) {
-        x.innerText = el[0];
-      } else if (el[0] === 'enter') {
-        //nop
-      } else if (el[3] !== undefined) {
-        x.innerText = el[3];
-      }      
-    });
-  }
-
-  if (shiftCase === true && localStorage.lang === 'RUS') {
-    arrVals.forEach(el => {
-      let x = document.querySelector(`.${el[0]}`);
-      if (el.length < 2) {
-        x.innerText = el[0];
-      } else if (el[0] === 'enter') {
-        //nop
-      } else if (el[4] !== undefined) {
-        x.innerText = el[4];
-      }      
-    });
-  }
+  arrVals.forEach(el => {
+    let x = document.querySelector(`.${el[0]}`);
+    if (el[0] === 'key-enter' || el.length === 1) {
+      //nop;
+    } else if (el.length < 2) {
+      x.innerText = el[0];
+    } else if (shiftCase === false && localStorage.lang === 'ENG') {
+      x.innerText = el[1];
+    } else if (shiftCase === true && localStorage.lang === 'ENG') {
+      x.innerText = el[2];
+    } else if (shiftCase === false && localStorage.lang === 'RUS') {
+      x.innerText = el[3];
+    } else if (shiftCase === true && localStorage.lang === 'RUS') {
+      x.innerText = el[4];
+    }
+  });
 }
-
 
 function createKeyboard() {
   let div = document.createElement('div');
   div.className = "container keyboard-container"; 
   div.innerHTML = '<div class="keyboard"></div>';
-  //document.body.append(div);
   searchForm.append(div);
 }
 
@@ -411,16 +372,10 @@ function generatorButton () {
      ar.push(new Button({
       code: el,
       key: obj[el][0],
-      style: obj[el][0],
+      style: obj[el][0],      
     })); 
   });
    ar.forEach(el => {
     keyboard.append(el.generateButton());
   }) ; 
 }
-
-
-
-
-
-

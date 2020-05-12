@@ -154,7 +154,12 @@
 
   &__title--medium {
     text-decoration: underline;
-    height: 45px;   
+    height: 45px;
+    color: black; 
+
+    &:hover {
+      color: black;
+    }
   }
 
   &__year--medium {
