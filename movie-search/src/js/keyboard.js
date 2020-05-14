@@ -379,6 +379,7 @@ function createKeyboardTemplate() {
   template.className = 'keyboard-template'; 
   const keyboardDiv = document.createElement('div');
   keyboardDiv.className = 'keyboard'; 
+  keyboardDiv.style.display = 'grid';
   keyboardDiv.style.gridGap = '4px';
   keyboardDiv.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr';
   keyboardDiv.style.gridTemplateAreas = `"tilde one two three four five six seven eight nine zero minus equal backspace backspace backspace"
