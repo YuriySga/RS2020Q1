@@ -13,7 +13,6 @@ const searchForm__input = document.querySelector('.search-form__input');
 const searchForm__loadIndicator = document.querySelector('.search-form__load-indicator');
 const notice = document.querySelector('.notice__text');
 const searchForm__buttonClear = document.querySelector('.search-form__button-clear');
-const searchForm__buttonKeyboard = document.querySelector('.search-form__button-keyboard');
 
 let loadablePage = 1;
 let searchFilm = 'Terminator';
@@ -180,26 +179,15 @@ function addSlides(arr) {
 
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  if (/^[А-яёЁ]*$/.test(searchForm__input.value)) {
+  if (/^[А-яёЁ]/.test(searchForm__input.value)) {
     notice.innerHTML = `Error: do not use the Cyrillic`;
   } else if (searchForm__input.value !== '') {
     loadablePage = 1;
     searchFilm = searchForm__input.value;
     startSearchMovie();   
-  }   
+  }
 });
 
 searchForm__buttonClear.addEventListener('click', () => {
   searchForm__input.value = '';
-});
-
-searchForm__buttonKeyboard.addEventListener('click', () => {
-  const keyboardContainer = document.querySelector('.keyboard-container');
-  if (keyboardContainerIsOn) {
-    keyboardContainer.style.display = 'none';
-    keyboardContainerIsOn = false;
-  } else {
-    keyboardContainer.style.display = 'block';
-    keyboardContainerIsOn = true;
-  }
 });

@@ -1,5 +1,4 @@
 .keyboard-container {
-  display: none;
   position: fixed;
   top: 185px; 
   z-index: 11;
@@ -35,311 +34,264 @@
   padding: 5px;
   border-radius: 15px;
   text-align: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   display: grid;
-  grid-gap: 4px;
-  grid-template-areas:
-    "tilde one    two three four five six    seven   eight   nine zero     minus         equal         backspace    backspace  backspace"
-    "tab    q      w    e    r     t    y     u        i      o     p       ha          strongSign      slash          del      del"
-    "caps  caps    a    s    d     f    g     h       j       k     l     colon       quotationMarks    enter       enter       enter"
-    "shift  shift shift  z   x    c     v     b        n        m  comma  point         questionMark  arrowUp       rShift    rShift"
-    "ctrl  win    alt  space space space space space space   space  rAlt rCtrl    rCtrl  arrowLeft    arrowDown     arrowRight";
+ }
+
+.keyboard-button {
+  display: block;
 }
 
 .key-one {
   grid-area: one;
-  display: block;
 }
+
 .key-two {
   grid-area: two;
-  display: block;
 }
+
 .key-three {
   grid-area: three;
-  display: block;
 }
 
 .key-four {
   grid-area: four;
-  display: block;
 }
+
 .key-five {
   grid-area: five;
-  display: block;
 }
+
 .key-six {
   grid-area: six;
-  display: block;
 }
+
 .key-seven {
   grid-area: seven;
-  display: block;
 }
+
 .key-eight {
   grid-area: eight;
-  display: block;
 }
+
 .key-nine {
   grid-area: nine;
-  display: block;
 }
+
 .key-zero {
   grid-area: zero;
-  display: block;
 }
 .key-tilda {
   grid-area: tilda;
-  display: block;
 }
 
 .key-minus {
   grid-area: minus;
-  display: block;
 }
 
 .key-equal {
   grid-area: equal;
-  display: block;
 }
 
 .key-backspace {
   grid-area: backspace;
-  display: block;
 }
 
 .key-tab {
   grid-area: tab;
-  display: block;
 }
 
 .key-q {
   grid-area: q;
-  display: block;
 }
 
 .key-w {
   grid-area: w;
-  display: block;
 }
 
 .key-e {
   grid-area: e;
-  display: block;
 }
 
 .key-r {
   grid-area: r;
-  display: block;
 }
 
 .key-t {
   grid-area: t;
-  display: block;
 }
 
 .key-y {
   grid-area: y;
-  display: block;
 }
 
 .key-u {
   grid-area: u;
-  display: block;
 }
 
 .key-i {
   grid-area: i;
-  display: block;
 }
 
 .key-o {
   grid-area: o;
-  display: block;
 }
 
 .key-p {
   grid-area: p;
-  display: block;
 }
 
 .key-ha {
   grid-area: ha;
-  display: block;
 }
 
 .key-strongSign {
   grid-area: strongSign;
-  display: block;
 }
 
 .key-slash {
   grid-area: slash;
-  display: block;
 }
 
 .key-del {
   grid-area: del;
-  display: block;
 }
 
 .key-caps {
   grid-area: caps;
-  display: block;
 }
 
 .key-a {
   grid-area: a;
-  display: block;
 }
 
 .key-s {
   grid-area: s;
-  display: block;
 }
+
 .key-d {
   grid-area: d;
-  display: block;
 }
+
 .key-f {
   grid-area: f;
-  display: block;
 }
+
 .key-g {
   grid-area: g;
-  display: block;
 }
 
 .key-h {
   grid-area: h;
-  display: block;
 }
+
 .key-j {
   grid-area: j;
-  display: block;
 }
+
 .key-k {
   grid-area: k;
-  display: block;
 }
+
 .key-l {
   grid-area: l;
-  display: block;
 }
 
 .key-colon {
   grid-area: colon;
-  display: block;
 }
 
 .key-quotationMarks {
   grid-area: quotationMarks;
-  display: block;
 }
 
 .key-enter {
   grid-area: enter;
-  display: block;
 }
 
 .key-shift {
   grid-area: shift;
-  display: block;
 }
 
 .key-z {
   grid-area: z;
-  display: block;
 }
+
 .key-x {
   grid-area: x;
-  display: block;
 }
+
 .key-c {
   grid-area: c;
-  display: block;
 }
+
 .key-v {
   grid-area: v;
-  display: block;
 }
+
 .key-b {
   grid-area: b;
-  display: block;
 }
+
 .key-n {
   grid-area: n;
-  display: block;
 }
 
 .key-m {
   grid-area: m;
-  display: block;
 }
 
 .key-comma {
   grid-area: comma;
-  display: block;
 }
+
 .key-point {
   grid-area: point;
-  display: block;
 }
+
 .key-questionMark {
   grid-area: questionMark;
-  display: block;
 }
 
 .key-arrowUp {
   grid-area: arrowUp;
-  display: block;
 }
 
 .key-rShift {
   grid-area: rShift;
-  display: block;
 }
 
 .key-ctrl {
   grid-area: ctrl;
-  display: block;
 }
 
 .key-win {
   grid-area: win;
-  display: block;
 }
 
 .key-alt {
   grid-area: alt;
-  display: block;
 }
 
 .key-space {
   grid-area: space;
-  display: block;
 }
 
 .key-rAlt {
   grid-area: rAlt;
-  display: block;
 }
 
 .key-rCtrl {
   grid-area: rCtrl;
-  display: block;
 }
 
 .key-arrowLeft {
   grid-area: arrowLeft;
-  display: block;
 }
 
 .key-arrowDown {
   grid-area: arrowDown;
-  display: block;
 }
 
 .key-arrowRight {
   grid-area: arrowRight;
-  display: block;
 }

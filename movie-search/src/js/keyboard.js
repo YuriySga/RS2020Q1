@@ -1,11 +1,12 @@
 const searchForm = document.querySelector(".search-form");
 const textin = document.querySelector('.search-form__input');
 const swiper = document.querySelector(".swiper");
+const searchForm__buttonKeyboard = document.querySelector('.search-form__button-keyboard');
+let keyboard;
+let keyboardIsOn = false;
 
 //createTextarea();
-createKeyboard();
-
-const keyboard = document.querySelector('.keyboard');
+createKeyboardTemplate();
 
 const obj = {
   Backquote: ["key-tilde", "~", "`", "ё", "Ё" ],  
@@ -100,45 +101,67 @@ class Button {
   }
 }
 
-generatorButton();
-drawKey();
-textin.focus();
-
-
-keyboard.addEventListener('mousedown', function(event) {
-  textin.focus();
-  if (event.target.classList[0] === "keyboard") return;
-  MousLastPressButton = event.target;
-  setStyle(event.target, true);
-  identifyKey(event.target.dataset, "down");
-  drawKey();
+searchForm__buttonKeyboard.addEventListener('click', () => {
+  if (keyboardIsOn === false) {
+    keyboardTurnOn(true);
+    keyboardIsOn = true;
+  } else {
+    keyboardTurnOn(false);
+    keyboardIsOn = false;
+  }
 });
 
-keyboard.addEventListener('mouseup', function(event) {
-  textin.focus();
-  if (event.target.dataset.code === "CapsLock") return;
-  removeLastPressButtonStyle();
-  identifyKey(event.target.dataset, "up");
-  drawKey();
-});
+function keyboardTurnOn(enableKeyboard) {
+  const keyboardTemplate = document.querySelector('.keyboard-template');
+  if (enableKeyboard === true) {
+    const clone = document.importNode(keyboardTemplate.content, true);
+    keyboardTemplate.before(clone);
+    keyboard = document.querySelector('.keyboard');
+    generatorButton();
+    drawKey();
+    addAllEventListener();
+  } else {
+    const keyboardContainer = document.querySelector('.keyboard-container');
+    keyboardContainer.remove();
+  }
+}
 
-/* document.addEventListener('keydown', function(event) {
-  if (event.repeat) return;
-  event.preventDefault(); 
-  setStyle (document.querySelector(`.${obj[event.code][0]}`), true);  
-  identifyKey(event, 'down');
-  checkLang();
-  drawKey();
-});
-
-document.addEventListener('keyup', function(event) { 
-  if (event.repeat) return;
-  if (event.key === "CapsLock") return;
-  setStyle (document.querySelector(`.${obj[event.code][0]}`), false);
-  identifyKey(event, 'up');
-  checkLang();
-  drawKey();
- }); */
+function addAllEventListener () {
+  keyboard.addEventListener('mousedown', function(event) {
+    textin.focus();
+    if (event.target.classList[0] === "keyboard") return;
+    MousLastPressButton = event.target;
+    setStyle(event.target, true);
+    identifyKey(event.target.dataset, "down");
+    drawKey();
+  });
+  
+  keyboard.addEventListener('mouseup', function(event) {
+    textin.focus();
+    if (event.target.dataset.code === "CapsLock") return;
+    removeLastPressButtonStyle();
+    identifyKey(event.target.dataset, "up");
+    drawKey();
+  });
+  
+  /* document.addEventListener('keydown', function(event) {
+    if (event.repeat) return;
+    event.preventDefault(); 
+    setStyle (document.querySelector(`.${obj[event.code][0]}`), true);  
+    identifyKey(event, 'down');
+    checkLang();
+    drawKey();
+  });
+  
+  document.addEventListener('keyup', function(event) { 
+    if (event.repeat) return;
+    if (event.key === "CapsLock") return;
+    setStyle (document.querySelector(`.${obj[event.code][0]}`), false);
+    identifyKey(event, 'up');
+    checkLang();
+    drawKey();
+   }); */
+}
 
 function setStyle (code, bool) {
   if (bool) code.classList.add("active");
@@ -351,11 +374,23 @@ function drawKey() {
   });
 }
 
-function createKeyboard() {
-  let div = document.createElement('div');
-  div.className = "container keyboard-container"; 
-  div.innerHTML = '<div class="keyboard"></div>';
-  searchForm.append(div);
+function createKeyboardTemplate() {
+  const template = document.createElement('template');
+  template.className = 'keyboard-template'; 
+  const keyboardDiv = document.createElement('div');
+  keyboardDiv.className = 'keyboard'; 
+  keyboardDiv.style.gridGap = '4px';
+  keyboardDiv.style.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr';
+  keyboardDiv.style.gridTemplateAreas = `"tilde one two three four five six seven eight nine zero minus equal backspace backspace backspace"
+                                          "tab q w e r t y u i o p ha strongSign slash del del"
+                                          "caps caps a s d f g h j k l colon quotationMarks enter enter enter"
+                                          "shift shift shift z x c v b n m comma point questionMark arrowUp rShift rShift"
+                                          "ctrl win alt space space space space space space space rAlt rCtrl rCtrl arrowLeft arrowDown arrowRight"`;
+  const keyboardContainerDiv = document.createElement('div');
+  keyboardContainerDiv.className = 'container keyboard-container'; 
+  keyboardContainerDiv.append(keyboardDiv);
+  template.content.append(keyboardContainerDiv);
+  searchForm.append(template);
 }
 
 function createTextarea() {
