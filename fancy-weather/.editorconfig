@@ -1,0 +1,17 @@
+# Корневой файл EditorConfig
+root = true
+
+# Для всех файлов используем unix-совместимые переносы строк
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Используем табы для отступов 
+[*.js]
+indent_style = space
+indent_size = 4
+
+# Перезависываем настройку отступов для js файлов в папке lib
+#[src/js/**.js]
+#indent_style = space
+#indent_size = 2  
