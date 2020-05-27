@@ -1,0 +1,19 @@
+@import "custom";
+@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+.app {
+    background-color: #d1baba;  
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
