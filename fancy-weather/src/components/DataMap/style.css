@@ -6,7 +6,27 @@
     /*  left: 700px;*/
     /* width: 375px; */
     height: 459px;
+  /*   background-image: url(img/mask.svg);
+    background-size: contain;
+    background-repeat: no-repeat; */
 
+   /*  mask: url(img/mask.svg);
+    mask-size: cover; */
+
+    /* -webkit-mask-size: 425px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position-x: -25px;
+    -webkit-mask-position-y: -27px; */
+
+}
+
+.mapMask{
+    mask: url(img/mask.svg);
+    mask-size: 429px;
+    mask-repeat: no-repeat;
+    -webkit-mask-position-x: -27px;
+    -webkit-mask-position-y: -29px;
+    height: 396px;
 }
 
 .dataMap {
@@ -16,6 +36,26 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    
+ /*    background-image: url(img/mask.svg);
+    background-size: contain;
+    background-repeat: no-repeat; */
 }
+
+.dataMap__coords {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: right;
+    text-transform: capitalize;
+    color: #ffffff;
+    -webkit-text-stroke: 0.7px black;
+    letter-spacing: 1.3px;
+
+}
+
+
 
 

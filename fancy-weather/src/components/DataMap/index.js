@@ -43,13 +43,15 @@ export default class DataMap extends Component {
         let latitude = '';
         if (this.state.pos) {
             this.renderMap()
-            longitude = this.state.pos.longitude
-            latitude = this.state.pos.latitude
+            longitude = `${Math.trunc(Number(this.state.pos.longitude))}° ${Math.trunc(((Number(this.state.pos.longitude).toFixed(2))%1)*60)}'`
+            latitude = `${Math.trunc(Number(this.state.pos.latitude))}° ${Math.trunc(((Number(this.state.pos.latitude).toFixed(2))%1)*60)}'`
         }
 
         return (            
             <div className="dataMap float-right">
-                <div className="dataMap__map" id='map'/>
+                <div className="mapMask">
+                    <div className="dataMap__map" id='map'/>
+                </div>
                 <div className="dataMap__coords">
                     <div>{`Longitude: ${longitude}`}</div>
                     <div>{`Latitude: ${latitude}`}</div>

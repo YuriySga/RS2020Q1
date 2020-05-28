@@ -1,0 +1,66 @@
+.cityName {
+    width: 396px;
+    height: 87px;
+}
+
+.cityCountryEndTime {
+    height: 87px;
+    font-family: Montserrat;
+    font-style: normal;
+    color: #FFFFFF;
+}
+
+.cityCountryName {
+    font-weight: bold;
+    font-size: 44px;
+    line-height: 54px;
+    text-transform: uppercase;
+}
+
+.dateTime {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.todayWeather {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 373px;
+    font-family: Montserrat;
+    font-style: normal;
+    color: #FFFFFF;
+
+    .nowTemp {
+        letter-spacing: -10px;
+        font-weight: bold;
+        font-size: 220px;
+        line-height: 373px;
+    }
+
+}
+
+.weatherSettings {
+
+    &__list {
+        font-size: 22px;
+        line-height: 37px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 33px;
+        list-style-type: none;
+    }
+    
+    
+    &__img{
+        width: 100px;
+    }
+    
+}
+
+.nextDaysWeather {
+    display: flex;
+    height: 108px;
+}

@@ -1,0 +1,31 @@
+.btnRfrshImage {
+  background-image: url(img/vector.svg);
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: center; 
+
+    &--size44 {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+.dropDownBtn {
+
+    &--size7144 {
+        width: 71px;
+        height: 44px;
+    }
+
+    
+}
+
+
+/* .mapMask{
+    mask: url(img/mask.svg);
+    mask-size: 429px;
+    mask-repeat: no-repeat;
+    -webkit-mask-position-x: -27px;
+    -webkit-mask-position-y: -29px;
+    height: 396px;
+} */

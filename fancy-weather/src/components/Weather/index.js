@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from 'react'
-import './style.css'
+import './style.scss'
 
 export default class Weather extends PureComponent {
     constructor(props) {
@@ -137,10 +137,12 @@ export default class Weather extends PureComponent {
         const getWeather3Day = function (city)  {
             console.log("-----getWeather3Day")
             const date = new Date(Date.now() + (3600000*24*3))
-            const dateParse = `${date.getFullYear()}-${String(date.getDay()-1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`
+            console.log(date.getDay());
+            const dateParse = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`
             const weatherapiKey = 'e663d7507066491f896180617202405'
             const urlWeather = `https://api.weatherapi.com/v1/forecast.json?key=${weatherapiKey}&q=${city}&dt=${dateParse}`
-        console.log(urlWeather);
+            console.log("------");
+            console.log(dateParse);
 
             return fetch(urlWeather,{mode: "cors"})
                 .then((response) => {
@@ -211,12 +213,41 @@ export default class Weather extends PureComponent {
     }
 
     render() {
-        console.log('render');
+        console.log('render')
+        const timeDateParse = {
+            daysOfWeek: {
+                0: "Sun",
+                1: "Mon",
+                2: "Tues",
+                3: "Wed",
+                4: "Thurs",
+                5: "Fri",
+                6: "Sat"
+            },
+            months: {
+                0: "January",
+                1: "February",
+                2: "March",
+                3: "April",
+                4: "May",
+                5: "June",
+                6: "July",
+                7: "August",
+                8: "September",
+                9: "Oktober",
+                10: "November",
+                11: "December"
+            } 
+        }   
         
         let city = ''
         let country =''
-
-
+        let dayOfWeek = timeDateParse.daysOfWeek[this.state.time.getDay()]
+        let dayOfMonth = this.state.time.getDate()
+        let month = timeDateParse.months[this.state.time.getMonth()]
+        let hours = this.state.time.getHours()
+        let minutes = this.state.time.getMinutes()
+        let timeClock = `${dayOfWeek} ${dayOfMonth} ${month} ${hours}:${minutes}`
         
         if (this.state.country) {         
             city = this.state.city
@@ -224,36 +255,42 @@ export default class Weather extends PureComponent {
         }
 
         return ( 
-            <div className="data-weather">         
-                <div className="cityCountryName">
-                    
-                    { `${city}, ${country}` }
-                </div>
-                <div className="dateTime">
-                    {/* //{ this.state.time } */}
-                    <p>Сейчас {this.state.time.toLocaleTimeString()}.</p>
-                </div>
-               <div className="nowTemp">
-                    { `${this.state.nowTemp_c}` }
-                </div>
-                <div className="weatherSettings">
-                    { `${this.state.nowText}
-                    ${this.state.nowFeelslike_c}
-                    ${this.state.nowWind_kph}
-                    ${this.state.nowHumidity}                    
-                    ` }
-                </div>
-                <div className="weatherIcon">
-                    <img src={this.state.nowIcon}/>
-                </div>
-                <div className="next1Day">
-                    { `${this.state.next1DayTemp_c}` }
-                </div>
-                <div className="next2Day">
-                    { `${this.state.next2DayTemp_c}` }
-                </div>
-                <div className="next3Day">
-                    { `${this.state.next3DayTemp_c}` }
+            <div className="data-weather">
+                <div className="cityCountryEndTime">       
+                    <div className="cityCountryName">                    
+                        { `${city}, ${country}` }
+                    </div>
+                    <div className="dateTime">             
+                        {timeClock}                        
+                    </div>
+                </div> 
+                <div className="todayWeather">
+                    <div className="nowTemp">
+                        { `${this.state.nowTemp_c}°` }
+                    </div>
+                   <div className="weatherSettings ml-3">
+                        <img className="weatherSettings__img" src={this.state.nowIcon} alt=""/>
+                        <ul className="weatherSettings__list pl-0">
+                            <li>{String(this.state.nowText).toUpperCase()}</li>
+                            <li>{`FEELS LIKE: ${this.state.nowFeelslike_c}°`}</li>
+                            <li>{`WIND: ${this.state.nowWind_mph}miles/h`}</li>
+                            <li>{`HUMIDITY: ${this.state.nowHumidity}%`}</li>
+                        </ul>
+                   </div>                   
+                </div>                 
+                <div className="nextDaysWeather">
+                    <div className="next1Day">
+                        <p className="next1Day__dayOfWeek">{this.state.next1DayDate}</p>
+                        { `${this.state.next1DayTemp_c}°` }
+                    </div>
+                    <div className="next2Day">
+                        <p className="next1Day__dayOfWeek">{this.state.next2DayDate}</p>
+                        { `${this.state.next2DayTemp_c}°` }
+                    </div>
+                    <div className="next3Day">
+                        <p className="next1Day__dayOfWeek">{this.state.next3DayDate}</p>
+                        { `${this.state.next3DayTemp_c}°` }
+                    </div>
                 </div>
             </div>
         )
