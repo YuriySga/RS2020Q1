@@ -23,7 +23,37 @@
     line-height: 29px;
 }
 
-.todayWeather {
+.data-weather {
+    color: #FFFFFF;
+    font-family: Montserrat;
+    font-style: normal;
+
+
+    .nowTemp {
+        letter-spacing: -10px;
+        font-weight: bold;
+        font-size: 306px;
+        line-height: 300px;
+    }
+
+    .weatherSettings {
+
+        &__list {
+            font-size: 22px;
+            line-height: 37px;
+            font-weight: 600;
+            list-style-type: none;
+        }
+        
+        
+        &__img{
+            width: 100px;
+        }
+        
+    }
+
+}
+/* .todayWeather {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -40,9 +70,9 @@
         line-height: 373px;
     }
 
-}
+} */
 
-.weatherSettings {
+/* .weatherSettings {
 
     &__list {
         font-size: 22px;
@@ -56,38 +86,38 @@
         width: 100px;
     }
     
-}
+} */
 
 .nextDaysWeather {
-    height: 95px;
-    margin-bottom: 90px;
+   /*  height: 95px; */
+    margin-bottom: 40px;
     color: #FFFFFF;
-    display: grid;
+    /* display: grid;
     grid-template-areas: "dayOfWeek1 dayOfWeek1 dayOfWeek2 dayOfWeek2 dayOfWeek3 dayOfWeek3"
-                         "temp1 img1 temp2 img2 temp3 img3";
+                         "temp1 img1 temp2 img2 temp3 img3"; */
     
     &__next1DayOfWeek {
         grid-area: dayOfWeek1;
         font-weight: bold;
         font-size: 22px;
         line-height: 27px;
-        margin: 0 auto;
         height: 27px;
         margin: 0 auto;
-
+        text-transform: uppercase;
     }
 
     &__next1DayTemp {
         grid-area: temp1;
         font-weight: 600;
-        font-size: 50px;
-        line-height: 55px;
+        font-size: 80px;
+        line-height: 98px;
         margin: 0 auto;
     }
 
     &__next1DayImg {
         grid-area: img1;
         margin: 0 auto;
+        height: fit-content;
     }
 
     &__next2DayOfWeek {
@@ -97,19 +127,21 @@
         line-height: 27px;
         height: 27px;
         margin: 0 auto;
+        text-transform: uppercase;
     }
 
     &__next2DayTemp {
         grid-area: temp2;
         font-weight: 600;
-        font-size: 50px;
-        line-height: 55px;
+        font-size: 80px;
+        line-height: 98px;
         margin: 0 auto;
     }
 
     &__next2DayImg {
         grid-area: img2;
         margin: 0 auto;
+        height: fit-content;
     }
 
     &__next3DayOfWeek {
@@ -119,19 +151,21 @@
         line-height: 27px;
         height: 27px;
         margin: 0 auto;
+        text-transform: uppercase;
     }
 
     &__next3DayTemp {
         grid-area: temp3;
         font-weight: 600;
-        font-size: 50px;
-        line-height: 55px;
-        margin: 0 auto;
+        font-size: 80px;
+        line-height: 98px;
+        margin: 0 auto;        
     }
 
     &__next3DayImg {
         grid-area: img3;
         margin: 0 auto;
+        height: fit-content;
     }
 }
 

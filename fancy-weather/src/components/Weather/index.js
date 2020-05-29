@@ -227,46 +227,53 @@ export default class Weather extends PureComponent {
         }
 
         return ( 
-            <div className="data-weather">
-                <div className="cityCountryEndTime">       
-                    <div className="cityCountryName">                    
-                        { `${city}, ${country}` }
-                    </div>
-                    <div className="dateTime">             
-                        {timeClock}                        
-                    </div>
-                </div> 
-                <div className="todayWeather">
-                    <div className="nowTemp">
-                        { `${Math.trunc(this.state.nowTemp_c)}°` }
-                    </div>
-                   <div className="weatherSettings ml-3">
+            <div className="row justify-content-center data-weather">
+                {/* <div className="col-3"></div> */}
+                    <div className="col-12 text-center text-xl-left cityCountryEndTime">       
+                        <div className="cityCountryName">                    
+                            { `${city}, ${country}` }
+                        </div>
+                        <div className="dateTime">             
+                            {timeClock}                        
+                        </div>
+                    </div> 
+               {/*  <div className="col-3"></div> */}
+
+                <div className="col-sm-12 text-center text-sm-center col-md-6 col-lg-5 col-xl-7 mt-5 mb-4 nowTemp">
+                    { `${Math.trunc(this.state.nowTemp_c)}°` }
+                </div>
+                <div className="text-center col-12 col-sm-6 col-md-5 col-lg-4 col-xl-5 weatherSettings">
                         <img className="weatherSettings__img" src={this.state.nowIcon} alt=""/>
-                        <ul className="weatherSettings__list pl-0">
+                        <ul className="weatherSettings__list p-0">
                             <li>{String(this.state.nowText).toUpperCase()}</li>
                             <li>{`FEELS LIKE: ${this.state.nowFeelslike_c}°`}</li>
                             <li>{`WIND: ${this.state.nowWind_mph}miles/h`}</li>
                             <li>{`HUMIDITY: ${this.state.nowHumidity}%`}</li>
                         </ul>
-                   </div>                   
-                </div>                 
-                <div className="nextDaysWeather">
-                    {/* <div className="next1Day"> */}
+                   </div> 
+                <div className="col-6 col-sm-6 col-md-10 col-lg-8 col-xl-12 row nextDaysWeather">
+                    <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-4 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
 
                         <p className="nextDaysWeather__next1DayOfWeek">{next1Day}</p>
-                        <p className="nextDaysWeather__next1DayTemp">{`${Math.trunc(this.state.next1DayTemp_c)}°`}</p>
-                        <img className="nextDaysWeather__next1DayImg" src={this.state.next1DayIcon} alt=""/>
-                    {/* </div> */}
-                   {/*  <div className="next2Day"> */}
+                        <div className="row">
+                            <p className="col-8 nextDaysWeather__next1DayTemp">{`${Math.trunc(this.state.next1DayTemp_c)}°`}</p>
+                            <img className="col pl-0 nextDaysWeather__next1DayImg" src={this.state.next1DayIcon} alt=""/>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-4 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
                         <p className="nextDaysWeather__next2DayOfWeek">{next2Day}</p>
-                        <p className="nextDaysWeather__next2DayTemp">{`${Math.trunc(this.state.next2DayTemp_c)}°`}</p>
-                        <img className="nextDaysWeather__next2DayImg" src={this.state.next2DayIcon} alt=""/>
-                    {/* </div> */}
-                    {/* <div className="next3Day"> */}
+                        <div className="row">
+                            <p className="col-8 nextDaysWeather__next2DayTemp">{`${Math.trunc(this.state.next2DayTemp_c)}°`}</p>
+                            <img className="col pl-0 nextDaysWeather__next2DayImg" src={this.state.next2DayIcon} alt=""/>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-4 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
                         <p className="nextDaysWeather__next3DayOfWeek">{next3Day}</p>
-                        <p className="nextDaysWeather__next3DayTemp">{`${Math.trunc(this.state.next3DayTemp_c)}°`}</p>
-                        <img className="nextDaysWeather__next3DayImg" src={this.state.next3DayIcon} alt=""/>
-                    {/* </div> */}
+                        <div className="row">
+                            <p className="col-8 nextDaysWeather__next3DayTemp">{`${Math.trunc(this.state.next3DayTemp_c)}°`}</p>
+                            <img className="col pl-0 nextDaysWeather__next3DayImg" src={this.state.next3DayIcon} alt=""/>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

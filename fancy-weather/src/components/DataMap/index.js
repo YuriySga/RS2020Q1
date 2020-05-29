@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from 'react'
-import './style.css'
+import './style.scss'
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 

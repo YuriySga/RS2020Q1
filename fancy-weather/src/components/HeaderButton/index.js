@@ -16,9 +16,9 @@ export default class HeaderButton extends Component {
      
 
     render() {
-               
+        /* mt-sm-4 mb-sm-4 mx-md-0 mx-xl-0 mx-lg-0 mx-sm-auto */ 
         return (            
-                <div className="buttons-group">
+                <div className="buttons-group mx-auto mx-sm-auto mx-md-0 mx-lg-0 mx-xl-0">
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div className="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
                             <button type="button" className="btn btnRfrshImage btnRfrshImage--size44 btn-secondary"></button>

@@ -19,21 +19,20 @@ class App extends PureComponent {
 
         return (
             <div className="container app">                
-                    <div className="row justify-content-between">
-                        <div className="col">
+                    <div className="row justify-content-center pt-4 mb-4">
+                        <div className="col-sm-12 col-md-5 col-lg-7 col-xl-7 mb-4">
                             <HeaderButton/>
                         </div>
-                        <div className="col">
+                        <div className="col-sm-12 col-md-7 col-lg-4 col-xl-4">
                             <SearchForm/>
                         </div>
-
                     </div>
-                    <div className="row justify-content-between">
-                        <div className="col">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-xl-7">
                             <Weather/>
                         </div>
-                        <div className="col">
-                            <DataMap className="float-right"/>
+                        <div className="col-12 col-xl-4">
+                            <DataMap className="mx-auto mx-sm-auto mx-md-auto mx-lg-auto float-xl-right"/>
                         </div>
                     </div>                    
             </div>
