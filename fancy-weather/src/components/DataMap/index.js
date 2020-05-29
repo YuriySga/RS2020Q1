@@ -39,6 +39,7 @@ export default class DataMap extends Component {
 
     render() {
         console.log('-------render');
+        const clsName = this.props.className
         let longitude = '';
         let latitude = '';
         if (this.state.pos) {
@@ -48,7 +49,7 @@ export default class DataMap extends Component {
         }
 
         return (            
-            <div className="dataMap float-right">
+            <div className={`${clsName} dataMap`}>
                 <div className="mapMask">
                     <div className="dataMap__map" id='map'/>
                 </div>

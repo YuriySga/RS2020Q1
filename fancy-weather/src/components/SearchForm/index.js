@@ -28,7 +28,7 @@ import './style.scss'
 
 export default function SearchForm() {    
     return (
-        <div className="header__search-form search-form">
+        <div className="header__search-form search-form float-right">
             <div className="input-group mb-3">
                 <input type="text" className="form-control form-control-lg" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"/>
                 <div className="input-group-append">

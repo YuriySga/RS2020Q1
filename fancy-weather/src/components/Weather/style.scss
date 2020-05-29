@@ -36,7 +36,7 @@
     .nowTemp {
         letter-spacing: -10px;
         font-weight: bold;
-        font-size: 220px;
+        font-size: 306px;
         line-height: 373px;
     }
 
@@ -48,8 +48,6 @@
         font-size: 22px;
         line-height: 37px;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 33px;
         list-style-type: none;
     }
     
@@ -61,6 +59,80 @@
 }
 
 .nextDaysWeather {
-    display: flex;
-    height: 108px;
+    height: 95px;
+    margin-bottom: 90px;
+    color: #FFFFFF;
+    display: grid;
+    grid-template-areas: "dayOfWeek1 dayOfWeek1 dayOfWeek2 dayOfWeek2 dayOfWeek3 dayOfWeek3"
+                         "temp1 img1 temp2 img2 temp3 img3";
+    
+    &__next1DayOfWeek {
+        grid-area: dayOfWeek1;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        margin: 0 auto;
+        height: 27px;
+        margin: 0 auto;
+
+    }
+
+    &__next1DayTemp {
+        grid-area: temp1;
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 55px;
+        margin: 0 auto;
+    }
+
+    &__next1DayImg {
+        grid-area: img1;
+        margin: 0 auto;
+    }
+
+    &__next2DayOfWeek {
+        grid-area: dayOfWeek2;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        height: 27px;
+        margin: 0 auto;
+    }
+
+    &__next2DayTemp {
+        grid-area: temp2;
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 55px;
+        margin: 0 auto;
+    }
+
+    &__next2DayImg {
+        grid-area: img2;
+        margin: 0 auto;
+    }
+
+    &__next3DayOfWeek {
+        grid-area: dayOfWeek3;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        height: 27px;
+        margin: 0 auto;
+    }
+
+    &__next3DayTemp {
+        grid-area: temp3;
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 55px;
+        margin: 0 auto;
+    }
+
+    &__next3DayImg {
+        grid-area: img3;
+        margin: 0 auto;
+    }
 }
+
+

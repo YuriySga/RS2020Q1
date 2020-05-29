@@ -83,50 +83,27 @@ export default class Weather extends PureComponent {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)                                     
-                    
-                    /* tempState.country = data.location.country
-                    tempState.nowIcon = data.current.condition.icon
-                    tempState.nowText = data.current.condition.text
-                    tempState.nowFeelslike_f = data.current.feelslike_f
-                        
-                    tempState.nowFeelslike_c = data.current.feelslike_c
-                    tempState.nowHumidity = data.current.humidity
-                    tempState.nowWind_kph = data.current.wind_kph
-                    tempState.nowWind_mph = data.current.wind_mph
-                    tempState.nowTemp_c = data.current.temp_c
-                    tempState.nowTemp_f = data.current.temp_f
-                        
-                    tempState.next1DayDate = data.forecast.forecastday[1].date
-                    tempState.next1DayTemp_c = data.forecast.forecastday[1].day.avgtemp_c
-                    tempState.next1DayTemp_f = data.forecast.forecastday[1].day.avgtemp_f
-                    tempState.ext1DayIcon = data.forecast.forecastday[1].day.condition.icon
-                        
-                    tempState.next2DayDate = data.forecast.forecastday[2].date
-                    tempState.next2DayTemp_c = data.forecast.forecastday[2].day.avgtemp_c
-                    tempState.next2DayTemp_f = data.forecast.forecastday[2].day.avgtemp_f
-                    tempState.next2DayIcon = data.forecast.forecastday[2].day.condition.icon */
-                    
                     setS( {
                         country: data.location.country,
-                        nowIcon: data.current.condition.icon,
-                        nowText: data.current.condition.text,
+                        nowIcon: data.forecast.forecastday[0].day.condition.icon,
+                        nowText: data.forecast.forecastday[0].day.condition.text,
                         nowFeelslike_f: data.current.feelslike_f,
                             
                         nowFeelslike_c: data.current.feelslike_c,
-                        nowHumidity: data.current.humidity,
+                        nowHumidity: data.forecast.forecastday[0].day.avghumidity,
                         nowWind_kph: data.current.wind_kph,
                         nowWind_mph: data.current.wind_mph,
-                        nowTemp_c: data.current.temp_c,
-                        nowTemp_f: data.current.temp_f,
+                        nowTemp_c: data.forecast.forecastday[0].day.avgtemp_c,
+                        nowTemp_f: data.forecast.forecastday[0].day.avgtemp_f,
                             
                         next1DayDate: data.forecast.forecastday[1].date,
-                        next1DayTemp_c: data.forecast.forecastday[1].day.avgtemp_c,
-                        next1DayTemp_f: data.forecast.forecastday[1].day.avgtemp_f,
-                        ext1DayIcon: data.forecast.forecastday[1].day.condition.icon,
+                        next1DayTemp_c: data.forecast.forecastday[1].day.maxtemp_c,
+                        next1DayTemp_f: data.forecast.forecastday[1].day.maxtemp_f,
+                        next1DayIcon: data.forecast.forecastday[1].day.condition.icon,
                             
                         next2DayDate: data.forecast.forecastday[2].date,
-                        next2DayTemp_c: data.forecast.forecastday[2].day.avgtemp_c,
-                        next2DayTemp_f: data.forecast.forecastday[2].day.avgtemp_f,
+                        next2DayTemp_c: data.forecast.forecastday[2].day.maxtemp_c,
+                        next2DayTemp_f: data.forecast.forecastday[2].day.maxtemp_f,
                         next2DayIcon: data.forecast.forecastday[2].day.condition.icon
                     } )
                         
@@ -137,7 +114,6 @@ export default class Weather extends PureComponent {
         const getWeather3Day = function (city)  {
             console.log("-----getWeather3Day")
             const date = new Date(Date.now() + (3600000*24*3))
-            console.log(date.getDay());
             const dateParse = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`
             const weatherapiKey = 'e663d7507066491f896180617202405'
             const urlWeather = `https://api.weatherapi.com/v1/forecast.json?key=${weatherapiKey}&q=${city}&dt=${dateParse}`
@@ -155,28 +131,12 @@ export default class Weather extends PureComponent {
                 })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data) 
-                    console.log(5551666)
-                    //weather next 3 day
-                    /* localStorage.fancyWeatherNext3DayDate = data.forecast.forecastday[0].date
-                    localStorage.fancyWeatherNext3DayTemp_c = data.forecast.forecastday[0].day.avgtemp_c
-                    localStorage.fancyWeatherNext3DayTemp_f = data.forecast.forecastday[0].day.avgtemp_f
-                    localStorage.fancyWeatherNext3DayIcon = data.forecast.forecastday[0].day.condition.icon
-                     */
-                        //weather next 3 day
-                    /* tempState.next3DayDate = data.forecast.forecastday[0].date
-                    tempState.next3DayTemp_c = data.forecast.forecastday[0].day.avgtemp_c
-                    tempState.next3DayTemp_f = data.forecast.forecastday[0].day.avgtemp_f
-                    tempState.next3DayIcon = data.forecast.forecastday[0].day.condition.icon */
-
-                    //Object.entries(tempState).map(([key, value]) =>this.setState( {key: value} ))
-                    //this.setState( {city: city} )
-                    //this.setState( {tempState: tempState} ) 
+                    console.log(data)
                     setS( {
                         //weather next 3 day
                         next3DayDate: data.forecast.forecastday[0].date,
-                        next3DayTemp_c: data.forecast.forecastday[0].day.avgtemp_c,
-                        next3DayTemp_f: data.forecast.forecastday[0].day.avgtemp_f,
+                        next3DayTemp_c: data.forecast.forecastday[0].day.maxtemp_c,
+                        next3DayTemp_f: data.forecast.forecastday[0].day.maxtemp_f,
                         next3DayIcon: data.forecast.forecastday[0].day.condition.icon                        
                     } )
 
@@ -216,6 +176,15 @@ export default class Weather extends PureComponent {
         console.log('render')
         const timeDateParse = {
             daysOfWeek: {
+                0: "Sunday",
+                1: "Monday",
+                2: "Tuesday",
+                3: "Wednesday",
+                4: "Thursday",
+                5: "Friday",
+                6: "Saturday"
+            },
+            daysOfWeekMin: {
                 0: "Sun",
                 1: "Mon",
                 2: "Tues",
@@ -248,6 +217,9 @@ export default class Weather extends PureComponent {
         let hours = this.state.time.getHours()
         let minutes = this.state.time.getMinutes()
         let timeClock = `${dayOfWeek} ${dayOfMonth} ${month} ${hours}:${minutes}`
+        let next1Day= timeDateParse.daysOfWeek[new Date(this.state.next1DayDate).getDay()]
+        let next2Day= timeDateParse.daysOfWeek[new Date(this.state.next2DayDate).getDay()]
+        let next3Day= timeDateParse.daysOfWeek[new Date(this.state.next3DayDate).getDay()]
         
         if (this.state.country) {         
             city = this.state.city
@@ -266,7 +238,7 @@ export default class Weather extends PureComponent {
                 </div> 
                 <div className="todayWeather">
                     <div className="nowTemp">
-                        { `${this.state.nowTemp_c}°` }
+                        { `${Math.trunc(this.state.nowTemp_c)}°` }
                     </div>
                    <div className="weatherSettings ml-3">
                         <img className="weatherSettings__img" src={this.state.nowIcon} alt=""/>
@@ -279,18 +251,22 @@ export default class Weather extends PureComponent {
                    </div>                   
                 </div>                 
                 <div className="nextDaysWeather">
-                    <div className="next1Day">
-                        <p className="next1Day__dayOfWeek">{this.state.next1DayDate}</p>
-                        { `${this.state.next1DayTemp_c}°` }
-                    </div>
-                    <div className="next2Day">
-                        <p className="next1Day__dayOfWeek">{this.state.next2DayDate}</p>
-                        { `${this.state.next2DayTemp_c}°` }
-                    </div>
-                    <div className="next3Day">
-                        <p className="next1Day__dayOfWeek">{this.state.next3DayDate}</p>
-                        { `${this.state.next3DayTemp_c}°` }
-                    </div>
+                    {/* <div className="next1Day"> */}
+
+                        <p className="nextDaysWeather__next1DayOfWeek">{next1Day}</p>
+                        <p className="nextDaysWeather__next1DayTemp">{`${Math.trunc(this.state.next1DayTemp_c)}°`}</p>
+                        <img className="nextDaysWeather__next1DayImg" src={this.state.next1DayIcon} alt=""/>
+                    {/* </div> */}
+                   {/*  <div className="next2Day"> */}
+                        <p className="nextDaysWeather__next2DayOfWeek">{next2Day}</p>
+                        <p className="nextDaysWeather__next2DayTemp">{`${Math.trunc(this.state.next2DayTemp_c)}°`}</p>
+                        <img className="nextDaysWeather__next2DayImg" src={this.state.next2DayIcon} alt=""/>
+                    {/* </div> */}
+                    {/* <div className="next3Day"> */}
+                        <p className="nextDaysWeather__next3DayOfWeek">{next3Day}</p>
+                        <p className="nextDaysWeather__next3DayTemp">{`${Math.trunc(this.state.next3DayTemp_c)}°`}</p>
+                        <img className="nextDaysWeather__next3DayImg" src={this.state.next3DayIcon} alt=""/>
+                    {/* </div> */}
                 </div>
             </div>
         )
@@ -312,24 +288,3 @@ export default class Weather extends PureComponent {
 
 
 
-
-/* 
-
-const ipinfoToken = 'f2e8d5915cf4d9'
-const ipinfoUrl = `https://ipinfo.io/json?token=${ipinfoToken}`
-return fetch(ipinfoUrl)
-    .then((response) => {
-    if (response.ok !== true) {
-        console.log(`Ошибка HTTP: ${response.status}`);
-        throw new Error('Ошибка!');
-    } else {
-        console.log('getPosition OK');
-        return response;
-    }
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data)
-        this.setState({city: data.city})
-        
-    }); */
