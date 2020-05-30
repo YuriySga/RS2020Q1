@@ -1,13 +1,23 @@
+@media (min-width: 0px) and (max-width: 576px) {
+    .search-form {
+       width: 100% !important;
+    }
+}
+
 .search-form {
     width: 375px;
 }
 
 .form-control {
     height: 44px !important;
-
+    font-size: 14px !important;
+    line-height: 17px !important; 
 }
 
 .searchButton {
     height: 44px;
     line-height: 0px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
 }

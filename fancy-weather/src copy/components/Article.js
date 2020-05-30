@@ -26,7 +26,6 @@ class Article extends PureComponent {
     }
 
     componentWillUpdate() {
-        console.log("componentWillUpdate")
     }
 
 

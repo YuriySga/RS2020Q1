@@ -3,7 +3,7 @@ $grid-breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 930px,
-  xl: 1130px
+  xl: 1200px
 ) !default;
 
 /* $grid-breakpoints: (
@@ -25,4 +25,5 @@ $container-max-widths: (
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
+
 

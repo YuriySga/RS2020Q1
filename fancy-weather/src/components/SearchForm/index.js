@@ -26,7 +26,8 @@ import './style.scss'
 } */
 
 
-export default function SearchForm() {    
+export default function SearchForm() {  
+     
     return (
         <div className="header__search-form search-form float-md-right float-lg-right float-xl-right mx-auto mx-sm-auto mx-md-0 mx-lg-0 mx-xl-0">
             <div className="input-group mb-3">

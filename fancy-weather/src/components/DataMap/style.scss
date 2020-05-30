@@ -1,23 +1,22 @@
+@media (min-width: 0px) and (max-width: 576px) {
+    .dataMap {
+        width: 270px !important;
+        height: 290px !important;
+    }
+
+    .dataMap__map {
+        height: 290px !important;
+    }
+
+    .mapMask{
+        mask-size: 308px!important;
+        -webkit-mask-position-x: -19px!important;
+        -webkit-mask-position-y: -20px!important;
+    }
+}
+
 .dataMap__map {
-    /* 
-    background-color: blue; */
-    /* position: absolute; */
-    /*  top: 200px;*/
-    /*  left: 700px;*/
-    /* width: 375px; */
     height: 459px;
-  /*   background-image: url(img/mask.svg);
-    background-size: contain;
-    background-repeat: no-repeat; */
-
-   /*  mask: url(img/mask.svg);
-    mask-size: cover; */
-
-    /* -webkit-mask-size: 425px;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position-x: -25px;
-    -webkit-mask-position-y: -27px; */
-
 }
 
 .mapMask{
@@ -36,6 +35,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    /* margin-top: 100px; */
     
  /*    background-image: url(img/mask.svg);
     background-size: contain;
