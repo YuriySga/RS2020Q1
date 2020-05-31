@@ -31,15 +31,9 @@
 .dataMap {
     width: 375px;
     height: 459px;
-    /* width: 492px; */
     position: relative;
     display: flex;
     flex-direction: column;
-    /* margin-top: 100px; */
-    
- /*    background-image: url(img/mask.svg);
-    background-size: contain;
-    background-repeat: no-repeat; */
 }
 
 .dataMap__coords {
@@ -51,7 +45,6 @@
     text-align: right;
     text-transform: capitalize;
     color: #ffffff;
-    /* -webkit-text-stroke: 0.7px black; */
     letter-spacing: 1.3px;
 
 }

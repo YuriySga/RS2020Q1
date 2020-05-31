@@ -21,6 +21,8 @@
     font-size: 44px;
     line-height: 54px;
     text-transform: uppercase;
+    overflow: hidden;
+    height: 55px;
 }
 
 .dateTime {
@@ -59,48 +61,10 @@
     }
 
 }
-/* .todayWeather {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    height: 373px;
-    font-family: Montserrat;
-    font-style: normal;
-    color: #FFFFFF;
-
-    .nowTemp {
-        letter-spacing: -10px;
-        font-weight: bold;
-        font-size: 306px;
-        line-height: 373px;
-    }
-
-} */
-
-/* .weatherSettings {
-
-    &__list {
-        font-size: 22px;
-        line-height: 37px;
-        font-weight: 600;
-        list-style-type: none;
-    }
-    
-    
-    &__img{
-        width: 100px;
-    }
-    
-} */
 
 .nextDaysWeather {
-   /*  height: 95px; */
     margin-bottom: 40px;
     color: #FFFFFF;
-    /* display: grid;
-    grid-template-areas: "dayOfWeek1 dayOfWeek1 dayOfWeek2 dayOfWeek2 dayOfWeek3 dayOfWeek3"
-                         "temp1 img1 temp2 img2 temp3 img3"; */
     
     &__next1DayOfWeek {
         grid-area: dayOfWeek1;
