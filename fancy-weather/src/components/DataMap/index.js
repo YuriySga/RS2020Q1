@@ -8,12 +8,14 @@ export default class DataMap extends PureComponent {
         super(props)
     
         this.state = {
-            pos: null,            
+            pos: null           
         }
     }
 
     componentWillMount() {
-        const getPosition = function (options) {
+        console.log('datamap componentWillMount') 
+        //this.setState( {pos: this.props.pos} )
+      /*   const getPosition = function (options) {
             return new Promise(function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject, options);
             });
@@ -25,10 +27,20 @@ export default class DataMap extends PureComponent {
             })           
             .catch((err) => {
               console.error(err.message);
-            });
+            }); */
     }
     
-    componentDidMount() {
+    componentDidMount() {  
+        console.log('datamap componentDidMount')  
+    }
+
+    componentWillUpdate() {
+        console.log('datamap componentWillUpdate')  
+    }
+
+    componentDidUpdate() {
+        console.log('datamap componentDidUpdate') 
+        this.setState( {pos: this.props.pos} ) 
     }
 
     render() {
@@ -55,6 +67,11 @@ export default class DataMap extends PureComponent {
     }
 
     renderMap = () => {
+        console.log('renderMap+++')
+        console.log(this.state.pos.longitude)
+        console.log(this.state.pos.latitude)
+
+
         const mapboxToken = 'pk.eyJ1IjoieXVyaXlzZ2EiLCJhIjoiY2thanB1dzl5MGQwYzMwcGlpenE5N3U5diJ9.WoVhYs3HRx5n6qtIl3KAyA'
         mapboxgl.accessToken = mapboxToken
         const map = new mapboxgl.Map({

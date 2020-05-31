@@ -2,28 +2,27 @@ import React, {Component, PureComponent} from 'react'
 import { Dropdown, Button, ButtonGroup, Radio } from 'bootstrap-4-react';
 import ChangeBackground from '../ChangeBackground/index.js'
 import './style.scss';
-//import SearchForm from '../SearchForm'
 
 export default class HeaderButton extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    };
     
-        this.state = {
-        }
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-        this.handleChange = this.handleChange.bind(this);
-    }
+  handleChange(e) {
+    this.props.onChange(e.target)
+  }
 
-    handleChange(e) {
-        this.props.onChange(e.target)
-      }
-
-    render() {
-        return (            
+  render() {
+    return (            
             <div className="buttons-group mx-auto mx-sm-auto mx-md-0 mx-lg-0 mx-xl-0">
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group btn-group-lg mr-2" role="group" aria-label="First group">
-                        <button onClick={ChangeBackground} type="button" className="btn btnRfrshImage btnRfrshImage--size44 btn-secondary">
+                        <button onClick={this.handleChange} type="button" className="btn btnRfrshImage btnRfrshImage--size44 btn-secondary">
                             <div className="spinner"></div>
                         </button>
                     </div>
@@ -47,14 +46,11 @@ export default class HeaderButton extends Component {
                     </ButtonGroup>
                 </div>
             </div> 
-        )            
-    }
-    /* ChangeBackground */
-    spinnerOn = () => {
-        console.log("spin")
-        this.props.onChange(9999999999)
-    } 
-   /* 
+    )            
+  }
+  /* ChangeBackground */
+
+  /* 
 
    @keyframes rotation { 
   0% {transform:rotate(0deg);} 

@@ -1,22 +1,30 @@
 import React from 'react'
 
-export default function ChangeBackground() {
+export default function ChangeBackground( country ) {
 
-    const getImgLink = function ()  { 
-        const country = localStorage.fancyWeaterCountry
+    const getImgLink = function ()  {
+        const countryName = localStorage.fancyWeaterCountryForBackground
         const season = getSeason();
+        const dayNight = dayOrNight()
         const keyUnsplash = 'ps01HPrdVfcJiF2_0zWrptAYbUqNVI5ATj-8Qo7ZveI'
-        const url = `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${country}+${season}}&client_id=${keyUnsplash}`
+        const url = `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query={${'dayNight'},${season}}&client_id=${keyUnsplash}`
+        console.log('background request '+url)
         return fetch(url)
             .then(response => {
-                if (!response.ok) throw new Error('Ошибка!')   
-                return response;
+                console.log(response)
+                if (response.ok) return response
+                throw new Error('background not found or limit is rated')
                 }
             )
             .then(response => response.json())
             .then(data => {                        
                 return data.urls.regular
-            })                
+            })                          
+    }
+
+    const dayOrNight = () => {
+        const hour = new Date().getHours()
+        return  (hour < 7) ? 'night' : 'day'
     }
 
     const getSeason = () => {
@@ -33,7 +41,10 @@ export default function ChangeBackground() {
 
     getImgLink()
             .then(link => changeBacgrImg(link))
-            .catch(err => {}); 
+            .catch(err => {
+                console.log(err)
+                changeBacgrImg("https://drive.google.com/uc?export=view&id=1WjdUgK1GjNqJM5RFA7QbbQIVinLb-beW")
+            }); 
 }
 
 
