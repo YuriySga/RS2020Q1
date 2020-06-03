@@ -3,6 +3,7 @@ import HeaderButton from './HeaderButton';
 import SearchForm from './SearchForm';
 import DataMap from './DataMap';
 import Weather from './Weather';
+import Time from './Time';
 import ChangeBackground from './ChangeBackground';
 import getCityOnIp from './Requests/getCityOnIp.js';
 import getPosition from './getPosition.js';
@@ -14,6 +15,9 @@ export default class App extends PureComponent {
         valueForSearchCity: null,
         country: null,
         pos: null,
+
+       /*  date: new Date(), */
+        UTC: null
     }
 
   buttonListener = this.buttonListener.bind(this)
@@ -21,7 +25,7 @@ export default class App extends PureComponent {
   getPosFromWeather = this.getPosFromWeather.bind(this)
 
   componentWillMount() {
-    ChangeBackground();
+    /* ChangeBackground();
     getCityOnIp()
       .then((data) => {
         this.setState({ valueForSearchCity: data.city, country: data.country });
@@ -32,7 +36,27 @@ export default class App extends PureComponent {
 
     getPosition()
       .then((pos) => { this.setState({ pos: pos.coords }); })
-      .catch((err) => { console.log(err); });
+      .catch((err) => { console.log(err); }); */
+  }
+
+  getUtcDate() {
+    const { longitude } = this.state.pos
+    const utc = Math.ceil(longitude / 15)
+    this.setState({ UTC: utc })     
+  }
+
+
+
+  componentDidMount() {
+    ChangeBackground();
+    getCityOnIp()
+      .then((data) => this.setState({ valueForSearchCity: data.city }))
+      .then(() => getPosition())      
+      .then((pos) => this.setState({ pos: pos.coords }))
+      .then(() => this.getUtcDate())
+      .catch((err) => { console.log(err); }) 
+
+
   }
 
   getValueForSearchCity(value) {
@@ -51,10 +75,12 @@ export default class App extends PureComponent {
   }
 
   render() {
-    if (!this.state.valueForSearchCity) return <div />;
+    if (!this.state.valueForSearchCity && !this.state.UTC) return <div> Loading... </div>;
 
     return (
       <div className="container app">
+        <Time UTC = {this.state.UTC} />
+        
         <div className="row justify-content-center pt-4 mb-4">
           <div className="col-sm-12 col-md-5 col-lg-7 col-xl-7 mb-4">
             <HeaderButton onChange={this.buttonListener} />

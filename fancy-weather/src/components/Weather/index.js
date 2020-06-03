@@ -1,3 +1,4 @@
+// eslint-disable-next-line linebreak-style
 import React, { PureComponent } from 'react';
 import getWeather2Days from '../Requests/getWeather2Days.js';
 import getWeather3Day from '../Requests/getWeather3Day.js';
@@ -77,6 +78,7 @@ export default class Weather extends PureComponent {
     const minutes = String(this.state.time.getMinutes()).padStart(2, '0');
     const seconds = String(this.state.time.getSeconds()).padStart(2, '0');
     const timeClock = `${dayOfWeek} ${dayOfMonth} ${month} ${hours}:${minutes}:${seconds}`;
+    
     const next1Day = timeDateParse.daysOfWeek[new Date(this.state.next1DayDate).getDay()];
     const next2Day = timeDateParse.daysOfWeek[new Date(this.state.next2DayDate).getDay()];
     const next3Day = timeDateParse.daysOfWeek[new Date(this.state.next3DayDate).getDay()];
