@@ -9,10 +9,13 @@ export default function getWeather2Days(city) {
     })
     .then((response) => response.json())
     .then((data) => {
-      resultWeather = {
-        city: data.location.name,
-        location: { latitude: data.location.lat, longitude: data.location.lon },
-        country: data.location.country,
+      const pos = { latitude: data.location.lat, longitude: data.location.lon };
+      const cityName = data.location.name;
+      const country =  data.location.country;
+      const resultWeather = {
+        //receivedCityName: data.location.name,
+        //location: { latitude: data.location.lat, longitude: data.location.lon },
+        //country: data.location.country,
         nowIcon: data.forecast.forecastday[0].day.condition.icon,
         nowText: data.forecast.forecastday[0].day.condition.text,
         nowFeelslike_f: data.current.feelslike_f,
@@ -37,6 +40,11 @@ export default function getWeather2Days(city) {
 
       localStorage.fancyWeaterCountryForBackground = data.location.country;
 
-      return resultWeather;
+      return {
+        pos,
+        cityName,
+        country,
+        resultWeather
+      }
     });
 }

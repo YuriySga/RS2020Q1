@@ -14,22 +14,23 @@ export default class DataMap extends PureComponent {
 
 
   componentDidMount() {
+    this.renderMap(); 
   }
 
 
   componentDidUpdate() {
-    this.setState({ pos: this.props.pos });
+
   }
 
   render() {
     const clsName = this.props.className;
-    let longitude = '';
-    let latitude = '';
-    if (this.state.pos) {
-      this.renderMap();
-      longitude = `${Math.trunc(Number(this.state.pos.longitude))}° ${Math.trunc(((Number(this.state.pos.longitude).toFixed(2)) % 1) * 60)}'`;
-      latitude = `${Math.trunc(Number(this.state.pos.latitude))}° ${Math.trunc(((Number(this.state.pos.latitude).toFixed(2)) % 1) * 60)}'`;
-    }
+    let { longitude } = this.props.pos;
+    let { latitude } = this.props.pos;
+    //this.renderMap(longitude, latitude); 
+
+    const editedLongitude = `${Math.trunc(Number(longitude))}° ${Math.trunc(((Number(longitude).toFixed(2)) % 1) * 60)}'`;
+    const editedLatitude = `${Math.trunc(Number(latitude))}° ${Math.trunc(((Number(latitude).toFixed(2)) % 1) * 60)}'`;
+
 
     return (
       <div className={`${clsName} dataMap`}>
@@ -37,26 +38,27 @@ export default class DataMap extends PureComponent {
           <div className="dataMap__map" id="map" />
         </div>
         <div className="dataMap__coords">
-          <div>{`Longitude: ${longitude}`}</div>
-          <div>{`Latitude: ${latitude}`}</div>
+          <div>{`Longitude: ${editedLongitude}`}</div>
+          <div>{`Latitude: ${editedLatitude}`}</div>
         </div>
       </div>
     );
   }
 
   renderMap = () => {
+        const {longitude, latitude} = this.props.pos;
 
         const mapboxToken = 'pk.eyJ1IjoieXVyaXlzZ2EiLCJhIjoiY2thanB1dzl5MGQwYzMwcGlpenE5N3U5diJ9.WoVhYs3HRx5n6qtIl3KAyA'
         mapboxgl.accessToken = mapboxToken
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.state.pos.longitude, this.state.pos.latitude],
+            center: [longitude, latitude],
             zoom: 8
         })
 
         const marker = new mapboxgl.Marker()
-            .setLngLat([this.state.pos.longitude, this.state.pos.latitude])
+            .setLngLat([longitude, latitude])
             .addTo(map)
     }  
 }

@@ -19,7 +19,9 @@ export default class SearchForm extends PureComponent {
 
   handleSearchCity(event) {
     event.preventDefault();
-    this.props.getValueInput(this.state.searchFormValueInput);
+    const { getValueInput } = this.props;
+    const { searchFormValueInput } = this.state;
+    getValueInput(searchFormValueInput);
   }
 
   render() {
@@ -31,7 +33,7 @@ export default class SearchForm extends PureComponent {
             <button className="btn searchButton btn-lg btn-secondary" type="submit" id="button-addon2">SEARCH</button>
           </div>
         </div>
-      </form>
+      </form>      
     );
   }
 }

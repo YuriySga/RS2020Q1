@@ -11,9 +11,14 @@ export default class Time extends PureComponent {
     };
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
+    console.log('componentDidMount TIME');
     setTimeout(() => this.tick(), 1000);
+  }
 
+  componentDidUpdate() {
+    console.log('componentDidUpdate TIME');
+    setTimeout(() => this.tick(), 1000);
   }
 
   tick() {
@@ -23,6 +28,8 @@ export default class Time extends PureComponent {
 
 
   render() {
+    console.log('TIME RENDER');
+    console.log(this.props);
     const { UTC } = this.props;
     if (!UTC) return <div> 000000 </div>;
     const { date } = this.state;
