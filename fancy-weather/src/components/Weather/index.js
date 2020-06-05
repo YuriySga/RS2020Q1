@@ -1,9 +1,6 @@
 // eslint-disable-next-line linebreak-style
 import React, { PureComponent } from 'react';
-import getWeather2Days from '../Requests/getWeather2Days.js';
-import getWeather3Day from '../Requests/getWeather3Day.js';
 import timeDateParse from '../Weather/timeDateParse.js';
-import ChangeBackground from '../ChangeBackground';
 
 import './style.scss';
 
@@ -12,64 +9,19 @@ export default class Weather extends PureComponent {
     super(props);
 
     this.state = {
-      /* scaleIsFarengeit: this.props.scaleIsFarengeit,
-      valueForSearch: this.props.valueForSearchCity,
-      location: null,
-      time: new Date(),
-      city: null,
-      country: null,
-      nowIcon: null,
-      nowText: null,
-      nowFeelslike_f: null,
-      nowFeelslike_c: null,
-      nowHumidity: null,
-      nowWind_kph: null,
-      nowWind_mph: null,
-      nowTemp_c: null,
-      nowTemp_f: null,
-      next1DayDate: null,
-      next1DayTemp_c: null,
-      next1DayTemp_f: null,
-      ext1DayIcon: null,
-      next2DayDate: null,
-      next2DayTemp_c: null,
-      next2DayTemp_f: null,
-      next2DayIcon: null,
-      next3DayDate: null,
-      next3DayTemp_c: null,
-      next3DayTemp_f: null,
-      next3DayIcon: null, */
     };
   }
 
   componentWillMount() {
-    /* getWeather2Days(this.state.valueForSearch)
-      .then((weatherData) => getWeather3Day(weatherData))
-      .then((weatherData) => this.setState(weatherData))
-      .catch((err) => { console.log(err); }); */
   }
 
 
   componentDidUpdate() {
-    /* this.state.scaleIsFarengeit !== this.props.scaleIsFarengeit && this.setState({ scaleIsFarengeit: this.props.scaleIsFarengeit });
-    if (this.state.valueForSearch === this.props.valueForSearchCity) return;
-    if (this.props.valueForSearchCity === '') return;
-    this.setState({ valueForSearch: this.props.valueForSearchCity }); */
-
-    /* getWeather2Days(this.props.valueForSearchCity)
-      .then((weatherData) => getWeather3Day(weatherData))
-      .then((weatherData) => {
-        this.setState(weatherData);
-        this.props.getPos(weatherData.location);
-      })
-      .then(() => ChangeBackground(this.props.valueForSearchCity))
-      .catch((err) => { console.log(err); }); */
   }
 
 
   render() {
     console.log('render Weather');
-    console.log(this.props);
     const { scaleIsFarengeit } = this.props;
     const {
       nowIcon,
@@ -108,14 +60,14 @@ export default class Weather extends PureComponent {
 
     return (
       <div className="row justify-content-center data-weather">
-        <div className="col-12 text-center text-xl-left cityCountryEndTime">
+        {/* <div className="col-12 text-center text-xl-left cityCountryEndTime">
           <div className="cityCountryName">
-            {/* { `${city}, ${country}` } */}
+             { `${city}, ${country}` }
           </div>
           <div className="dateTime">
-            {/* {timeClock} */}
+             {timeClock} 
           </div>
-        </div>
+        </div> */}
         <div className="col-sm-12 text-center text-sm-center col-md-6 col-lg-5 col-xl-7 mt-0 mt-sm-5 mt-md-5 mt-lg-5 mt-xl-5 mb-0 mb-sm-4 mb-md-4 mb-lg-4 mb-xl-4 nowTemp">
           { nowT }
         </div>

@@ -1,22 +1,23 @@
-export default function ChangeBackground() {
+export default function ChangeBackground(longitude) {
+  const UTC = Math.ceil(longitude / 15);
   const getImgLink = function () {
     const season = getSeason();
     const dayNight = dayOrNight();
     const keyUnsplash = 'ps01HPrdVfcJiF2_0zWrptAYbUqNVI5ATj-8Qo7ZveI';
-    const url = `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query={${dayNight},${season}}&client_id=${keyUnsplash}`;
+    const url = `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=${dayNight} ${season}&client_id=${keyUnsplash}`;
     console.log(`background request ${url}`);
     return fetch(url)
       .then((response) => {
         if (response.ok) return response;
-        throw new Error('background not found or limit is rated');
+        throw new Error('background img request limit is exceeded');
       })
       .then((response) => response.json())
       .then((data) => data.urls.regular);
   };
 
   const dayOrNight = () => {
-    const hour = new Date().getHours();
-    return (hour < 7) ? 'night' : 'day';
+    const hour = new Date().getUTCHours() + UTC;
+    return (hour < 7 || hour > 21) ? 'night' : 'day';
   };
 
   const getSeason = () => {
@@ -28,7 +29,11 @@ export default function ChangeBackground() {
   };
 
   const changeBacgrImg = (link) => {
-    document.body.style.background = `linear-gradient(rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center / cover fixed, url(${link}) center center / cover no-repeat fixed`;
+    const bgImg = new Image();
+    bgImg.src = link;
+    bgImg.onload = function () {
+      document.body.style.backgroundImage = `url(${bgImg.src})`;
+    };
   };
 
   getImgLink()

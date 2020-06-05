@@ -12,27 +12,29 @@ export default class Time extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('componentDidMount TIME');
-    setTimeout(() => this.tick(), 1000);
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000,
+    );
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate TIME');
-    setTimeout(() => this.tick(), 1000);
+    
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   tick() {
-    console.log('tick');
     this.setState({ date: new Date() });
   }
 
-
   render() {
-    console.log('TIME RENDER');
-    console.log(this.props);
-    const { UTC } = this.props;
-    if (!UTC) return <div> 000000 </div>;
+    const { city, country, longitude } = this.props.place;
     const { date } = this.state;
+
+    const UTC = Math.ceil(longitude / 15);
     const yearUTC = date.getUTCFullYear();
     const monthUTC = date.getUTCMonth();
     const dateUTC = date.getUTCDate();
@@ -51,8 +53,13 @@ export default class Time extends PureComponent {
 
 
     return (
-      <div className="dateTime">
-        {clock}
+      <div className="col-12 text-center text-xl-left cityCountryEndTime">
+        <div className="cityCountryName">
+          { `${city}, ${country}` }
+        </div>
+        <div className="dateTime">
+          {clock}
+        </div>
       </div>
     );
   }

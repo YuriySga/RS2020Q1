@@ -13,9 +13,6 @@ export default function getWeather2Days(city) {
       const cityName = data.location.name;
       const country =  data.location.country;
       const resultWeather = {
-        //receivedCityName: data.location.name,
-        //location: { latitude: data.location.lat, longitude: data.location.lon },
-        //country: data.location.country,
         nowIcon: data.forecast.forecastday[0].day.condition.icon,
         nowText: data.forecast.forecastday[0].day.condition.text,
         nowFeelslike_f: data.current.feelslike_f,

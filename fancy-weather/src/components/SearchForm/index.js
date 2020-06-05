@@ -33,7 +33,7 @@ export default class SearchForm extends PureComponent {
             <button className="btn searchButton btn-lg btn-secondary" type="submit" id="button-addon2">SEARCH</button>
           </div>
         </div>
-      </form>      
+      </form>
     );
   }
 }

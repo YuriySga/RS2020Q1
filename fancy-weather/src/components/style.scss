@@ -9,6 +9,11 @@
 }
 
 .body {
+    background-image: rgb(99, 98, 98);
     animation: smoothAppearance 2s ease-in-out;
+    transition: background-image ease-in 1s;
+    background: linear-gradient(rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center / cover fixed;
+    background-attachment: fixed;
+    background-position: center;
 }
 

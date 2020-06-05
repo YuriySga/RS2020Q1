@@ -14,9 +14,6 @@ export default function getWeather3Day (weather) {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log('weather');
-      console.log('weather');
-
       weather.resultWeather.next3DayDate = data.forecast.forecastday[0].date;
       weather.resultWeather.next3DayTemp_c = data.forecast.forecastday[0].day.maxtemp_c;
       weather.resultWeather.next3DayTemp_f = data.forecast.forecastday[0].day.maxtemp_f;
