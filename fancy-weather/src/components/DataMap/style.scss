@@ -1,8 +1,9 @@
 @media (min-width: 0px) and (max-width: 576px) {
     .dataMap {
         width: 270px !important;
-        height: 290px !important;
-    }
+        //height: 290px !important;
+    }  
+
 
     .dataMap__map {
         height: 290px !important;
@@ -16,7 +17,8 @@
 }
 
 .dataMap__map {
-    height: 459px;
+    //height: 459px;
+    height: 398px;
 }
 
 .mapMask{
@@ -25,12 +27,12 @@
     mask-repeat: no-repeat;
     -webkit-mask-position-x: -27px;
     -webkit-mask-position-y: -29px;
-    height: 396px;
+    //height: 396px;
 }
 
 .dataMap {
     width: 375px;
-    height: 459px;
+    //height: 459px;
     position: relative;
     display: flex;
     flex-direction: column;

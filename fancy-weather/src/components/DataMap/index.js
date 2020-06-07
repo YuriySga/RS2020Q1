@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import timeDateParse from '../timeDateParse.js';
 import './style.scss';
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -15,12 +16,10 @@ export default class DataMap extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('componentDidMount MAP');
     this.renderMap();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate MAP');
       if(prevProps.pos.longitude !== this.props.pos.longitude || prevProps.pos.latitude !== this.props.pos.latitude) {
         const {longitude, latitude} = this.props.pos
         this.map.flyTo({ center: [longitude, latitude]});
@@ -29,13 +28,16 @@ export default class DataMap extends PureComponent {
   }
 
   render() {
-    console.log('render MAP');
     const clsName = this.props.className;
-    let { longitude } = this.props.pos;
-    let { latitude } = this.props.pos;
+    let { longitude, latitude } = this.props.pos;
+    const { lang } = this.props;
 
-    const editedLongitude = `${Math.trunc(Number(longitude))}° ${Math.trunc(((Number(longitude).toFixed(2)) % 1) * 60)}'`;
-    const editedLatitude = `${Math.trunc(Number(latitude))}° ${Math.trunc(((Number(latitude).toFixed(2)) % 1) * 60)}'`;
+    const editedLongitude = `${Math.trunc(Number(longitude))}° ${Math.abs(Math.trunc(((Number(longitude).toFixed(2)) % 1) * 60))}'`;
+    const editedLatitude = `${Math.trunc(Number(latitude))}° ${Math.abs(Math.trunc(((Number(latitude).toFixed(2)) % 1) * 60))}'`;
+    const mapPosLangIndexOfLongitude = timeDateParse.mapPos.en.indexOf('Longitude');
+    const mapPosLangIndexOfLatitude = timeDateParse.mapPos.en.indexOf('Latitude');
+    const textLongitude = `${timeDateParse.mapPos[lang][mapPosLangIndexOfLongitude]}`;
+    const textLatitude = `${timeDateParse.mapPos[lang][mapPosLangIndexOfLatitude]}`;
 
     return (
       <div className={`${clsName} dataMap`}>
@@ -43,8 +45,8 @@ export default class DataMap extends PureComponent {
           <div className="dataMap__map" id="map" />
         </div>
         <div className="dataMap__coords">
-          <div>{`Longitude: ${editedLongitude}`}</div>
-          <div>{`Latitude: ${editedLatitude}`}</div>
+          <div>{`${textLongitude}: ${editedLongitude}`}</div>
+          <div>{`${textLatitude}: ${editedLatitude}`}</div>
         </div>
       </div>
     );

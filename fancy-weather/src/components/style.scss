@@ -2,6 +2,20 @@
 @import "~bootstrap/scss/bootstrap";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+ @media (min-width: 1200px) {
+    /* .root {
+        height: 800px !important;
+    }
+
+    .wrapper {
+        height: 800px !important;
+    }  */
+
+    .app {
+        height: 100vh;
+    }
+} 
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -9,11 +23,33 @@
 }
 
 .body {
-    background-image: rgb(99, 98, 98);
-    animation: smoothAppearance 2s ease-in-out;
-    transition: background-image ease-in 1s;
-    background: linear-gradient(rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center / cover fixed;
+    /* transition: background-image ease-in 1s;
     background-attachment: fixed;
     background-position: center;
+    background-size: cover;
+    height: auto;
+    overflow: hidden; */
+}
+
+.root {
+    /* background-image: url('https://drive.google.com/uc?export=view&id=1mTE0KB7upq18N2LPTQrWe14T_Iebrtbl');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: auto; */
+    transition: background-image ease-in 1s;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: auto;
+    //overflow: hidden;
+}
+
+.wrapper {
+    background-image: url('https://drive.google.com/uc?export=view&id=1mTE0KB7upq18N2LPTQrWe14T_Iebrtbl');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: auto;
 }
 

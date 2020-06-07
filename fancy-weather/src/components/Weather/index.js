@@ -1,6 +1,7 @@
 // eslint-disable-next-line linebreak-style
 import React, { PureComponent } from 'react';
-import timeDateParse from '../Weather/timeDateParse.js';
+import Time from '../Time';
+import timeDateParse from '../timeDateParse.js';
 
 import './style.scss';
 
@@ -21,8 +22,7 @@ export default class Weather extends PureComponent {
 
 
   render() {
-    console.log('render Weather');
-    const { scaleIsFarengeit } = this.props;
+    const { scaleIsFarengeit, lang, place } = this.props;
     const {
       nowIcon,
       nowText,
@@ -48,36 +48,34 @@ export default class Weather extends PureComponent {
     } = this.props.weather;
 
     const nowT = (scaleIsFarengeit) ? Math.trunc(nowTemp_f) : Math.trunc(nowTemp_c);
-    const nowFeelslikeT = (scaleIsFarengeit) ? Math.trunc(nowFeelslike_f) + '°' : Math.trunc(nowFeelslike_c) + '°';
+    const nowFeelslikeT = (scaleIsFarengeit) ? `${Math.trunc(nowFeelslike_f)}°` : `${Math.trunc(nowFeelslike_c)}°`;
     const nowWind = `${(nowWind_kph * 1000 / 3600).toFixed(1)} m/s`;
-    const next1DayTemp = (scaleIsFarengeit) ? Math.trunc(next1DayTemp_f) + '°' : Math.trunc(next1DayTemp_c) + '°';
-    const next2DayTemp = (scaleIsFarengeit) ? Math.trunc(next2DayTemp_f) + '°' : Math.trunc(next2DayTemp_c) + '°';
-    const next3DayTemp = (scaleIsFarengeit) ? Math.trunc(next3DayTemp_f) + '°' : Math.trunc(next3DayTemp_c) + '°';
-
-    const next1Day = timeDateParse.daysOfWeek[new Date(next1DayDate).getDay()];
-    const next2Day = timeDateParse.daysOfWeek[new Date(next2DayDate).getDay()];
-    const next3Day = timeDateParse.daysOfWeek[new Date(next3DayDate).getDay()];
-
+    const next1DayTemp = (scaleIsFarengeit) ? `${Math.trunc(next1DayTemp_f)}°` : `${Math.trunc(next1DayTemp_c)}°`;
+    const next2DayTemp = (scaleIsFarengeit) ? `${Math.trunc(next2DayTemp_f)}°` : `${Math.trunc(next2DayTemp_c)}°`;
+    const next3DayTemp = (scaleIsFarengeit) ? `${Math.trunc(next3DayTemp_f)}°` : `${Math.trunc(next3DayTemp_c)}°`;
+    const next1Day = timeDateParse.daysOfWeek[lang][new Date(next1DayDate).getDay()];
+    const next2Day = timeDateParse.daysOfWeek[lang][new Date(next2DayDate).getDay()];
+    const next3Day = timeDateParse.daysOfWeek[lang][new Date(next3DayDate).getDay()];
+    const nowWeatherTextIndex = timeDateParse.weatherText.en.indexOf(nowText);
+    const nowWeatherText = timeDateParse.weatherText[lang][nowWeatherTextIndex].toUpperCase();
+    const feelslike = `${String(timeDateParse.weatherSettingsFeel[lang]).toUpperCase()}: ${nowFeelslikeT}`;
+    const wind = `${String(timeDateParse.weatherSettingsWind[lang]).toUpperCase()}: ${nowWind}`;
+    const humidity = `${String(timeDateParse.weatherSettingsHum[lang]).toUpperCase()}: ${nowHumidity}%`;
     return (
       <div className="row justify-content-center data-weather">
-        {/* <div className="col-12 text-center text-xl-left cityCountryEndTime">
-          <div className="cityCountryName">
-             { `${city}, ${country}` }
-          </div>
-          <div className="dateTime">
-             {timeClock} 
-          </div>
-        </div> */}
+        <Time
+          place={place}
+        />
         <div className="col-sm-12 text-center text-sm-center col-md-6 col-lg-5 col-xl-7 mt-0 mt-sm-5 mt-md-5 mt-lg-5 mt-xl-5 mb-0 mb-sm-4 mb-md-4 mb-lg-4 mb-xl-4 nowTemp">
           { nowT }
         </div>
         <div className="text-center col-12 col-sm-6 col-md-5 col-lg-4 col-xl-5 weatherSettings">
           <img className="weatherSettings__img" src={nowIcon} alt="" />
           <ul className="weatherSettings__list p-0">
-            <li>{String(nowText).toUpperCase()}</li>
-            <li>{`FEELS LIKE: ${nowFeelslikeT}`}</li>
-            <li>{`WIND: ${nowWind}`}</li>
-            <li>{`HUMIDITY: ${nowHumidity}%`}</li>
+            <li>{nowWeatherText}</li>
+            <li>{feelslike}</li>
+            <li>{wind}</li>
+            <li>{humidity}</li>
           </ul>
         </div>
         <div className="col-8 col-sm-6 col-md-10 col-lg-8 col-xl-12 row nextDaysWeather">

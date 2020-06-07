@@ -3,23 +3,27 @@ import HeaderButton from './HeaderButton';
 import SearchForm from './SearchForm';
 import DataMap from './DataMap';
 import Weather from './Weather';
-import Time from './Time';
 import ChangeBackground from './ChangeBackground';
 import getCityOnIp from './Requests/getCityOnIp.js';
 import getPosition from './getPosition.js';
 import getWeather2Days from './Requests/getWeather2Days.js';
 import getWeather3Day from './Requests/getWeather3Day.js';
 import ErrorMsg from './ErrorMsg'
+import translate from './Requests/translate.js';
+
 import './style.scss';
 
 export default class App extends PureComponent {
   state = {
-        scaleIsFarengeit: false,
+        scaleIsFarengeit: 
+          (localStorage.fancyWeatherScaleIsFarengeit === undefined || localStorage.fancyWeatherScaleIsFarengeit == 'false') ?
+            false : true,
         valueForSearchCity: null,
         pos: null,
         receivedCityName: null,
         receivedCountry: null,
         errorMsg: '',
+        lang: (localStorage.fancyWeatherLang === undefined) ? 'ru' : localStorage.fancyWeatherLang,
         weather: {
           nowIcon: null,
           nowText: null,
@@ -46,22 +50,21 @@ export default class App extends PureComponent {
     }
 
   buttonListener = this.buttonListener.bind(this)
+  langButtonListener = this.langButtonListener.bind(this)
   getValueForSearchCity = this.getValueForSearchCity.bind(this)
   getPosFromWeather = this.getPosFromWeather.bind(this)
-
-  componentWillMount() {
-    console.log('componentWillMount APP')
-  }
+  translateCityCountry = this.translateCityCountry.bind(this)
 
   getNewCityWeather() {   
       const {valueForSearchCity} = this.state
       getWeather2Days(valueForSearchCity)
         .then((weatherData) => getWeather3Day(weatherData))
         .then((weatherData) => {
+          const city = weatherData.cityName;
+          const country = weatherData.country;
+          this.translateCityCountry(city, country, this.state.lang);
           this.setState({
             pos: weatherData.pos,
-            receivedCityName: weatherData.cityName,
-            receivedCountry: weatherData.country,
             weather: weatherData.resultWeather,          
           })
         })
@@ -73,8 +76,6 @@ export default class App extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('componentDidMountAPP')
-    //ChangeBackground();
     getCityOnIp()
       .then((data) => this.setState({ valueForSearchCity: data.city }))
       .then(() => getPosition())      
@@ -85,10 +86,11 @@ export default class App extends PureComponent {
       })
       .then((weatherData) => getWeather3Day(weatherData))
       .then((weatherData) => {
+        const city = weatherData.cityName;
+        const country = weatherData.country;
+        this.translateCityCountry(city, country, this.state.lang);
         this.setState({
           pos: weatherData.pos,
-          receivedCityName: weatherData.cityName,
-          receivedCountry: weatherData.country,
           weather: weatherData.resultWeather,          
         })
       })
@@ -96,7 +98,6 @@ export default class App extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdateAPP')
     if(prevState.valueForSearchCity !== this.state.valueForSearchCity) { 
       this.setState({ errorMsg: '' });     
       this.getNewCityWeather()
@@ -104,7 +105,11 @@ export default class App extends PureComponent {
   }
 
   getValueForSearchCity(value) {
-    this.setState({ valueForSearchCity: value });
+    if (/^[A-z]/.test(value)) {
+      this.setState({ valueForSearchCity: value });
+    } else {
+      this.setState({ errorMsg: 'use the Latin alphabet' });
+    }
   }
 
   getPosFromWeather(pos) {
@@ -114,43 +119,87 @@ export default class App extends PureComponent {
   buttonListener(target) {
     target.classList.contains('spinner') && ChangeBackground(this.state.pos.longitude);
     target.classList.contains('btnRfrshImage') && ChangeBackground(this.state.pos.longitude);
-    target.classList.contains('farengeit') && this.setState({ scaleIsFarengeit: true });
-    target.classList.contains('celsius') && this.setState({ scaleIsFarengeit: false });
+    if (target.classList.contains('farengeit')) {
+      localStorage.fancyWeatherScaleIsFarengeit = 'true';
+      this.setState({ scaleIsFarengeit: true })
+    };
+    if (target.classList.contains('celsius')) {
+      localStorage.fancyWeatherScaleIsFarengeit = 'false';
+      this.setState({ scaleIsFarengeit: false })
+    };
+  }
+
+  translateCityCountry(city, country, newLang, oldLang = 'en') {
+    const cityName = city;
+    const countryName = country;
+    const wordsToTranslate = `${cityName}, ${countryName}`;
+
+    translate(wordsToTranslate, newLang, oldLang)
+      .then((words) => {
+        const translatedCity = words[0].split(',')[0];
+        const translatedCountry = words[0].split(',')[1];
+        this.setState({
+          receivedCityName: translatedCity,
+          receivedCountry: translatedCountry,
+        });
+      })
+  }
+
+  langButtonListener(newLang) {
+    const { lang, receivedCityName, receivedCountry } = this.state;    
+    if (newLang !== lang) {
+      localStorage.fancyWeatherLang = newLang;
+      this.setState({ lang: newLang });
+      this.translateCityCountry(receivedCityName, receivedCountry, newLang, lang); 
+      this.setState({ lang: newLang });
+    }
   }
 
   render() {
-    console.log('renderAPP');
-    console.log(this.state.errorMsg);
-
-    if (!this.state.valueForSearchCity) return <div> Loading... </div>;
     if (!this.state.weather.nowTemp_c) return <div> Loading... </div>;
-
     return (
+      <div className='wrapper'>
       <div className="container app">
-        <Time
-          place = {{
-            longitude: this.state.pos.longitude,
-            city: this.state.receivedCityName,
-            country: this.state.receivedCountry
-            }}
-        />
         <div className="row justify-content-center pt-4 mb-4">
           <div className="col-sm-12 col-md-5 col-lg-7 col-xl-7 mb-4">
-            <HeaderButton onChange={this.buttonListener} />
+            <HeaderButton
+              onChange={this.buttonListener}
+              onClick={this.langButtonListener}
+              lang= {this.state.lang}
+              scaleIsFarengeit={this.state.scaleIsFarengeit}
+            />
           </div>
-          <div className="col-sm-12 col-md-7 col-lg-4 col-xl-4">
-            <SearchForm getValueInput={this.getValueForSearchCity} />
-            <ErrorMsg errorMsg={this.state.errorMsg}/>
+          <div className="text-center col-sm-12 col-md-7 col-lg-4 col-xl-4 mx-5 mx-sm-0 mx-md-0 mx-lg-0 mx-xl-0">
+            <SearchForm
+              getValueInput={this.getValueForSearchCity}
+              lang= {this.state.lang}
+            />
+            <ErrorMsg errorMsg={this.state.errorMsg} />
           </div>
         </div>
         <div className="row justify-content-center">
           <div className="col-12 col-xl-7">
-            <Weather weather={this.state.weather} scaleIsFarengeit={this.state.scaleIsFarengeit} />
+            <Weather
+              weather={this.state.weather}
+              scaleIsFarengeit={this.state.scaleIsFarengeit}
+              lang= {this.state.lang}
+              place = {{
+                longitude: this.state.pos.longitude,
+                city: this.state.receivedCityName,
+                country: this.state.receivedCountry,
+                lang: this.state.lang,
+                }}
+            />
           </div>
           <div className="col-12 col-xl-4 pt-0 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-5">
-            <DataMap pos={this.state.pos} className="mx-auto mx-sm-auto mx-md-auto mx-lg-auto float-xl-right" />
+            <DataMap
+              lang= {this.state.lang}
+              pos={this.state.pos}
+              className="mx-auto mx-sm-auto mx-md-auto mx-lg-auto float-xl-right"
+            />
           </div>
         </div>
+      </div>
       </div>
     );
   }

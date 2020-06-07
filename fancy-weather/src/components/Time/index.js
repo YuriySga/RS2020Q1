@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import timeDateParse from '../Weather/timeDateParse.js';
-
+import timeDateParse from '../timeDateParse.js';
+import './style.scss';
 
 export default class Time extends PureComponent {
   constructor(props) {
@@ -18,10 +18,6 @@ export default class Time extends PureComponent {
     );
   }
 
-  componentDidUpdate() {
-    
-  }
-  
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -31,7 +27,7 @@ export default class Time extends PureComponent {
   }
 
   render() {
-    const { city, country, longitude } = this.props.place;
+    const { city, country, longitude, lang } = this.props.place;
     const { date } = this.state;
 
     const UTC = Math.ceil(longitude / 15);
@@ -43,9 +39,9 @@ export default class Time extends PureComponent {
     const secondsUTC = date.getUTCSeconds();
     const timeUTC = new Date(yearUTC, monthUTC, dateUTC, hoursUTC, minutesUTC, secondsUTC);
     const dateThisCity = new Date(timeUTC.getTime() + (UTC * 3600000));
-    const dayOfWeek = timeDateParse.daysOfWeek[dateThisCity.getDay()];
+    const dayOfWeek = timeDateParse.daysOfWeek[lang][dateThisCity.getDay()];
     const dayOfMonth = String(dateThisCity.getDate()).padStart(2, '0');
-    const month = timeDateParse.months[dateThisCity.getMonth()];
+    const month = timeDateParse.months[lang][dateThisCity.getMonth()];
     const hours = String(dateThisCity.getHours()).padStart(2, '0');
     const minutes = String(dateThisCity.getMinutes()).padStart(2, '0');
     const seconds = String(dateThisCity.getSeconds()).padStart(2, '0');

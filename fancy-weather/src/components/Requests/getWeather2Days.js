@@ -1,5 +1,4 @@
 export default function getWeather2Days(city) {
-  let resultWeather = {};
   const weatherapiKey = 'e663d7507066491f896180617202405';
   const urlWeather = `https://api.weatherapi.com/v1/forecast.json?key=${weatherapiKey}&q=${city}&days=4`;
   return fetch(urlWeather)
@@ -11,7 +10,7 @@ export default function getWeather2Days(city) {
     .then((data) => {
       const pos = { latitude: data.location.lat, longitude: data.location.lon };
       const cityName = data.location.name;
-      const country =  data.location.country;
+      const { country } = data.location;
       const resultWeather = {
         nowIcon: data.forecast.forecastday[0].day.condition.icon,
         nowText: data.forecast.forecastday[0].day.condition.text,
@@ -35,13 +34,11 @@ export default function getWeather2Days(city) {
         next2DayIcon: data.forecast.forecastday[2].day.condition.icon,
       };
 
-      localStorage.fancyWeaterCountryForBackground = data.location.country;
-
       return {
         pos,
         cityName,
         country,
-        resultWeather
-      }
+        resultWeather,
+      };
     });
 }

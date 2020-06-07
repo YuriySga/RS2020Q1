@@ -17,7 +17,10 @@ export default function ChangeBackground(longitude) {
 
   const dayOrNight = () => {
     const hour = new Date().getUTCHours() + UTC;
-    return (hour < 7 || hour > 21) ? 'night' : 'day';
+    if (hour < 8 && hour > 4) return 'morning';
+    if (hour < 16 && hour > 8) return 'day';
+    if (hour < 20 && hour > 16) return 'evening';
+    return 'night';
   };
 
   const getSeason = () => {
@@ -32,7 +35,8 @@ export default function ChangeBackground(longitude) {
     const bgImg = new Image();
     bgImg.src = link;
     bgImg.onload = function () {
-      document.body.style.backgroundImage = `url(${bgImg.src})`;
+      const root = document.querySelector('.root');
+      root.style.backgroundImage = `url(${bgImg.src})`;
     };
   };
 
